@@ -1,0 +1,17 @@
+@import "../../../assets/colors";
+
+.frequency-card {
+  padding: 12px 26px 0;
+  border-radius: 8px;
+  background-color: $light-grey-bg;
+  &__title {
+    color: $black;
+  }
+  &__number {
+    padding: 36px 0;
+    font-weight: bold;
+    font-size: 63px;
+    text-align: center;
+    color: $primary;
+  }
+}

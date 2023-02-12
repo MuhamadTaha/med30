@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-frequency-card',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frequency-card.component.scss']
 })
 export class FrequencyCardComponent implements OnInit {
+
+  @Input() frequencyData: any;
 
   constructor() { }
 
