@@ -1,1 +1,9 @@
-<p>doctors-card works!</p>
+<div class="doctors-card">
+  <div class="doctors-card__image">
+    <img [src]="doctorsData.image" [alt]="doctorsData.name" />
+  </div>
+  <div class="doctors-card__data">
+    <p class="doctors-card__data__name">{{doctorsData.name}}</p>
+    <p class="doctors-card__data__title">{{doctorsData.title}}</p>
+  </div>
+</div>

@@ -2,14 +2,21 @@
 
 * {
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 .render-components {
   padding: 50px;
   background-color: lightblue;
-  &__cards {
+  &__topCards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 26px;
+  }
+  &__doctorsList {
+    width: 500px;
+    padding: 18px 18px 8px;
+    background-color: #f8f8f8;
+    margin-top: 50px;
   }
 }

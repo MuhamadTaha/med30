@@ -27,4 +27,11 @@ export class AppComponent {
       }
     ]
   };
+
+  doctorsData = {
+    image: '../../../assets/images/doctor-avatar.png',
+    name: 'Doctor name',
+    title: 'Title'
+  }
+
 }

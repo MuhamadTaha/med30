@@ -1,9 +1,11 @@
 <div class="render-components">
-  <div class="render-components__cards">
+  <div class="render-components__topCards">
     <app-analysis-card [title]="coverageTitle" [chartData]="coverageChartData"></app-analysis-card>
     <app-analysis-card [title]="interfactionalTitle" [chartData]="interfactionalChartData"></app-analysis-card>
     <app-frequency-card [frequencyData]="{number:'2.4'}"></app-frequency-card>
   </div>
-  <app-doctors-card></app-doctors-card>
+  <div class="render-components__doctorsList">
+    <app-doctors-card *ngFor="let item of [1,2,3,4,5]" [doctorsData]="doctorsData"></app-doctors-card>
+  </div>
   <app-videos-list-card></app-videos-list-card>
 </div>
