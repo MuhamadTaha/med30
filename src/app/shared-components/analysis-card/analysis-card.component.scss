@@ -1,0 +1,18 @@
+@import "../../../assets/colors";
+
+.analysis-card {
+  padding: 12px 26px 0;
+  border-radius: 8px;
+  background-color: $light-grey-bg;
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  // width: 410px;
+  &__title {
+    color: $black;
+  }
+  &__chart {
+    // width: 100%;
+    padding: 16px 0;
+  }
+}

@@ -7,4 +7,9 @@
 .render-components {
   padding: 50px;
   background-color: lightblue;
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
 }

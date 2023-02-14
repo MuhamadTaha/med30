@@ -7,6 +7,7 @@ import { AnalysisCardComponent } from './shared-components/analysis-card/analysi
 import { DoctorsCardComponent } from './shared-components/doctors-card/doctors-card.component';
 import { VideosListCardComponent } from './shared-components/videos-list-card/videos-list-card.component';
 import { FrequencyCardComponent } from './shared-components/frequency-card/frequency-card.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FrequencyCardComponent } from './shared-components/frequency-card/frequ
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
