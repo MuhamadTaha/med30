@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-videos-list-card',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./videos-list-card.component.scss']
 })
 export class VideosListCardComponent implements OnInit {
+
+  @Input() videosData: any;
 
   constructor() { }
 

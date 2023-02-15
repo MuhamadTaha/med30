@@ -34,4 +34,11 @@ export class AppComponent {
     title: 'Title'
   }
 
+  videosData = {
+    image: '../../../assets/images/medicines.jpg',
+    name: 'Video name',
+    status: 'Published',
+    views: '3'
+  }
+
 }

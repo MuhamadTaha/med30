@@ -13,10 +13,23 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 26px;
   }
+  &__all {
+    display: flex;
+    width: 100%;
+    gap: 42px;
+  }
   &__doctorsList {
-    width: 500px;
+    width: 600px;
     padding: 18px 18px 8px;
     background-color: #f8f8f8;
     margin-top: 50px;
+    border-radius: 8px;
+  }
+  &__videosList {
+    width: calc(100% - 600px);
+    padding: 18px 18px 8px;
+    background-color: #f8f8f8;
+    margin-top: 50px;
+    border-radius: 8px;
   }
 }

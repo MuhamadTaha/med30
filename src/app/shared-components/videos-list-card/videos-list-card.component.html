@@ -1,1 +1,18 @@
-<p>videos-list-card works!</p>
+<div class="videos-card">
+  <div class="videos-card__image">
+    <img [src]="videosData.image" [alt]="videosData.name" />
+  </div>
+  <div class="videos-card__details">
+    <div>
+      <p class="videos-card__details__name">{{videosData.name}}</p>
+      <div class="videos-card__details__views">
+        <i class="pi pi-eye"></i>
+        <span class="">{{videosData.views}}</span>
+        <span class=""> views </span>
+      </div>
+    </div>
+    <div class="videos-card__details__status">
+      <span class="">{{videosData.status}}</span>
+    </div>
+  </div>
+</div>
