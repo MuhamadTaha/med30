@@ -29,13 +29,13 @@ export class AppComponent {
   };
 
   doctorsData = {
-    image: '../../../assets/images/doctor-avatar.png',
+    image: '../../../../assets/images/doctor-avatar.png',
     name: 'Doctor name',
     title: 'Title'
   }
 
   videosData = {
-    image: '../../../assets/images/medicines.jpg',
+    image: '../../../../assets/images/medicines.jpg',
     name: 'Video name',
     status: 'Published',
     views: '3'
