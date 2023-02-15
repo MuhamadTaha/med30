@@ -8,6 +8,7 @@ import { DoctorsCardComponent } from './shared-components/doctors-card/doctors-c
 import { VideosListCardComponent } from './shared-components/videos-list-card/videos-list-card.component';
 import { FrequencyCardComponent } from './shared-components/frequency-card/frequency-card.component';
 import { ChartModule } from 'primeng/chart';
+import { NavbarComponent } from './shared-components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ChartModule } from 'primeng/chart';
     DoctorsCardComponent,
     VideosListCardComponent,
     FrequencyCardComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
