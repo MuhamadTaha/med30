@@ -1,4 +1,4 @@
-<div class="render-components">
+<!-- <div class="render-components">
   <div class="render-components__topCards">
     <app-analysis-card [title]="coverageTitle" [chartData]="coverageChartData"></app-analysis-card>
     <app-analysis-card [title]="interfactionalTitle" [chartData]="interfactionalChartData"></app-analysis-card>
@@ -12,4 +12,11 @@
       <app-videos-list-card *ngFor="let item of [1,2,3]" [videosData]="videosData"></app-videos-list-card>
     </div>
   </div>
+</div> -->
+
+<app-navbar></app-navbar>
+
+<div class="content-container">
+  <router-outlet></router-outlet>
+
 </div>
