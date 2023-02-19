@@ -11,6 +11,11 @@ import { ChartModule } from 'primeng/chart';
 import { NavbarComponent } from './shared-components/navbar/navbar.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { VideoDetailsPageComponent } from './pages/video-details-page/video-details-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { VideosListPageComponent } from './pages/videos-list-page/videos-list-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,11 @@ import { VideoDetailsPageComponent } from './pages/video-details-page/video-deta
     FrequencyCardComponent,
     NavbarComponent,
     VideoDetailsPageComponent,
+    ProfilePageComponent,
+    VideosListPageComponent,
+    HomePageComponent,
+    LoginPageComponent,
+    AboutPageComponent,
   ],
   imports: [
     BrowserModule,
