@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,23 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  dropdownItems: any[];
+  dropdownItems = [
+    { name: 'My Account', route: '/profile', icon: '../../../assets/icons/dropdown-profile.png' },
+    { name: 'About us', route: '/about-us', icon: '../../../assets/icons/dropdown-about.png' },
+    { name: 'Logout', route: '/logout' }
+  ];
 
-  selectedItem: any;
+  constructor(public router: Router) { }
 
-  constructor() {
-    this.dropdownItems = [
-      { name: 'My Account', route: '/account', icon: '../../../assets/icons/dropdown-profile.png' },
-      { name: 'About us', route: '/about-us', icon: '../../../assets/icons/dropdown-about.png' },
-      { name: 'Logout', route: '/logout' }
-    ];
-  }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onChange(e: any) {
-    console.log('e =========> ', e.value)
+    this.router.navigate([e.value.route])
   }
 
 }
