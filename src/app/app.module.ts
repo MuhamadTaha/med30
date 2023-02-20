@@ -16,6 +16,8 @@ import { VideosListPageComponent } from './pages/videos-list-page/videos-list-pa
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
     HomePageComponent,
     LoginPageComponent,
     AboutPageComponent,
+    LoginComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
