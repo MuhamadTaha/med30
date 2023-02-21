@@ -1,42 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
-  loginForm!: FormGroup
+  signupForm!: FormGroup
   isLoading = false
-
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
+    this.signupForm = new FormGroup({
       'email': new FormControl(null),
       'password': new FormControl(null),
     })
   }
 
-
-  login(form: FormGroup) {
+  signup(form: FormGroup) {
     this.isLoading = true
+
     let x = form.value;
     x.returnSecureToken = true
+    console.log('x ====> ', x)
 
-    this.authService.logIn(x).subscribe(
+    this.authService.signUp(x).subscribe(
       res => {
         console.log('res ====> ', res)
         this.isLoading = false
       },
-      // error => {
-      //   console.log('error ====> ', error)
-      //   this.isLoading = false
-      // },
+      error => {
+        console.log('error ====> ', error)
+        this.isLoading = false
+      },
     )
   }
+
 
 }

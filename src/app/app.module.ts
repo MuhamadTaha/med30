@@ -17,7 +17,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegistrationComponent } from './auth/registration/registration.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared-components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,14 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     LoginPageComponent,
     AboutPageComponent,
     LoginComponent,
-    RegistrationComponent,
+    SignupComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
     ChartModule,
     DropdownModule

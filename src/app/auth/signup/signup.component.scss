@@ -1,6 +1,6 @@
 @import "../../../assets/colors";
 
-.login {
+.signup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,15 +64,12 @@
         color: #c2c2c2;
       }
     }
-    &__signIn {
+    &__signup {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       padding-top: 20px;
-      a {
-        color: #c2c2c2;
-      }
       button {
         background: none;
         border: none;

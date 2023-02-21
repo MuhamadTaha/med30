@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="login">
+  <div class="login__logoContainer">
+    <img src="../../../assets/images/logo.jpg" alt="logo" width="70" />
+  </div>
+  <div class="login__formContainer">
+    <div class="login__text">
+      <h2 class="login__text__title"> Welcome to 30 MED </h2>
+      <p class="login__text__subtitle"> Slogan here and it may contains more than one line. </p>
+    </div>
+
+    <div style="text-align: center;">
+      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    </div>
+
+    <form [formGroup]="loginForm" class="login__form" (ngSubmit)="login(loginForm)" *ngIf="isLoading">
+      <div class="login__form__phone">
+        <label for="email"> Phone Number </label>
+        <input type="text" formControlName="email" id="email" placeholder="Phone Number Here" required />
+      </div>
+      <div class="login__form__password">
+        <label for="password"> Password </label>
+        <input type="password" formControlName="password" id="password" placeholder="Password Here" required />
+        <a> Forgot password? </a>
+      </div>
+      <div class="login__form__signIn">
+        <a> Not a user? Sign up </a>
+        <button type="submit" [disabled]="!loginForm.valid"> Sign in <i class="pi pi-arrow-right"></i> </button>
+      </div>
+    </form>
+
+  </div>
+</div>

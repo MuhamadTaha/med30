@@ -5,7 +5,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { VideoDetailsPageComponent } from './pages/video-details-page/video-details-page.component';
 import { VideosListPageComponent } from './pages/videos-list-page/videos-list-page.component';
-import { VideosListCardComponent } from './shared-components/cards/videos-list-card/videos-list-card.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,8 @@ const routes: Routes = [
   { path: 'videos', component: VideosListPageComponent },
   { path: 'videos/:id', component: VideoDetailsPageComponent },
   { path: 'profile', component: ProfilePageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
