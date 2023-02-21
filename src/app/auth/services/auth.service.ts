@@ -51,7 +51,7 @@ export class AuthService {
   isTokenExpired(): boolean {
     const token = localStorage.getItem('token') || '';
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-    return expiry * 1000 > Date.now();
+    return Date.now() > expiry * 1000;
   }
 
   private handleError(errorRes: HttpErrorResponse) {
