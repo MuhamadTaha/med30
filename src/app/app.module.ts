@@ -3,42 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AnalysisCardComponent } from './shared-components/cards/analysis-card/analysis-card.component';
-import { DoctorsCardComponent } from './shared-components/cards/doctors-card/doctors-card.component';
-import { VideosListCardComponent } from './shared-components/cards/videos-list-card/videos-list-card.component';
-import { FrequencyCardComponent } from './shared-components/cards/frequency-card/frequency-card.component';
-import { ChartModule } from 'primeng/chart';
-import { NavbarComponent } from './shared-components/navbar/navbar.component';
-import { DropdownModule } from 'primeng/dropdown';
-import { VideoDetailsPageComponent } from './pages/video-details-page/video-details-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { VideosListPageComponent } from './pages/videos-list-page/videos-list-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { LoadingSpinnerComponent } from './shared-components/loading-spinner/loading-spinner.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth/services/auth-interceptor.service';
+import { PagesLayoutModule } from './pages/pages-layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnalysisCardComponent,
-    DoctorsCardComponent,
-    VideosListCardComponent,
-    FrequencyCardComponent,
-    NavbarComponent,
-    VideoDetailsPageComponent,
-    ProfilePageComponent,
-    VideosListPageComponent,
-    HomePageComponent,
-    LoginPageComponent,
-    AboutPageComponent,
-    LoginComponent,
-    SignupComponent,
-    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,10 +18,9 @@ import { LoadingSpinnerComponent } from './shared-components/loading-spinner/loa
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    ChartModule,
-    DropdownModule
+    PagesLayoutModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

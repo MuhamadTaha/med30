@@ -1,22 +1,2 @@
-<!-- <div class="render-components">
-  <div class="render-components__topCards">
-    <app-analysis-card [title]="coverageTitle" [chartData]="coverageChartData"></app-analysis-card>
-    <app-analysis-card [title]="interfactionalTitle" [chartData]="interfactionalChartData"></app-analysis-card>
-    <app-frequency-card [frequencyData]="{number:'2.4'}"></app-frequency-card>
-  </div>
-  <div class="render-components__all">
-    <div class="render-components__doctorsList">
-      <app-doctors-card *ngFor="let item of [1,2,3,4,5]" [doctorsData]="doctorsData"></app-doctors-card>
-    </div>
-    <div class="render-components__videosList">
-      <app-videos-list-card *ngFor="let item of [1,2,3]" [videosData]="videosData"></app-videos-list-card>
-    </div>
-  </div>
-</div> -->
 
-<app-navbar></app-navbar>
-
-<div class="content-container">
-  <router-outlet></router-outlet>
-
-</div>
+<router-outlet></router-outlet>

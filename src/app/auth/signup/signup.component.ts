@@ -11,6 +11,8 @@ export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup
   isLoading = false
+  errorMessage: string = ''
+
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
@@ -23,20 +25,17 @@ export class SignupComponent implements OnInit {
   signup(form: FormGroup) {
     this.isLoading = true
 
-    let x = form.value;
-    x.returnSecureToken = true
-    console.log('x ====> ', x)
-
-    this.authService.signUp(x).subscribe(
-      res => {
+    this.authService.signUp(form.value.email, form.value.password).subscribe({
+      next: (res) => {
         console.log('res ====> ', res)
         this.isLoading = false
       },
-      error => {
-        console.log('error ====> ', error)
+      error: (err) => {
+        console.log('error ====> ', err)
+        this.errorMessage = err
         this.isLoading = false
       },
-    )
+    })
   }
 
 

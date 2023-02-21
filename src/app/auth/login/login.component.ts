@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -11,8 +12,9 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup
   isLoading = false
+  errorMessage: string = ''
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -24,19 +26,19 @@ export class LoginComponent implements OnInit {
 
   login(form: FormGroup) {
     this.isLoading = true
-    let x = form.value;
-    x.returnSecureToken = true
 
-    this.authService.logIn(x).subscribe(
-      res => {
+    this.authService.logIn(form.value.email, form.value.password).subscribe({
+      next: (res) => {
         console.log('res ====> ', res)
         this.isLoading = false
+        this.router.navigate([''])
       },
-      // error => {
-      //   console.log('error ====> ', error)
-      //   this.isLoading = false
-      // },
-    )
+      error: (err) => {
+        console.log('error ====> ', err)
+        this.errorMessage = err
+        this.isLoading = false;
+      },
+    })
   }
 
 }

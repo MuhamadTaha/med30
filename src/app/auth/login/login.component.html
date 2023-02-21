@@ -12,7 +12,7 @@
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
 
-    <form [formGroup]="loginForm" class="login__form" (ngSubmit)="login(loginForm)" *ngIf="isLoading">
+    <form [formGroup]="loginForm" class="login__form" (ngSubmit)="login(loginForm)" *ngIf="!isLoading">
       <div class="login__form__phone">
         <label for="email"> Phone Number </label>
         <input type="text" formControlName="email" id="email" placeholder="Phone Number Here" required />

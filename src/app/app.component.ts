@@ -1,44 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
 
-  coverageTitle = 'Coverage rate'
-  interfactionalTitle = 'Interfactional view'
-  coverageChartData = {
-    labels: ['Covered', 'NotCovered'],
-    datasets: [
-      {
-        data: [4, 2],
-        backgroundColor: ["#3ba500", "#0870e7"]
-      }
-    ]
-  };
-  interfactionalChartData = {
-    labels: ['No. of interfactional views', 'No. of non-interfactional views'],
-    datasets: [
-      {
-        data: [2, 2],
-        backgroundColor: ["#3ba500", "#0870e7"]
-      }
-    ]
-  };
+  constructor(public authService: AuthService) { }
 
-  doctorsData = {
-    image: '../../../../assets/images/doctor-avatar.png',
-    name: 'Doctor name',
-    title: 'Title'
+  ngOnInit(): void {
+    this.authService.autoLogin()
   }
 
-  videosData = {
-    image: '../../../../assets/images/medicines.jpg',
-    name: 'Video name',
-    status: 'Published',
-    views: '3'
+  ngOnDestroy(): void {
+    // this.userSubscription.unsubscribe()
   }
 
 }
