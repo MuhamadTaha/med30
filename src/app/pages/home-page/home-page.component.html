@@ -2,8 +2,7 @@
   <div class="home-content__analysis">
     <h3 class=""> Analysis </h3>
     <div class="home-content__analysis__cards">
-      <app-analysis-card [title]="coverageTitle" [chartData]="coverageChartData"></app-analysis-card>
-      <app-analysis-card [title]="interfactionalTitle" [chartData]="interfactionalChartData"></app-analysis-card>
+      <app-analysis-card *ngFor="let chart of charts | slice:0:5" [chartData]="chart"></app-analysis-card>
       <app-frequency-card [frequencyData]="{number:'2.4'}"></app-frequency-card>
     </div>
   </div>
@@ -11,7 +10,7 @@
     <div class="home-content__doctorsList">
       <h3 class=""> Doctors list </h3>
       <div class="home-content__doctorsList__cards">
-        <app-doctors-card *ngFor="let item of [1,2,3,4,5]" [doctorsData]="doctorsData"></app-doctors-card>
+        <app-doctors-card *ngFor="let doctor of doctors | slice:0:5" [doctorsData]="doctor"></app-doctors-card>
       </div>
     </div>
     <div class="home-content__videosList">
@@ -20,7 +19,7 @@
         <h5 class=""> <a> See All </a> </h5>
       </div>
       <div class="home-content__videosList__cards">
-        <app-videos-list-card *ngFor="let item of [1,2,3]" [videosData]="videosData"></app-videos-list-card>
+        <app-videos-list-card *ngFor="let video of videos | slice:0:3" [videosData]="video"></app-videos-list-card>
       </div>
     </div>
   </div>

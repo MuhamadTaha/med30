@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./analysis-card.component.scss']
 })
 export class AnalysisCardComponent implements OnInit {
-  @Input() title!: string;
   @Input() chartData: any;
   chartOptions = {
     responsive: true,

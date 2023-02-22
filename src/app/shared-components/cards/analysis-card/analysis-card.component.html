@@ -1,6 +1,6 @@
 <div class="analysis-card d-flex flex-column">
-  <div class="analysis-card__title"> {{title || ''}} </div>
+  <div class="analysis-card__title"> {{chartData.title || ''}} </div>
   <div class="analysis-card__chart">
-    <p-chart type="pie" [data]="chartData" [options]="chartOptions" height="120px"></p-chart>
+    <p-chart type="pie" [data]="chartData.chartData" [options]="chartOptions" height="120px"></p-chart>
   </div>
 </div>
