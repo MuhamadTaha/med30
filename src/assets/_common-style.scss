@@ -1,5 +1,84 @@
+@import "./colors";
+
 .content-container {
   width: 80%;
   margin: auto;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-row {
+  flex-direction: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.form-input {
+  margin-top: 8px;
+  border: none;
+  padding: 15px 16px;
+  font-size: 15px;
+  border-radius: 12px;
+  background-color: $input-bg;
+}
+
+.sign-button {
+  background: none;
+  border: none;
+  background-color: $primary;
+  padding: 10px 15px;
+  border-radius: 12px;
+  color: $white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  i {
+    font-weight: bold;
+    margin-inline-start: 5px;
+  }
+}
+
+.sign-logo-cont {
+  background-image: url("../assets/images/login-logo-bg.png");
+  background-size: cover;
+  width: 100px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  padding-bottom: 32px;
+  margin-bottom: 30px;
+}

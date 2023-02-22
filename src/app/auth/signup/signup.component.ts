@@ -12,6 +12,7 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup
   isLoading = false
   errorMessage: string = ''
+  isFileUploaded = false;
 
   constructor(public authService: AuthService) { }
 
@@ -38,5 +39,22 @@ export class SignupComponent implements OnInit {
     })
   }
 
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    var formData: any = new FormData();
+    formData.append('file', file);
+
+    this.authService.postFile(formData).subscribe({
+      next: (response) => {
+        this.isFileUploaded = true
+        console.log('postFile response ===>', response)
+      },
+      error: (error) => {
+        this.isFileUploaded = false
+        console.log('postFile error ===>', error)
+      },
+    });
+
+  }
 
 }

@@ -1,15 +1,15 @@
 <nav class="navbar">
-  <div class="content-container">
+  <div class="content-container d-flex justify-content-between align-items-center">
     <div class="navbar__logo">
       <img src="../../../assets/images/logo.jpg" alt="logo" />
     </div>
-    <div class="navbar__links">
-      <ul>
+    <div class="navbar__links d-flex align-items-center">
+      <ul class="d-flex">
         <li> <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"> Homepage </a> </li>
         <li> <a routerLink="/videos" routerLinkActive="active" ariaCurrentWhenActive="page"> Video List </a> </li>
         <li> <a href="#"> العربية </a> </li>
       </ul>
-      <div class="navbar__links__profile">
+      <div class="navbar__links__profile d-flex align-items-center">
         <img src="../../../assets/images/doctor-avatar.png" alt="profile-img" width="40" />
         <span> DR.maya ameer </span>
         <p-dropdown [options]="dropdownItems" [autoDisplayFirst]="false" optionLabel="name"

@@ -1,9 +1,9 @@
-<div class="signup">
-  <div class="signup__logoContainer">
+<div class="signup d-flex align-items-center flex-column">
+  <div class="sign-logo-cont">
     <img src="../../../assets/images/logo.jpg" alt="logo" width="70" />
   </div>
-  <div class="signup__formContainer">
-    <div class="signup__text">
+  <div class="signup__formContainer d-flex flex-column">
+    <div class="signup__text d-flex align-items-center flex-column justify-content-center">
       <h2 class="signup__text__title"> Welcome to 30 MED </h2>
       <p class="signup__text__subtitle"> Slogan here and it may contains more than one line. </p>
       <p class="signup__text__subtitle"> Step 1 : Registration Info </p>
@@ -18,16 +18,29 @@
     </div>
 
     <form [formGroup]="signupForm" class="signup__form" (ngSubmit)="signup(signupForm)" *ngIf="!isLoading">
-      <div class="signup__form__phone">
+      <div class="signup__form__phone d-flex flex-column">
         <label for="email"> Phone Number </label>
-        <input type="text" formControlName="email" id="email" placeholder="Phone Number Here" required />
+        <input type="text" class="form-input" formControlName="email" id="email" placeholder="Phone Number Here"
+          required />
       </div>
-      <div class="signup__form__password">
+      <div class="signup__form__password d-flex flex-column">
         <label for="password"> Password </label>
-        <input type="password" formControlName="password" id="password" placeholder="Password Here" required />
+        <input type="password" class="form-input" formControlName="password" id="password" placeholder="Password Here"
+          required />
       </div>
-      <div class="signup__form__signup">
-        <button type="submit" [disabled]="!signupForm.valid"> Sign up <i class="pi pi-arrow-right"></i> </button>
+      <div class="signup__form__file">
+        <label for="file">Choose File</label>
+        <span class="d-flex align-items-center justify-content-center">
+          <i class="pi pi-plus"></i>
+          Upload CRM
+          <input type="file" id="file" (change)="uploadFile($event)">
+        </span>
+      </div>
+      <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
+        <button type="submit" class="sign-button" [disabled]="!signupForm.valid">
+          Sign up
+          <i class="pi pi-arrow-right"></i>
+        </button>
       </div>
     </form>
 

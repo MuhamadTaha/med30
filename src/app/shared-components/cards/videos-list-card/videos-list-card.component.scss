@@ -1,12 +1,10 @@
 @import "../../../../assets/colors";
+@import "../../../../assets/common-style";
 
 .videos-card {
   padding: 10px;
   background-color: $white;
-  display: flex;
   width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
   margin-bottom: 10px;
   box-sizing: border-box;
   &__image {
@@ -18,17 +16,12 @@
     }
   }
   &__details {
-    display: flex;
     width: 100%;
-    justify-content: space-between;
     &__name {
       font-size: 18px;
       margin-bottom: 30px;
     }
     &__views {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
       gap: 5px;
       i {
         color: $primary;
@@ -38,9 +31,6 @@
     &__status {
       width: 143px;
       height: 42px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       border-radius: 21px;
       background-color: $status_published;
       color: $white;

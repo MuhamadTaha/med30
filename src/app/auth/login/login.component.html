@@ -1,9 +1,9 @@
-<div class="login">
-  <div class="login__logoContainer">
+<div class="login d-flex align-items-center flex-column">
+  <div class="sign-logo-cont">
     <img src="../../../assets/images/logo.jpg" alt="logo" width="70" />
   </div>
-  <div class="login__formContainer">
-    <div class="login__text">
+  <div class="login__formContainer d-flex flex-column">
+    <div class="login__text d-flex align-items-center flex-column justify-content-center">
       <h2 class="login__text__title"> Welcome to 30 MED </h2>
       <p class="login__text__subtitle"> Slogan here and it may contains more than one line. </p>
     </div>
@@ -13,18 +13,23 @@
     </div>
 
     <form [formGroup]="loginForm" class="login__form" (ngSubmit)="login(loginForm)" *ngIf="!isLoading">
-      <div class="login__form__phone">
+      <div class="login__form__phone d-flex flex-column">
         <label for="email"> Phone Number </label>
-        <input type="text" formControlName="email" id="email" placeholder="Phone Number Here" required />
+        <input type="text" class="form-input" formControlName="email" id="email" placeholder="Phone Number Here"
+          required />
       </div>
-      <div class="login__form__password">
+      <div class="login__form__password d-flex flex-column">
         <label for="password"> Password </label>
-        <input type="password" formControlName="password" id="password" placeholder="Password Here" required />
+        <input type="password" class="form-input" formControlName="password" id="password" placeholder="Password Here"
+          required />
         <a> Forgot password? </a>
       </div>
-      <div class="login__form__signIn">
+      <div class="login__form__signIn d-flex align-items-center flex-row justify-content-between">
         <a> Not a user? Sign up </a>
-        <button type="submit" [disabled]="!loginForm.valid"> Sign in <i class="pi pi-arrow-right"></i> </button>
+        <button type="submit" class="sign-button" [disabled]="!loginForm.valid">
+          Sign in
+          <i class="pi pi-arrow-right"></i>
+        </button>
       </div>
     </form>
 
