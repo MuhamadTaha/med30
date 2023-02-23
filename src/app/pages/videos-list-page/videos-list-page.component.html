@@ -7,15 +7,15 @@
     </div>
   </div>
   <div class="videos-list__videosList d-flex flex-column">
-    <div class="videos-list__videosList__titleAndIcons d-flex justify-content-between align-items-center">
+    <div class="videos-list__videosList__title-and-icons d-flex justify-content-between align-items-center">
       <h3 class=""> My Videos </h3>
       <div class="d-flex align-items-center">
-        <div class="videos-list__videosList__titleAndIcons__timeOptions">
+        <div class="videos-list__videosList__title-and-icons__timeOptions">
           <p-selectButton [options]="timeOptions" [(ngModel)]="timeOptionsValue" optionLabel="label" optionValue="value"
             (onChange)="onTimeOptionChange($event)">
           </p-selectButton>
         </div>
-        <div class="videos-list__videosList__titleAndIcons__layoutOptions">
+        <div class="videos-list__videosList__title-and-icons__layoutOptions">
           <p-selectButton [options]="layoutOptions" [(ngModel)]="layoutOptionsValue" optionLabel="label"
             optionValue="value" (onChange)="onLayoutOptionChange($event)">
             <ng-template let-item>
@@ -24,6 +24,9 @@
           </p-selectButton>
         </div>
       </div>
+    </div>
+    <div class="videos-list__videosList__add-video d-flex justify-content-center align-items-center">
+      <button class="add-video-btn"> + Add new video </button>
     </div>
     <div class="videos-list__videosList__cards" [ngClass]="{'grid': videoListTheme == 'grid'}">
       <app-videos-list-card *ngFor="let video of videos | slice:0:6" [videosData]="video"

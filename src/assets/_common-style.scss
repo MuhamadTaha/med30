@@ -5,38 +5,6 @@
   margin: auto;
 }
 
-.d-flex {
-  display: flex;
-}
-
-.align-items-center {
-  align-items: center;
-}
-
-.align-items-start {
-  align-items: flex-start;
-}
-
-.justify-content-center {
-  justify-content: center;
-}
-
-.justify-content-start {
-  justify-content: flex-start;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-
-.flex-row {
-  flex-direction: flex;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
 .form-input {
   margin-top: 8px;
   border: none;
@@ -81,4 +49,53 @@
   align-items: end;
   padding-bottom: 32px;
   margin-bottom: 30px;
+}
+
+.add-video-btn {
+  border: none;
+  background: none;
+  background-color: $primary;
+  padding: 22px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: $white;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// grid system classes
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-row {
+  flex-direction: flex;
+}
+
+.flex-column {
+  flex-direction: column;
 }
