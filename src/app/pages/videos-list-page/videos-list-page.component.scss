@@ -1,0 +1,56 @@
+@import "../../../assets/colors";
+@import "../../../assets/common-style";
+
+.videos-list {
+  padding: 35px 0;
+  &__analysis {
+    &__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+  }
+  &__videosList {
+    width: 100%;
+    margin-top: 16px;
+    &__titleAndIcons {
+      ::ng-deep {
+        .p-button {
+          color: $subtitle-color !important;
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .p-highlight {
+          color: $primary !important;
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+      }
+      &__layoutOptions {
+        ::ng-deep {
+          .p-button {
+            font-size: 25px;
+          }
+        }
+      }
+    }
+    &__cards {
+      width: 100%;
+      padding: 18px 0 8px;
+      background-color: $white;
+      border-radius: 8px;
+      &.grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 26px;
+        ::ng-deep {
+          .videos-card-grid {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

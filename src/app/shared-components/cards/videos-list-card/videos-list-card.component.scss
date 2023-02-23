@@ -8,7 +8,7 @@
   margin-bottom: 10px;
   box-sizing: border-box;
   &__image {
-    margin-inline-end: 10px;
+    margin-inline-end: 20px;
     img {
       width: 150px;
       height: 110px;
@@ -19,10 +19,11 @@
     width: 100%;
     &__name {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin: 10px 0 0;
     }
     &__views {
       gap: 5px;
+      margin: 20px 0;
       i {
         color: $primary;
         font-weight: bold;
@@ -34,6 +35,49 @@
       border-radius: 21px;
       background-color: $status_published;
       color: $white;
+    }
+  }
+}
+
+.videos-card-linear {
+  background-color: $light-grey-bg;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  .videos-card__image {
+    img {
+      width: 200px;
+      height: 145px;
+    }
+  }
+  .videos-card__details {
+    &__name {
+      margin: 10px 0 0;
+    }
+    &__views {
+      margin: 20px 0;
+    }
+    &__status {
+      margin: 10px;
+    }
+  }
+}
+
+.videos-card-grid {
+  background-color: $light-grey-bg;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  .videos-card__image {
+    img {
+      width: 200px;
+      height: 145px;
+    }
+  }
+  .videos-card__details {
+    &__name {
+      margin: 10px 0 0;
+    }
+    &__views {
+      margin: 20px 0;
     }
   }
 }

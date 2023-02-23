@@ -2,7 +2,7 @@
   <div class="home-content__analysis">
     <h3 class=""> Analysis </h3>
     <div class="home-content__analysis__cards">
-      <app-analysis-card *ngFor="let chart of charts | slice:0:5" [chartData]="chart"></app-analysis-card>
+      <app-analysis-card *ngFor="let chart of charts | slice:0:2" [chartData]="chart"></app-analysis-card>
       <app-frequency-card [frequencyData]="{number:'2.4'}"></app-frequency-card>
     </div>
   </div>

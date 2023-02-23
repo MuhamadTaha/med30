@@ -8,16 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class VideosListCardComponent implements OnInit {
 
   @Input() videosData: any;
+  @Input() theme = '';
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.videosData = {
-      image: '../../../../assets/images/medicines.jpg',
-      name: 'Video name',
-      status: 'Published',
-      views: '3'
-    }
-  }
+  ngOnInit(): void { }
 
 }

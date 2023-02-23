@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesLayoutComponent } from './pages-layout.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { VideoDetailsPageComponent } from './video-details-page/video-details-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
@@ -14,10 +17,11 @@ import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/
 import { DoctorsCardComponent } from '../shared-components/cards/doctors-card/doctors-card.component';
 import { VideosListCardComponent } from '../shared-components/cards/videos-list-card/videos-list-card.component';
 import { FrequencyCardComponent } from '../shared-components/cards/frequency-card/frequency-card.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+
 import { AuthGuard } from '../auth/guards/auth.guard';
 
 
@@ -65,7 +69,10 @@ const components = [
     ReactiveFormsModule,
     HttpClientModule,
     ChartModule,
+    FormsModule,
     DropdownModule,
+    SelectButtonModule,
+    FontAwesomeModule,
     RouterModule.forChild(routes)
   ]
 })

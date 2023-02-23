@@ -1,8 +1,10 @@
-<div class="videos-card d-flex align-items-start justify-content-start">
-  <div class="videos-card__image">
+<div class="videos-card d-flex align-items-start justify-content-start"
+  [ngClass]="{'videos-card-linear': theme == 'linear','videos-card-grid': theme == 'grid'}">
+  <div class=" videos-card__image">
     <img [src]="videosData.image" [alt]="videosData.name" />
   </div>
-  <div class="videos-card__details d-flex justify-content-between">
+  <div class="videos-card__details d-flex justify-content-between"
+    [ngClass]="{'flex-row': theme == 'linear','flex-column': theme == 'grid'}">
     <div>
       <p class="videos-card__details__name">{{videosData.name}}</p>
       <div class="videos-card__details__views d-flex align-items-center justify-content-start">

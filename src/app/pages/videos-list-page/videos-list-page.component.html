@@ -1,1 +1,33 @@
-<p>videos-list-page works!</p>
+<div class="videos-list">
+  <div class="videos-list__analysis">
+    <h3 class=""> Analysis </h3>
+    <div class="videos-list__analysis__cards">
+      <app-analysis-card *ngFor="let chart of charts | slice:0:2" [chartData]="chart"></app-analysis-card>
+      <app-frequency-card [frequencyData]="{number:'2.4'}"></app-frequency-card>
+    </div>
+  </div>
+  <div class="videos-list__videosList d-flex flex-column">
+    <div class="videos-list__videosList__titleAndIcons d-flex justify-content-between align-items-center">
+      <h3 class=""> My Videos </h3>
+      <div class="d-flex align-items-center">
+        <div class="videos-list__videosList__titleAndIcons__timeOptions">
+          <p-selectButton [options]="timeOptions" [(ngModel)]="timeOptionsValue" optionLabel="label" optionValue="value"
+            (onChange)="onTimeOptionChange($event)">
+          </p-selectButton>
+        </div>
+        <div class="videos-list__videosList__titleAndIcons__layoutOptions">
+          <p-selectButton [options]="layoutOptions" [(ngModel)]="layoutOptionsValue" optionLabel="label"
+            optionValue="value" (onChange)="onLayoutOptionChange($event)">
+            <ng-template let-item>
+              <fa-icon [icon]="item.label"></fa-icon>
+            </ng-template>
+          </p-selectButton>
+        </div>
+      </div>
+    </div>
+    <div class="videos-list__videosList__cards" [ngClass]="{'grid': videoListTheme == 'grid'}">
+      <app-videos-list-card *ngFor="let video of videos | slice:0:6" [videosData]="video"
+        [theme]="videoListTheme"></app-videos-list-card>
+    </div>
+  </div>
+</div>
