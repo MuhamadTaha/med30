@@ -32,7 +32,7 @@ const routes: Routes = [
     component: PagesLayoutComponent,
     children: [
       { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
-      { path: 'about-us', component: AboutPageComponent },
+      { path: 'about', component: AboutPageComponent },
       { path: 'videos', component: VideosListPageComponent, },
       { path: 'videos/:id', component: VideoDetailsPageComponent },
       { path: 'profile', component: ProfilePageComponent },

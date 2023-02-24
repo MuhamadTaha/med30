@@ -13,7 +13,7 @@
         <img src="../../../assets/images/doctor-avatar.png" alt="profile-img" width="40" />
         <span> DR.maya ameer </span>
         <p-dropdown [options]="dropdownItems" [autoDisplayFirst]="false" optionLabel="name"
-          (onChange)="onChange($event)">
+          [(ngModel)]="dropdownSelectedItem" (onChange)="onChange($event)">
           <ng-template let-dropdownItem pTemplate="item">
             <img [src]="dropdownItem.icon" alt="dropdown-icon" *ngIf="dropdownItem.route !== '/logout'" width="24" />
             <span [ngClass]="{'dropdown-item-logout': dropdownItem.route == '/logout'}">{{dropdownItem.name}}</span>

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Dropdown } from 'primeng/dropdown';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -9,9 +10,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
+  dropdownSelectedItem!: any;
+
   dropdownItems = [
     { name: 'My Account', route: '/profile', icon: '../../../assets/icons/dropdown-profile.png' },
-    { name: 'About us', route: '/about-us', icon: '../../../assets/icons/dropdown-about.png' },
+    { name: 'About us', route: '/about', icon: '../../../assets/icons/dropdown-about.png' },
     { name: 'Logout', route: '/logout' }
   ];
 
@@ -24,6 +27,9 @@ export class NavbarComponent implements OnInit {
       this.authService.logout();
     } else {
       this.router.navigate([e.value.route])
+      console.log(this.dropdownSelectedItem)
+      this.dropdownSelectedItem = {};
+      console.log(this.dropdownSelectedItem)
     }
   }
 
