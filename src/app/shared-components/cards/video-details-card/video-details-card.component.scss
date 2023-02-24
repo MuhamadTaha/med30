@@ -37,31 +37,24 @@
     }
     &__actions {
       gap: 20px;
-      .delete-btn {
+      .action-btn {
         border: none;
         background: none;
-        background-color: $btn-red;
         gap: 7px;
         padding: 14px 28px;
         border-radius: 8px;
+        font-size: 16px;
         color: $white;
         cursor: pointer;
         &:hover {
           opacity: 0.9;
         }
       }
+      .delete-btn {
+        background-color: $btn-red;
+      }
       .edit-btn {
-        border: none;
-        background: none;
         background-color: $btn-green;
-        gap: 7px;
-        padding: 12px 22px;
-        border-radius: 8px;
-        color: $white;
-        cursor: pointer;
-        &:hover {
-          opacity: 0.9;
-        }
       }
     }
     &__status {
