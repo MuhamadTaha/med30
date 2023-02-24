@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-videos-list-card',
@@ -10,8 +11,11 @@ export class VideosListCardComponent implements OnInit {
   @Input() videosData: any;
   @Input() theme = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void { }
 
+  openVideoDetails(id: any) {
+    this.router.navigate([`videos/${id}`])
+  }
 }

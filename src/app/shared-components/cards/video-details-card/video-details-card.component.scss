@@ -1,0 +1,76 @@
+@import "../../../../assets/colors";
+@import "../../../../assets/common-style";
+
+.video-card {
+  padding: 10px;
+  background-color: $light-grey-bg;
+  margin: 20px 0;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  &__image {
+    margin-inline-end: 20px;
+    img {
+      width: 300px;
+      height: 220px;
+      border-radius: 8px;
+    }
+  }
+  &__details {
+    width: 100%;
+    &__name {
+      font-size: 18px;
+      margin: 0;
+    }
+    &__statistics {
+      gap: 50px;
+      div {
+        gap: 5px;
+        span:first-of-type {
+          color: $primary;
+          font-weight: bold;
+        }
+        span:nth-of-type(2) {
+          font-size: 14px;
+        }
+      }
+    }
+    &__actions {
+      gap: 20px;
+      .delete-btn {
+        border: none;
+        background: none;
+        background-color: $btn-red;
+        gap: 7px;
+        padding: 14px 28px;
+        border-radius: 8px;
+        color: $white;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+      .edit-btn {
+        border: none;
+        background: none;
+        background-color: $btn-green;
+        gap: 7px;
+        padding: 12px 22px;
+        border-radius: 8px;
+        color: $white;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+    &__status {
+      width: 143px;
+      height: 42px;
+      margin: 10px 20px;
+      border-radius: 21px;
+      background-color: $status_published;
+      color: $white;
+    }
+  }
+}

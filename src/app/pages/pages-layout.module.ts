@@ -17,6 +17,7 @@ import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/
 import { DoctorsCardComponent } from '../shared-components/cards/doctors-card/doctors-card.component';
 import { VideosListCardComponent } from '../shared-components/cards/videos-list-card/videos-list-card.component';
 import { FrequencyCardComponent } from '../shared-components/cards/frequency-card/frequency-card.component';
+import { VideoDetailsCardComponent } from '../shared-components/cards/video-details-card/video-details-card.component';
 
 import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
@@ -32,12 +33,8 @@ const routes: Routes = [
     children: [
       { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
       { path: 'about-us', component: AboutPageComponent },
-      {
-        path: 'videos', component: VideosListPageComponent,
-        children: [
-          { path: 'videos/:id', component: VideoDetailsPageComponent }
-        ],
-      },
+      { path: 'videos', component: VideosListPageComponent, },
+      { path: 'videos/:id', component: VideoDetailsPageComponent },
       { path: 'profile', component: ProfilePageComponent },
     ]
   }
@@ -56,6 +53,7 @@ const components = [
   AnalysisCardComponent,
   DoctorsCardComponent,
   VideosListCardComponent,
+  VideoDetailsCardComponent,
   FrequencyCardComponent,
 ]
 

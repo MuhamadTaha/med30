@@ -1,4 +1,4 @@
-<div class="videos-card d-flex align-items-start justify-content-start"
+<div class="videos-card d-flex align-items-start justify-content-start" (click)="openVideoDetails(videosData.id)"
   [ngClass]="{'videos-card-linear': theme == 'linear','videos-card-grid': theme == 'grid'}">
   <div class=" videos-card__image">
     <img [src]="videosData.image" [alt]="videosData.name" />

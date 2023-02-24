@@ -1,0 +1,37 @@
+@import "../../../assets/colors";
+@import "../../../assets/common-style";
+
+.video-details {
+  padding: 35px 0;
+  &__analysis {
+    &__container {
+      padding: 35px;
+      background-color: $light-grey-bg;
+    }
+    &__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      ::ng-deep {
+        .frequency-card {
+          background-color: $white;
+        }
+      }
+    }
+    &__audience-like,
+    &__audience-comment {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    h3 {
+      margin-top: 30px;
+    }
+    a {
+      color: $primary;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

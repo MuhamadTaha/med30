@@ -1,9 +1,10 @@
 <div class="doctors-card d-flex align-items-start justify-content-start">
-  <div class="doctors-card__image">
+  <div class="doctors-card__image" *ngIf="doctorsData.image">
     <img [src]="doctorsData.image" [alt]="doctorsData.name" />
   </div>
   <div class="doctors-card__data">
-    <p class="doctors-card__data__name">{{doctorsData.name}}</p>
-    <p class="doctors-card__data__title">{{doctorsData.title}}</p>
+    <p class="doctors-card__data__name" *ngIf="doctorsData.name">{{doctorsData.name}}</p>
+    <p class="doctors-card__data__title" *ngIf="doctorsData.title">{{doctorsData.title}}</p>
+    <p class="doctors-card__data__comment" *ngIf="doctorsData.comment"><q>{{doctorsData.comment}}</q></p>
   </div>
 </div>

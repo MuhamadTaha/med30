@@ -11,14 +11,6 @@ export class DoctorsCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-
-    this.doctorsData = {
-      image: '../../../../assets/images/doctor-avatar.png',
-      name: 'Doctor name',
-      title: 'Title'
-    }
-
-  }
+  ngOnInit(): void { }
 
 }

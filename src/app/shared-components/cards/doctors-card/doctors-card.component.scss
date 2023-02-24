@@ -20,5 +20,10 @@
       margin: 8px;
       font-weight: bold;
     }
+    &__comment {
+      margin: 8px;
+      color: $text-light-grey;
+      font-weight: normal !important;
+    }
   }
 }

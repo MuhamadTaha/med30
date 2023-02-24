@@ -1,1 +1,30 @@
-<p>video-details-page works!</p>
+<div class="video-details">
+
+  <div class="video-details__videosList d-flex flex-column">
+    <div class="video-details__videosList__cards">
+      <h3> Video title </h3>
+      <app-video-details-card [videosDetails]="videosDetails"></app-video-details-card>
+    </div>
+  </div>
+
+  <div class="video-details__analysis">
+    <h3 class=""> Video summary analysis </h3>
+    <div class="video-details__analysis__container">
+      <div class="video-details__analysis__cards">
+        <app-frequency-card *ngFor="let item of frequencyData" [frequencyData]="item"></app-frequency-card>
+      </div>
+      <h3 class=""> Audience who like this video </h3>
+      <div class="video-details__analysis__audience-like">
+        <app-doctors-card *ngFor="let doctor of doctorsLike | slice:0:4" [doctorsData]="doctor"></app-doctors-card>
+      </div>
+      <a routerLink="/"> + see all </a>
+      <h3 class=""> Audience who comment on this video </h3>
+      <div class="video-details__analysis__audience-comment">
+        <app-doctors-card *ngFor="let doctor of doctorsComment | slice:0:4" [doctorsData]="doctor"></app-doctors-card>
+      </div>
+      <a routerLink="/"> + see all </a>
+    </div>
+  </div>
+
+
+</div>

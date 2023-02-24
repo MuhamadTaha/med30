@@ -1,0 +1,31 @@
+<div class="video-card d-flex align-items-start justify-content-start">
+  <div class=" video-card__image" *ngIf="videosDetails.image">
+    <img [src]="videosDetails.image" [alt]="videosDetails.name" />
+  </div>
+  <div class="video-card__details d-flex justify-content-between">
+    <div class="d-flex flex-column justify-content-between" style="min-height: 220px; padding: 15px 0;">
+      <p class="video-card__details__name">{{videosDetails.name}}</p>
+
+      <div class="video-card__details__statistics d-flex align-items-center justify-content-between">
+        <div class="d-flex flex-column align-items-center justify-content-center" *ngFor="let item of iconsData">
+          <span class=""> <fa-icon [icon]="item.icon"></fa-icon> </span>
+          <span class=""> {{item.title}} </span>
+          <span class=""> {{item.number}} </span>
+        </div>
+      </div>
+
+      <div class="video-card__details__actions d-flex align-items-center">
+        <button class="delete-btn d-flex align-items-center">
+          <fa-icon [icon]="icons.delete"></fa-icon> Delete Video
+        </button>
+        <button class="edit-btn d-flex align-items-center">
+          <fa-icon [icon]="icons.edit"></fa-icon> Edit Video </button>
+      </div>
+
+
+    </div>
+    <div class="video-card__details__status d-flex align-items-center justify-content-center">
+      <span class="">{{videosDetails.status}}</span>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,10 @@ export class GeneralService {
     return this.http.get('https://med30-med30-default-rtdb.firebaseio.com/doctors.json')
   }
 
+  getDoctorsComment() {
+    return this.http.get('https://med30-med30-default-rtdb.firebaseio.com/doctors-comment.json')
+  }
+
   getVideos() {
     return this.http.get('https://med30-med30-default-rtdb.firebaseio.com/videos.json')
   }
