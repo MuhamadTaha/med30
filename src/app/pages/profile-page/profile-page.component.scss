@@ -36,24 +36,44 @@
     }
     &__content {
       background-color: $light-grey-bg;
-      padding: 30px 20px;
-      &__text {
-        gap: 10px;
-        label {
-          font-weight: bold;
-        }
-        input {
-          background: none;
-          border: none;
-          padding: 20px;
-          outline: none;
-          box-shadow: none;
-          &.edit-input {
-            background-color: $white;
-            border-radius: 8px;
+      padding: 50px 100px;
+      h3 {
+        color: $primary;
+        margin: 0;
+      }
+      &__form {
+        form {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 200px;
+          label {
+            margin-top: 20px;
           }
         }
       }
     }
   }
+}
+
+span {
+  position: relative;
+  background: $primary;
+  color: $white;
+  outline: none;
+  border-radius: 50px;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+}
+
+span input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  font-size: 0px;
+  z-index: 999;
+  cursor: pointer;
 }

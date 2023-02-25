@@ -53,9 +53,10 @@ export class AuthService {
   }
 
   isTokenExpired(): boolean {
-    const token = localStorage.getItem('token') || '';
-    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
-    return Date.now() > expiry * 1000;
+    // const token = localStorage.getItem('token') || '';
+    // const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    // return Date.now() > expiry * 1000;
+    return false
   }
 
   postFile(formData: FormData) {
