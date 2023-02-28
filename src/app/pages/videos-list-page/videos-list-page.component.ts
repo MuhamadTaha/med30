@@ -13,6 +13,7 @@ export class VideosListPageComponent implements OnInit {
   charts: any;
   videos: any;
 
+  showAddVideoDialog: boolean = false;
   videoListTheme: any = 'linear';
 
   icons = {
@@ -80,6 +81,10 @@ export class VideosListPageComponent implements OnInit {
 
   onTimeOptionChange(e: any) {
     console.log('e', e)
+  }
+
+  showAddVideoDialogFn() {
+    this.showAddVideoDialog = true
   }
 
 }

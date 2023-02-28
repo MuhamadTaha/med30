@@ -26,11 +26,13 @@
       </div>
     </div>
     <div class="videos-list__videosList__add-video d-flex justify-content-center align-items-center">
-      <button class="add-video-btn"> + Add new video </button>
+      <button class="add-video-btn" (click)="showAddVideoDialogFn()"> + Add new video </button>
     </div>
     <div class="videos-list__videosList__cards" [ngClass]="{'grid': videoListTheme == 'grid'}">
       <app-videos-list-card *ngFor="let video of videos | slice:0:6" [videosData]="video"
         [theme]="videoListTheme"></app-videos-list-card>
     </div>
   </div>
+
+  <app-add-video-dialog [showDialog]="showAddVideoDialog"></app-add-video-dialog>
 </div>

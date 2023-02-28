@@ -108,5 +108,9 @@
   }
   .p-dialog-header {
     font-weight: bold;
+    justify-content: center !important;
+    .p-dialog-header-icons {
+      display: none !important;
+    }
   }
 }

@@ -1,1 +1,23 @@
-<p>add-video-page works!</p>
+<div class="add-video">
+
+  <h2> Add new video </h2>
+
+
+  <p-tabView [(activeIndex)]="currentTabIndex">
+
+    <p-tabPanel header="Step 1: Choose audience" [headerStyleClass]="'activeTab'">
+      <app-add-video-choose-audience></app-add-video-choose-audience>
+    </p-tabPanel>
+
+    <p-tabPanel header="Step 2: Upload videos"
+      [headerStyleClass]="(currentTabIndex == 1 || currentTabIndex == 2) ? 'activeTab' : ''">
+      <app-add-video-upload-videos></app-add-video-upload-videos>
+    </p-tabPanel>
+
+    <p-tabPanel header="Step 3: Submissions" [headerStyleClass]="currentTabIndex == 2 ? 'activeTab' : ''">
+      <app-add-video-submissions></app-add-video-submissions>
+    </p-tabPanel>
+
+  </p-tabView>
+
+</div>

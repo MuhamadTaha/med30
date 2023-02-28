@@ -1,6 +1,6 @@
 <div class="profile">
 
-  <p-dialog [(visible)]="displayChangePasswordDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+  <p-dialog [(visible)]="displayChangePasswordDialog" [modal]="true" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
     [style]="{width: '50vw'}">
     <ng-template pTemplate="header"> Change Password </ng-template>
 
@@ -35,8 +35,7 @@
         <button type="button" class="cancel-btn-transparent action-btn d-flex align-items-center"
           (click)="closeDialog()"> Cancel </button>
         <button class="edit-btn action-btn d-flex align-items-center" type="submit"
-          [disabled]="!changePasswordForm.valid">
-          <fa-icon [icon]="icons.edit"></fa-icon> Change Password </button>
+          [disabled]="!changePasswordForm.valid"> Change Password </button>
       </diV>
 
 

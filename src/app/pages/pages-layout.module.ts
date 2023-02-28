@@ -11,8 +11,14 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { VideosListPageComponent } from './videos-list-page/videos-list-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { AddVideoPageComponent } from './add-video-page/add-video-page.component';
 
 import { NavbarComponent } from '../shared-components/navbar/navbar.component';
+import { AddVideoChooseAudienceComponent } from './components/add-video-choose-audience/add-video-choose-audience.component';
+import { AddVideoUploadVideosComponent } from './components/add-video-upload-videos/add-video-upload-videos.component';
+import { AddVideoSubmissionsComponent } from './components/add-video-submissions/add-video-submissions.component';
+import { AddVideoDialogComponent } from './components/add-video-dialog/add-video-dialog.component';
+
 import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/analysis-card.component';
 import { DoctorsCardComponent } from '../shared-components/cards/doctors-card/doctors-card.component';
 import { VideosListCardComponent } from '../shared-components/cards/videos-list-card/videos-list-card.component';
@@ -25,13 +31,10 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TabViewModule } from 'primeng/tabview';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { DisableControlDirective } from '../directives/disable-control.directive';
-import { AddVideoChooseAudienceComponent } from './components/add-video-choose-audience/add-video-choose-audience.component';
-import { AddVideoUploadVideosComponent } from './components/add-video-upload-videos/add-video-upload-videos.component';
-import { AddVideoSubmissionsComponent } from './components/add-video-submissions/add-video-submissions.component';
-import { AddVideoPageComponent } from './add-video-page/add-video-page.component';
 
 
 const routes: Routes = [
@@ -44,6 +47,7 @@ const routes: Routes = [
       { path: 'videos', component: VideosListPageComponent, },
       { path: 'videos/:id', component: VideoDetailsPageComponent },
       { path: 'profile', component: ProfilePageComponent },
+      { path: 'add-video', component: AddVideoPageComponent },
     ]
   }
 
@@ -74,7 +78,8 @@ const components = [
   declarations: [
     DisableControlDirective,
     PagesLayoutComponent,
-    ...components
+    ...components,
+    AddVideoDialogComponent
   ],
   imports: [
     CommonModule,
@@ -87,6 +92,7 @@ const components = [
     FileUploadModule,
     DialogModule,
     InputTextareaModule,
+    TabViewModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)
   ]
