@@ -28,6 +28,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { DisableControlDirective } from '../directives/disable-control.directive';
+import { AddVideoChooseAudienceComponent } from './components/add-video-choose-audience/add-video-choose-audience.component';
+import { AddVideoUploadVideosComponent } from './components/add-video-upload-videos/add-video-upload-videos.component';
+import { AddVideoSubmissionsComponent } from './components/add-video-submissions/add-video-submissions.component';
+import { AddVideoPageComponent } from './add-video-page/add-video-page.component';
 
 
 const routes: Routes = [
@@ -52,7 +56,12 @@ const components = [
   VideoDetailsPageComponent,
   ProfilePageComponent,
   AboutPageComponent,
+  AddVideoPageComponent,
+  // shared components
   NavbarComponent,
+  AddVideoChooseAudienceComponent,
+  AddVideoUploadVideosComponent,
+  AddVideoSubmissionsComponent,
   // cards
   AnalysisCardComponent,
   DoctorsCardComponent,
