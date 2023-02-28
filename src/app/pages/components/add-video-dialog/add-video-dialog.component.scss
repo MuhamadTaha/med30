@@ -1,0 +1,28 @@
+@import "../../../../assets/colors";
+@import "../../../../assets/common-style";
+
+.dialog {
+  &__text {
+    line-height: 2;
+    text-align: center;
+    padding: 0 40px;
+  }
+  &__actions {
+    padding: 0 40px;
+    gap: 50px;
+    .edit-btn {
+      border-radius: 26px;
+      width: calc(100% - 80px);
+      text-align: center;
+    }
+  }
+}
+::ng-deep {
+  .p-dialog-header {
+    font-weight: bold;
+    justify-content: center !important;
+    .p-dialog-header-icons {
+      display: none !important;
+    }
+  }
+}
