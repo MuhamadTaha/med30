@@ -6,6 +6,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from '../shared-components/loading-spinner/loading-spinner.component';
+import { TabViewModule } from 'primeng/tabview';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 const routes: Routes = [
@@ -21,9 +23,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    RouterModule.forChild(routes),
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild(routes)
+    TabViewModule,
+    FileUploadModule,
   ],
   exports: [RouterModule]
 })

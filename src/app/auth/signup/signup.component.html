@@ -6,7 +6,6 @@
     <div class="signup__text d-flex align-items-center flex-column justify-content-center">
       <h2 class="signup__text__title"> Welcome to 30 MED </h2>
       <p class="signup__text__subtitle"> Slogan here and it may contains more than one line. </p>
-      <p class="signup__text__subtitle"> Step 1 : Registration Info </p>
     </div>
 
     <!-- <div style="text-align: center; color: red; padding: 20px; background-color: lightpink;" *ngIf="errorMessage">
@@ -18,31 +17,124 @@
     </div>
 
     <form [formGroup]="signupForm" class="signup__form" (ngSubmit)="signup(signupForm)" *ngIf="!isLoading">
-      <div class="signup__form__phone d-flex flex-column">
-        <label for="email"> Phone Number </label>
-        <input type="text" class="form-input" formControlName="email" id="email" placeholder="Phone Number Here"
-          required />
-      </div>
-      <div class="signup__form__password d-flex flex-column">
-        <label for="password"> Password </label>
-        <input type="password" class="form-input" formControlName="password" id="password" placeholder="Password Here"
-          required />
-      </div>
-      <div class="signup__form__file">
-        <label for="file">Choose File</label>
-        <span class="d-flex align-items-center justify-content-center">
-          <i class="pi pi-plus"></i>
-          Upload CRM
-          <input type="file" id="file" (change)="uploadFile($event)">
-        </span>
-      </div>
-      <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
-        <button type="submit" class="sign-button" [disabled]="!signupForm.valid">
-          Sign up
-          <i class="pi pi-arrow-right"></i>
-        </button>
-      </div>
+
+      <p-tabView [(activeIndex)]="currentTabIndex">
+
+        <p-tabPanel header="step 1" [headerStyleClass]="'activeTab'">
+          <h3> Step 1 : Registration Info </h3>
+
+          <div class="signup__form__company-name-en form-control d-flex flex-column">
+            <label for="company-name-en"> Company Name (En) </label>
+            <input type="text" class="form-input" formControlName="nameEn" id="company-name-en"
+              placeholder="Company Name Here (English)" required />
+          </div>
+          <div class="signup__form__company-name-ar form-control d-flex flex-column">
+            <label for="company-name-ar"> Company Name (Ar) </label>
+            <input type="text" class="form-input" formControlName="nameAr" id="company-name-ar"
+              placeholder="Company Name Here (Arabic)" required />
+          </div>
+
+          <div class="signup__form__company-mail form-control d-flex flex-column">
+            <label for="company-mail"> Company E-mail </label>
+            <input type="text" class="form-input" formControlName="email" id="company-mail"
+              placeholder="Company E-mail Here" required />
+            <span class="error-message" *ngIf="
+              signupForm?.get('email')?.value && signupForm?.get('email')?.touched &&
+              signupForm?.get('email')?.errors?.['email']">
+              Please enter a valid mail
+            </span>
+          </div>
+
+          <div class="signup__form__file form-control">
+            <label for="file">Choose File</label>
+            <p-fileUpload name="myfile[]" (onSelect)="onFileSelect($event)"
+              (onRemove)="onFileRemove($event)"></p-fileUpload>
+          </div>
+
+          <div class="signup__form__password form-control d-flex flex-column">
+            <label for="password"> Password </label>
+            <input type="password" class="form-input" formControlName="password" id="password"
+              placeholder="Password Here" required />
+          </div>
+
+          <div class="signup__form__rePassword form-control d-flex flex-column">
+            <label for="repassword"> Re-enter Password </label>
+            <input type="password" class="form-input" formControlName="rePassword" id="repassword"
+              placeholder="Re-enter Password Here" required />
+            <span class="error-message" *ngIf="
+              signupForm?.get('password')?.value && signupForm?.get('password')?.touched &&
+              signupForm?.get('rePassword')?.value && signupForm?.get('rePassword')?.touched &&
+              signupForm?.errors?.['passwordsNotMatching']">
+              Passwords Doesn't Match
+            </span>
+          </div>
+
+
+          <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
+            <button type="button" class="sign-button" [disabled]="!signupForm.valid" (click)="openSecondTab()">
+              Next <i class="pi pi-arrow-right"></i>
+            </button>
+          </div>
+
+        </p-tabPanel>
+
+        <p-tabPanel header="step 2" [headerStyleClass]="currentTabIndex == 1 ? 'activeTab' : ''"
+          formGroupName="responsiblePerson">
+          <h3> Step 2 : Responsible person Info </h3>
+
+          <div class="signup__form__responsible-person-name-en form-control d-flex flex-column">
+            <label for="responsible-person-name-en"> Person name (En) </label>
+            <input type="text" class="form-input" formControlName="nameEn" id="responsible-person-name-en"
+              placeholder="Responsible Person Name Here (English)" [required]="currentTabIndex == 1" />
+          </div>
+
+          <div class="signup__form__responsible-person-name-ar form-control d-flex flex-column">
+            <label for="responsible-person-name-ar"> Person name (Ar) </label>
+            <input type="text" class="form-input" formControlName="nameAr" id="responsible-person-name-ar"
+              placeholder="Responsible Person Name Here (Arabic)" [required]="currentTabIndex == 1" />
+          </div>
+
+          <div class="signup__form__responsible-mail form-control d-flex flex-column">
+            <label for="responsible-mail"> E-mail </label>
+            <input type="text" class="form-input" formControlName="email" id="responsible-mail"
+              placeholder="Responsible E-mail Here" [required]="currentTabIndex == 1" />
+            <span class="error-message" *ngIf="
+              signupForm?.get('responsiblePerson.email')?.value && signupForm?.get('responsiblePerson.email')?.touched &&
+              signupForm?.get('responsiblePerson.email')?.errors?.['email']">
+              Please enter a valid mail
+            </span>
+          </div>
+
+          <div class="signup__form__responsible-title-en form-control d-flex flex-column">
+            <label for="responsible-title-en"> Title (En) </label>
+            <input type="text" class="form-input" formControlName="titleEn" id="responsible-title-en"
+              placeholder="Responsible Title Here (English)" [required]="currentTabIndex == 1" />
+          </div>
+
+          <div class="signup__form__responsible-title-ar form-control d-flex flex-column">
+            <label for="responsible-title-ar"> Title (Ar) </label>
+            <input type="text" class="form-input" formControlName="titleAr" id="responsible-title-ar"
+              placeholder="Responsible Title Here (Arabic)" [required]="currentTabIndex == 1" />
+          </div>
+
+          <div class="signup__form__responsible-mobile-number form-control d-flex flex-column">
+            <label for="responsible-mobile-number"> Mobile number </label>
+            <input type="text" class="form-input" formControlName="phone" id="responsible-mobile-number"
+              placeholder="Responsible Mobile Number Here" [required]="currentTabIndex == 1" />
+          </div>
+
+          <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
+            <button type="submit" class="sign-button" [disabled]="!signupForm.valid">
+              Sign up
+              <i class="pi pi-arrow-right"></i>
+            </button>
+          </div>
+        </p-tabPanel>
+
+      </p-tabView>
+
     </form>
+    <button (click)="click()"> 00000 </button>
 
   </div>
 </div>
