@@ -22,8 +22,10 @@ import { VideoDetailsCardComponent } from '../shared-components/cards/video-deta
 import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { DisableControlDirective } from '../directives/disable-control.directive';
 
 
 const routes: Routes = [
@@ -59,6 +61,7 @@ const components = [
 
 @NgModule({
   declarations: [
+    DisableControlDirective,
     PagesLayoutComponent,
     ...components
   ],
@@ -70,6 +73,7 @@ const components = [
     FormsModule,
     DropdownModule,
     SelectButtonModule,
+    FileUploadModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)
   ]

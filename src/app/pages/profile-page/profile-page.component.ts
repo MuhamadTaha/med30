@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { faCheckCircle, faEdit, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -11,13 +12,9 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class ProfilePageComponent implements OnInit {
 
 
-  signupForm!: FormGroup
+  profileDetailsForm!: FormGroup
   isLoading = false
-  errorMessage: string = ''
-  isFileUploaded = false;
-
-  currentText: string = '123123132132132165464646541354';
-  editedText!: string;
+  imagePath: any;
 
   isEditMode = false;
 
@@ -27,47 +24,49 @@ export class ProfilePageComponent implements OnInit {
     delete: faTimesCircle,
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      'email': new FormControl(null),
-      'password': new FormControl(null),
+    this.profileDetailsForm = new FormGroup({
+      'responsiblePerson': new FormGroup({
+        'nameEn': new FormControl(''),
+        'nameAr': new FormControl(''),
+        'titleEn': new FormControl(''),
+        'titleAr': new FormControl(''),
+        'email': new FormControl('', Validators.email),
+        'phone': new FormControl(''),
+      }),
+      'registrationNumber': new FormControl(''),
+      'nameEn': new FormControl(''),
+      'nameAr': new FormControl(''),
+      'userName': new FormControl(''),
+      'email': new FormControl('', Validators.email),
+      'password': new FormControl(''),
+      'rePassword': new FormControl(''),
+      'phone': new FormControl(''),
     })
-    this.editedText = this.currentText
   }
 
   edit() {
     this.isEditMode = true;
-    this.editedText = this.editedText;
   }
 
   save() {
-    this.currentText = this.editedText;
     this.isEditMode = false;
   }
 
   cancel() {
-    this.editedText = this.currentText;
     this.isEditMode = false;
   }
 
-  uploadFile(event: any) {
-    const file = event.target.files[0];
-    var formData: any = new FormData();
-    formData.append('file', file);
-
-    this.authService.postFile(formData).subscribe({
-      next: (response) => {
-        this.isFileUploaded = true
-        console.log('postFile response ===>', response)
-      },
-      error: (error) => {
-        this.isFileUploaded = false
-        console.log('postFile error ===>', error)
-      },
-    });
-
+  onFileSelect(event: any) {
+    const file = event.currentFiles[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imagePath = this.domSanitizer.bypassSecurityTrustResourceUrl('' + reader.result);
+      this.profileDetailsForm.get('registrationNumber')?.setValue(this.imagePath.changingThisBreaksApplicationSecurity)
+    };
   }
 
 }

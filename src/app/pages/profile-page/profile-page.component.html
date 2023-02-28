@@ -16,62 +16,117 @@
 
       <div class="profile__details__content__image d-flex justify-content-start flex-column">
         <h3> Photo </h3>
-        <div class="profile__details__content__image">
-          <span class="d-flex align-items-center justify-content-center">
-            <i class="pi pi-plus"></i>
-            <input type="file" id="file" (change)="uploadFile($event)">
-          </span>
+        <div class="profile__details__content__image__container">
+          <img [src]="imagePath" />
+          <p-fileUpload name="myfile[]" (onSelect)="onFileSelect($event)"> </p-fileUpload>
         </div>
       </div>
 
       <div class="profile__details__content__form d-flex justify-content-start flex-column">
-
-        <form [formGroup]="signupForm" class="signup__form d-flex justify-content-between" *ngIf="!isLoading">
+        <form [formGroup]="profileDetailsForm" *ngIf="!isLoading">
 
           <div class="profile__details__content__form__left d-flex flex-column">
             <h3>Company Info</h3>
-            <div class="profile__details__content__form__company-name d-flex flex-column">
-              <label for="company-name"> Company name </label>
-              <input type="text" class="form-input" formControlName="companyName" id="company-name"
-                placeholder="Company name Here" required />
-            </div>
-            <div class="profile__details__content__form__company-mail d-flex flex-column">
-              <label for="company-mail"> Company E-mail </label>
-              <input type="text" class="form-input" formControlName="companyMail" id="company-mail"
-                placeholder="Company E-mail Here" required />
-            </div>
-            <div class="profile__details__content__form__phone d-flex flex-column">
-              <label for="email"> Commercial Registration Number </label>
-              <input type="text" class="form-input" id="com-registration-number" formControlName="comRegistrationNumber"
-                placeholder="Commercial Registration Number Here" required />
-            </div>
-          </div>
-          <div class="profile__details__content__form__left d-flex flex-column">
-            <h3>Responsible person Info</h3>
-            <div class="profile__details__content__form__responsible-person-name d-flex flex-column">
-              <label for="responsible-person-name"> Responsible person name </label>
-              <input type="text" class="form-input" formControlName="responsiblePersonName" id="responsible-person-name"
-                placeholder="Responsible person name Here" required />
-            </div>
-            <div class="profile__details__content__form__his-mail d-flex flex-column">
-              <label for="his-mail"> His E-mail </label>
-              <input type="text" class="form-input" formControlName="hisMail" id="his-mail"
-                placeholder="His E-mail Here" required />
-            </div>
-            <div class="profile__details__content__form__title d-flex flex-column">
-              <label for="title"> Title </label>
-              <input type="text" class="form-input" formControlName="title" id="title" placeholder="Title Here"
-                required />
-            </div>
-            <div class="profile__details__content__form__phone d-flex flex-column">
-              <label for="mobile-number"> Mobile Number </label>
-              <input type="text" class="form-input" formControlName="mobileNumber" id="mobile-number"
-                placeholder="Mobile Number Here" required />
-            </div>
-          </div>
-        </form>
-      </div>
 
+            <div class="profile__details__content__form__company-name-en form-control d-flex flex-column">
+              <label for="company-name-en"> Company Name (En) </label>
+              <input type="text" class="form-input" formControlName="nameEn" id="company-name-en"
+                placeholder="Company Name Here (English)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+            <div class="profile__details__content__form__company-name-ar form-control d-flex flex-column">
+              <label for="company-name-ar"> Company Name (Ar) </label>
+              <input type="text" class="form-input" formControlName="nameAr" id="company-name-ar"
+                placeholder="Company Name Here (Arabic)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__company-mail form-control d-flex flex-column">
+              <label for="company-mail"> Company E-mail </label>
+              <input type="text" class="form-input" formControlName="email" id="company-mail"
+                placeholder="Company E-mail Here" [required]="this.isEditMode" [disableControl]="!this.isEditMode" />
+              <span class="error-message" *ngIf="
+                  profileDetailsForm?.get('email')?.value && profileDetailsForm?.get('email')?.touched &&
+                  profileDetailsForm?.get('email')?.errors?.['email']">
+                Please enter a valid mail
+              </span>
+            </div>
+
+            <div class="profile__details__content__form__password form-control d-flex flex-column">
+              <label for="password"> Password </label>
+              <input type="password" class="form-input" formControlName="password" id="password"
+                placeholder="Password Here" [required]="this.isEditMode" [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__rePassword form-control d-flex flex-column">
+              <label for="repassword"> Re-enter Password </label>
+              <input type="password" class="form-input" formControlName="rePassword" id="repassword"
+                placeholder="Re-enter Password Here" [required]="this.isEditMode" [disableControl]="!this.isEditMode" />
+              <span class="error-message" *ngIf="
+                  profileDetailsForm?.get('password')?.value && profileDetailsForm?.get('password')?.touched &&
+                  profileDetailsForm?.get('rePassword')?.value && profileDetailsForm?.get('rePassword')?.touched &&
+                  profileDetailsForm?.errors?.['passwordsNotMatching']">
+                Passwords Doesn't Match
+              </span>
+            </div>
+          </div>
+
+          <div class="profile__details__content__form__right d-flex flex-column" formGroupName="responsiblePerson">
+            <h3>Responsible person Info</h3>
+
+            <div class="profile__details__content__form__responsible-person-name-en form-control d-flex flex-column">
+              <label for="responsible-person-name-en"> Person name (En) </label>
+              <input type="text" class="form-input" formControlName="nameEn" id="responsible-person-name-en"
+                placeholder="Responsible Person Name Here (English)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__responsible-person-name-ar form-control d-flex flex-column">
+              <label for="responsible-person-name-ar"> Person name (Ar) </label>
+              <input type="text" class="form-input" formControlName="nameAr" id="responsible-person-name-ar"
+                placeholder="Responsible Person Name Here (Arabic)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__responsible-mail form-control d-flex flex-column">
+              <label for="responsible-mail"> E-mail </label>
+              <input type="text" class="form-input" formControlName="email" id="responsible-mail"
+                placeholder="Responsible E-mail Here" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+              <span class="error-message" *ngIf="
+                  profileDetailsForm?.get('responsiblePerson.email')?.value && profileDetailsForm?.get('responsiblePerson.email')?.touched &&
+                  profileDetailsForm?.get('responsiblePerson.email')?.errors?.['email']">
+                Please enter a valid mail
+              </span>
+            </div>
+
+            <div class="profile__details__content__form__responsible-title-en form-control d-flex flex-column">
+              <label for="responsible-title-en"> Title (En) </label>
+              <input type="text" class="form-input" formControlName="titleEn" id="responsible-title-en"
+                placeholder="Responsible Title Here (English)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__responsible-title-ar form-control d-flex flex-column">
+              <label for="responsible-title-ar"> Title (Ar) </label>
+              <input type="text" class="form-input" formControlName="titleAr" id="responsible-title-ar"
+                placeholder="Responsible Title Here (Arabic)" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+            <div class="profile__details__content__form__responsible-mobile-number form-control d-flex flex-column">
+              <label for="responsible-mobile-number"> Mobile number </label>
+              <input type="text" class="form-input" formControlName="phone" id="responsible-mobile-number"
+                placeholder="Responsible Mobile Number Here" [required]="this.isEditMode"
+                [disableControl]="!this.isEditMode" />
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
     </div>
+
   </div>
 </div>
