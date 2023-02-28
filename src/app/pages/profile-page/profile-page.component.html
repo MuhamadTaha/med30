@@ -1,15 +1,62 @@
 <div class="profile">
 
+  <p-dialog [(visible)]="displayChangePasswordDialog" [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+    [style]="{width: '50vw'}">
+    <ng-template pTemplate="header"> Change Password </ng-template>
+
+    <form [formGroup]="changePasswordForm" (submit)="changePassword(changePasswordForm)"
+      class="dialogForm d-flex flex-column justify-content-center align-items-center">
+
+      <div class=" dialogForm__currnet-password form-control d-flex flex-column">
+        <label for="currnet-password"> Current Password </label>
+        <input type="password" class="form-input" formControlName="currentPassword" id="currnet-password"
+          placeholder="Current Password Here" required />
+      </div>
+
+      <div class="dialogForm__new-password form-control d-flex flex-column">
+        <label for="new-password"> New Password </label>
+        <input type="password" class="form-input" formControlName="password" id="new-password"
+          placeholder="New Password Here" required />
+      </div>
+
+      <div class="dialogForm__rePassword form-control d-flex flex-column">
+        <label for="repassword"> Re-enter Password </label>
+        <input type="password" class="form-input" formControlName="rePassword" id="repassword"
+          placeholder="Re-enter New Password Here" required />
+        <span class="error-message" *ngIf="
+          changePasswordForm?.get('password')?.value && changePasswordForm?.get('password')?.touched &&
+          changePasswordForm?.get('rePassword')?.value && changePasswordForm?.get('rePassword')?.touched &&
+          changePasswordForm?.errors?.['passwordsNotMatching']">
+          Passwords Doesn't Match
+        </span>
+      </div>
+
+      <diV class="dialogForm__actions d-flex justify-content-between align-items-center">
+        <button type="button" class="cancel-btn-transparent action-btn d-flex align-items-center"
+          (click)="closeDialog()"> Cancel </button>
+        <button class="edit-btn action-btn d-flex align-items-center" type="submit"
+          [disabled]="!changePasswordForm.valid">
+          <fa-icon [icon]="icons.edit"></fa-icon> Change Password </button>
+      </diV>
+
+
+    </form>
+
+  </p-dialog>
+
+
   <div class="profile__details d-flex flex-column">
     <div class="profile__details__title-and-action d-flex justify-content-between align-items-center">
       <h3> Video title </h3>
       <div class="d-flex align-items-center" style="gap:10px">
-        <button class="edit-btn action-btn d-flex align-items-center" [disabled]="isEditMode" (click)="edit()">
-          <fa-icon [icon]="icons.edit"></fa-icon> Edit </button>
-        <button class="cancel-btn action-btn d-flex align-items-center" [disabled]="!isEditMode" (click)="cancel()">
-          <fa-icon [icon]="icons.delete"></fa-icon> Cancel </button>
-        <button class="save-btn action-btn d-flex align-items-center" [disabled]="!isEditMode" (click)="save()">
-          <fa-icon [icon]="icons.save"></fa-icon> Save </button>
+        <button class="edit-btn action-btn d-flex align-items-center" (click)="openChangePasswordDialog()">
+          <fa-icon [icon]="icons.edit"></fa-icon> Change Password </button>
+        <button class="edit-btn action-btn d-flex align-items-center" *ngIf="!isEditMode" [disabled]="isEditMode"
+          (click)="edit()"> <fa-icon [icon]="icons.edit"></fa-icon> Edit </button>
+        <button class="cancel-btn action-btn d-flex align-items-center" *ngIf="isEditMode" [disabled]="!isEditMode"
+          (click)="cancel()"> <fa-icon [icon]="icons.delete"></fa-icon> Cancel </button>
+        <button class="save-btn action-btn d-flex align-items-center" *ngIf="isEditMode" [disabled]="!isEditMode"
+          (click)="save()"> <fa-icon [icon]="icons.save"></fa-icon> Save </button>
       </div>
     </div>
     <div class="profile__details__content">

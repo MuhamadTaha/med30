@@ -7,32 +7,6 @@
     width: 100%;
     &__title-and-action {
       padding-bottom: 30px;
-      .action-btn {
-        border: none;
-        background: none;
-        gap: 7px;
-        padding: 14px 28px;
-        border-radius: 8px;
-        font-size: 16px;
-        color: $white;
-        cursor: pointer;
-        &:hover {
-          opacity: 0.9;
-        }
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      }
-      .save-btn {
-        background-color: $btn-green;
-      }
-      .cancel-btn {
-        background-color: $btn-red;
-      }
-      .edit-btn {
-        background-color: $primary;
-      }
     }
     &__content {
       background-color: $light-grey-bg;
@@ -42,15 +16,21 @@
         label {
           font-weight: bold;
         }
-        input {
+        textarea {
           background: none;
           border: none;
           padding: 20px;
+          height: max-content;
           outline: none;
           box-shadow: none;
+          resize: none;
           &.edit-input {
             background-color: $white;
             border-radius: 8px;
+          }
+          &.p-disabled,
+          &.p-component:disabled {
+            opacity: 1;
           }
         }
       }

@@ -66,6 +66,43 @@
   }
 }
 
+.action-btn {
+  border: none;
+  background: none;
+  gap: 7px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  color: $white;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &.save-btn {
+    background-color: $btn-green;
+  }
+  &.cancel-btn {
+    background-color: $btn-red;
+  }
+  &.cancel-btn-transparent {
+    background-color: transparent;
+    color: $black;
+  }
+  &.edit-btn {
+    background-color: $primary;
+  }
+}
+
+.error-message {
+  display: inline-block;
+  margin: 10px 0;
+  color: $text-red;
+}
+
 // grid system classes
 
 .d-flex {

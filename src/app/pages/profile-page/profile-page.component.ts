@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { faCheckCircle, faEdit, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { ValidatorsService } from 'src/app/services/validators.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,10 +13,12 @@ export class ProfilePageComponent implements OnInit {
 
 
   profileDetailsForm!: FormGroup
+  changePasswordForm!: FormGroup
   isLoading = false
   imagePath: any;
 
   isEditMode = false;
+  displayChangePasswordDialog = false;
 
   icons = {
     save: faCheckCircle,
@@ -24,7 +26,7 @@ export class ProfilePageComponent implements OnInit {
     delete: faTimesCircle,
   }
 
-  constructor(private authService: AuthService, private domSanitizer: DomSanitizer) { }
+  constructor(private validatorsService: ValidatorsService, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.profileDetailsForm = new FormGroup({
@@ -45,6 +47,13 @@ export class ProfilePageComponent implements OnInit {
       'rePassword': new FormControl(''),
       'phone': new FormControl(''),
     })
+
+    this.changePasswordForm = new FormGroup({
+      'currentPassword': new FormControl(''),
+      'password': new FormControl(''),
+      'rePassword': new FormControl(''),
+    },
+      { validators: [this.validatorsService.checkPasswords] },)
   }
 
   edit() {
@@ -67,6 +76,22 @@ export class ProfilePageComponent implements OnInit {
       this.imagePath = this.domSanitizer.bypassSecurityTrustResourceUrl('' + reader.result);
       this.profileDetailsForm.get('registrationNumber')?.setValue(this.imagePath.changingThisBreaksApplicationSecurity)
     };
+  }
+
+  openChangePasswordDialog() {
+    this.displayChangePasswordDialog = true
+    console.log('openChangePasswordDialog')
+  }
+
+  closeDialog() {
+    this.displayChangePasswordDialog = false
+    console.log('closeDialog')
+  }
+
+  changePassword(form: any) {
+    console.log('changePassword', form)
+    this.displayChangePasswordDialog = false
+
   }
 
 }

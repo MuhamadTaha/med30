@@ -7,32 +7,6 @@
     width: 100%;
     &__title-and-action {
       padding-bottom: 30px;
-      .action-btn {
-        border: none;
-        background: none;
-        gap: 7px;
-        padding: 14px 28px;
-        border-radius: 8px;
-        font-size: 16px;
-        color: $white;
-        cursor: pointer;
-        &:hover {
-          opacity: 0.9;
-        }
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-      }
-      .save-btn {
-        background-color: $btn-green;
-      }
-      .cancel-btn {
-        background-color: $btn-red;
-      }
-      .edit-btn {
-        background-color: $primary;
-      }
     }
     &__content {
       background-color: $light-grey-bg;
@@ -71,12 +45,18 @@
       }
     }
   }
-}
-
-.error-message {
-  display: inline-block;
-  margin: 10px 0;
-  color: $text-red;
+  .dialogForm {
+    .form-control {
+      width: 300px;
+    }
+    &__actions {
+      width: 100%;
+      padding: 50px 50px 0;
+    }
+    label {
+      margin-top: 20px;
+    }
+  }
 }
 
 ::ng-deep {
@@ -125,5 +105,8 @@
   }
   .p-fileupload-content {
     display: none;
+  }
+  .p-dialog-header {
+    font-weight: bold;
   }
 }

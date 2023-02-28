@@ -8,7 +8,7 @@ import { faCheckCircle, faEdit, faTimesCircle } from '@fortawesome/free-solid-sv
 })
 export class AboutPageComponent implements OnInit {
 
-  currentText: string = '123123132132132165464646541354';
+  currentText: string = 'About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text About Current Text ';
   editedText!: string;
 
   isEditMode = false;

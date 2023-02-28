@@ -23,6 +23,8 @@ import { ChartModule } from 'primeng/chart';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FileUploadModule } from 'primeng/fileupload';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { DisableControlDirective } from '../directives/disable-control.directive';
@@ -74,6 +76,8 @@ const components = [
     DropdownModule,
     SelectButtonModule,
     FileUploadModule,
+    DialogModule,
+    InputTextareaModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)
   ]

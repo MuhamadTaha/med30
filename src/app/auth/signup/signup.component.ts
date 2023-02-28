@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ValidatorsService } from 'src/app/services/validators.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,18 +18,7 @@ export class SignupComponent implements OnInit {
 
   currentTabIndex = 0;
 
-  checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    let password = group.get('password')?.value;
-    let confirmPassword = group.get('rePassword')?.value
-    return password === confirmPassword ? null : { passwordsNotMatching: true }
-  }
-
-  checkFile: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    return group.get('registrationNumber')?.value ? null : { fileIsRequired: true }
-  }
-
-
-  constructor(public authService: AuthService, private domSanitizer: DomSanitizer) { }
+  constructor(public authService: AuthService, private validatorsService: ValidatorsService, private domSanitizer: DomSanitizer,) { }
 
   ngOnInit(): void {
 
@@ -50,7 +40,7 @@ export class SignupComponent implements OnInit {
       'rePassword': new FormControl(''),
       'phone': new FormControl(''),
     },
-      { validators: [this.checkPasswords, this.checkFile] },
+      { validators: [this.validatorsService.checkPasswords, this.validatorsService.checkFile] },
     )
   }
 
@@ -89,31 +79,6 @@ export class SignupComponent implements OnInit {
     console.log('onFileRemove', event)
     this.signupForm.get('registrationNumber')?.setValue(null)
   }
-
-  // uploadFile(event: any) {
-
-  //   const file = event.target.files[0];
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onload = () => {
-  //     console.log(reader.result);
-  //     this.imagePath = this.domSanitizer.bypassSecurityTrustResourceUrl('' + reader.result);
-  //   };
-
-  //   console.log('this.imagePath', this.imagePath);
-
-  //   // this.authService.postFile(formData).subscribe({
-  //   //   next: (response) => {
-  //   //     this.isFileUploaded = true
-  //   //     console.log('postFile response ===>', response)
-  //   //   },
-  //   //   error: (error) => {
-  //   //     this.isFileUploaded = false
-  //   //     console.log('postFile error ===>', error)
-  //   //   },
-  //   // });
-
-  // }
 
   openSecondTab() {
     this.currentTabIndex = 1;

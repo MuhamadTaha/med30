@@ -4,19 +4,19 @@
     <div class="about__details__title-and-action d-flex justify-content-between align-items-center">
       <h3> Video title </h3>
       <div class="d-flex align-items-center" style="gap:10px">
-        <button class="edit-btn action-btn d-flex align-items-center" [disabled]="isEditMode" (click)="edit()">
-          <fa-icon [icon]="icons.edit"></fa-icon> Edit </button>
-        <button class="cancel-btn action-btn d-flex align-items-center" [disabled]="!isEditMode" (click)="cancel()">
-          <fa-icon [icon]="icons.delete"></fa-icon> Cancel </button>
-        <button class="save-btn action-btn d-flex align-items-center" [disabled]="!isEditMode" (click)="save()">
-          <fa-icon [icon]="icons.save"></fa-icon> Save </button>
+        <button class="edit-btn action-btn d-flex align-items-center" *ngIf="!isEditMode" [disabled]="isEditMode"
+          (click)="edit()"> <fa-icon [icon]="icons.edit"></fa-icon> Edit </button>
+        <button class="cancel-btn action-btn d-flex align-items-center" *ngIf="isEditMode" [disabled]="!isEditMode"
+          (click)="cancel()"> <fa-icon [icon]="icons.delete"></fa-icon> Cancel </button>
+        <button class="save-btn action-btn d-flex align-items-center" *ngIf="isEditMode" [disabled]="!isEditMode"
+          (click)="save()"> <fa-icon [icon]="icons.save"></fa-icon> Save </button>
       </div>
     </div>
     <div class="about__details__content">
       <div class="about__details__content__text d-flex justify-content-start flex-column">
         <label for="about-text-1"> About Text 1 </label>
-        <input type="text" class="" id="about-text-1" [(ngModel)]="editedText" [disabled]="!isEditMode"
-          [ngClass]="{'edit-input':isEditMode}" />
+        <textarea pInputTextarea [(ngModel)]="editedText" [autoResize]="true" [disabled]="!isEditMode"
+          [ngClass]="{'edit-input':isEditMode}" id="about-text-1"></textarea>
       </div>
 
     </div>
