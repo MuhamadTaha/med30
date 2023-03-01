@@ -43,11 +43,11 @@ const routes: Routes = [
     component: PagesLayoutComponent,
     children: [
       { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
-      { path: 'about', component: AboutPageComponent },
-      { path: 'videos', component: VideosListPageComponent, },
-      { path: 'videos/:id', component: VideoDetailsPageComponent },
-      { path: 'profile', component: ProfilePageComponent },
-      { path: 'add-video', component: AddVideoPageComponent },
+      { path: 'about', component: AboutPageComponent, canActivate: [AuthGuard], },
+      { path: 'videos', component: VideosListPageComponent, canActivate: [AuthGuard], },
+      { path: 'videos/:id', component: VideoDetailsPageComponent, canActivate: [AuthGuard], },
+      { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard], },
+      { path: 'add-video', component: AddVideoPageComponent, canActivate: [AuthGuard], },
     ]
   }
 
