@@ -32,6 +32,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
+import { TreeModule } from 'primeng/tree';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { DisableControlDirective } from '../directives/disable-control.directive';
@@ -91,6 +92,7 @@ const components = [
     SelectButtonModule,
     FileUploadModule,
     DialogModule,
+    TreeModule,
     InputTextareaModule,
     TabViewModule,
     FontAwesomeModule,

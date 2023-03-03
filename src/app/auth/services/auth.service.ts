@@ -58,8 +58,8 @@ export class AuthService {
   autoLogin() {
     if (!localStorage.getItem('token')) {
       this.logout()
-    } else {
-      this.router.navigate([''])
+      // } else {
+      //   this.router.navigate([''])
     }
   }
 

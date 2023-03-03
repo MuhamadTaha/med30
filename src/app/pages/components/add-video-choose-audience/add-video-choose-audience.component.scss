@@ -1,0 +1,68 @@
+@import "../../../../assets/colors";
+@import "../../../../assets/common-style";
+
+.choose-audience {
+  &__content {
+    padding: 30px;
+    background-color: $input-bg;
+    gap: 50px;
+    &__list {
+      width: 50%;
+    }
+    &__selected {
+      width: 50%;
+      &__text {
+        margin-bottom: 20px;
+      }
+    }
+  }
+  ::ng-deep {
+    .p-tree-selectable {
+      padding: 0 !important;
+      background: none !important;
+      border: none !important;
+      ul {
+        p-treenode {
+          li {
+            padding: 0;
+            margin: 10px 0 0 0;
+            .p-treenode-content {
+              background-color: $white;
+              box-shadow: none !important;
+              button {
+                color: black !important;
+                box-shadow: none !important;
+                &:hover {
+                  background: none !important;
+                }
+              }
+              &:hover {
+                background-color: $white !important;
+              }
+              &.p-highlight {
+                background-color: $white !important;
+                .p-checkbox-box {
+                  &.p-highlight {
+                    background-color: $checked-checkBox !important;
+                    border-color: $checked-checkBox !important;
+                  }
+                }
+                button {
+                  color: black !important;
+                }
+                .p-treenode-label {
+                  color: black !important;
+                }
+              }
+            }
+          }
+          &:first-of-type {
+            li {
+              // margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
