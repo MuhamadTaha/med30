@@ -29,21 +29,27 @@ export class LoginComponent implements OnInit {
     this.isLoading = true
 
     this.authService.logIn(form.value).subscribe({
-      next: (res) => {
-        console.log('res ====> ', res)
-        this.isLoading = false
-        this.router.navigate([''])
+      next: (res: any) => {
+        if (res.isSucess) {
+          console.log('res ====> ', res)
+          this.isLoading = false
+          this.router.navigate([''])
+        } else {
+          console.log('res ====> ', res)
+          this.isLoading = false
+          this.showToaster('error', res.errorCode, res.errorCode);
+        }
       },
       error: (err) => {
         console.log('error ====> ', err)
-        this.showErrorToast(err);
+        this.showToaster('error', err, err);
         this.isLoading = false;
       },
     })
   }
 
-  showErrorToast(errorMessage: string) {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage });
+  showToaster(severity: string, title: string, errorMessage: string) {
+    this.messageService.add({ severity: severity, summary: title, detail: errorMessage });
   }
 
 }

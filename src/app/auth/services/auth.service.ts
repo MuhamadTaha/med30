@@ -43,7 +43,7 @@ export class AuthService {
   signUp(formValue: any) {
     return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Accounts/Register', formValue)
       .pipe(catchError(this.handleError), tap(resData => {
-        this.router.navigate(['/auth/login'])
+        // this.router.navigate(['/auth/login'])
       }))
   }
 
@@ -53,7 +53,7 @@ export class AuthService {
 
   autoLogin() {
     if (!localStorage.getItem('token')) {
-      this.logout()
+      // this.logout()
       // } else {
       //   this.router.navigate([''])
     }

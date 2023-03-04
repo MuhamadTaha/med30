@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ValidatorsService } from 'src/app/services/validators.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,13 @@ export class SignupComponent implements OnInit {
 
   currentTabIndex = 0;
 
-  constructor(public authService: AuthService, private messageService: MessageService, private validatorsService: ValidatorsService, private domSanitizer: DomSanitizer,) { }
+  constructor(
+    public authService: AuthService,
+    private messageService: MessageService,
+    private validatorsService: ValidatorsService,
+    private domSanitizer: DomSanitizer,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
 
@@ -51,13 +58,21 @@ export class SignupComponent implements OnInit {
     console.log('formValue ===> ', formValue)
 
     this.authService.signUp(formValue).subscribe({
-      next: (res) => {
-        console.log('res ====> ', res)
-        this.isLoading = false
+      next: (res: any) => {
+        if (res.isSucess) {
+          console.log('res ====> ', res)
+          this.isLoading = false
+          this.showToaster('success', 'Success', 'You have been registered successfully');
+          this.router.navigate(['auth/login'])
+        } else {
+          console.log('res ====> ', res)
+          this.isLoading = false
+          this.showToaster('error', res.errorCode, res.error);
+        }
       },
       error: (err) => {
         console.log('error ====> ', err)
-        this.showErrorToast(err);
+        this.showToaster('error', err, err);
         this.isLoading = false
       },
     })
@@ -89,10 +104,9 @@ export class SignupComponent implements OnInit {
     console.log('signupForm', this.signupForm);
   }
 
-  showErrorToast(errorMessage: string) {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage });
+  showToaster(severity: string, title: string, errorMessage: string) {
+    this.messageService.add({ severity: severity, summary: title, detail: errorMessage });
   }
-
 
 
 }
