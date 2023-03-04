@@ -8,14 +8,28 @@ export class ValidatorsService {
 
   constructor() { }
 
-  checkPasswords: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+  checkPasswordValid: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let password = group.get('password')?.value;
+    const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{6,}/;
+    if (password) {
+      if (passwordRegex.test(password)) {
+        return null;
+      } else {
+        return { passwordsNotValid: true, };
+      }
+    } else {
+      return null;
+    };
+  }
+
+  checkPasswordsMatching: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
     let password = group.get('password')?.value;
     let confirmPassword = group.get('rePassword')?.value
     return password === confirmPassword ? null : { passwordsNotMatching: true }
   }
 
   checkFile: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
-    return group.get('registrationNumber')?.value ? null : { fileIsRequired: true }
+    return group.get('comercialRegistrationNumber')?.value ? null : { fileIsRequired: true }
   }
 
 }

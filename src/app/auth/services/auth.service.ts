@@ -32,20 +32,16 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 export class AuthService {
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  logIn(email: string, password: string) {
+  logIn(formValue: any) {
     return this.http.post<AuthResponse>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCREljbBydsZWeJBBE254HYjvRMg2DcdMo',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }).pipe(catchError(this.handleError), tap(resData => {
-        localStorage.setItem('token', resData.idToken)
+      'http://abdelmageed-001-site15.etempurl.com/api/Accounts/Login', formValue).pipe(catchError(this.handleError), tap(resData => {
+        localStorage.setItem('token', resData.token)
+        localStorage.setItem('refreshToken', resData.refreshToken)
       }))
   }
 
   signUp(formValue: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/v1/Accounts/Register', formValue)
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Accounts/Register', formValue)
       .pipe(catchError(this.handleError), tap(resData => {
         this.router.navigate(['/auth/login'])
       }))

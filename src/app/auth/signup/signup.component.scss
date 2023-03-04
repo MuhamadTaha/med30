@@ -27,6 +27,9 @@
     }
     &__signup {
       padding-top: 20px;
+      a {
+        color: $light-grey-1;
+      }
     }
   }
 }

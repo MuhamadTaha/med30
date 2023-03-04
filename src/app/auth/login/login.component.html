@@ -14,7 +14,7 @@
 
     <form [formGroup]="loginForm" class="login__form" (ngSubmit)="login(loginForm)" *ngIf="!isLoading">
       <div class="login__form__phone d-flex flex-column">
-        <label for="email"> Phone Number </label>
+        <label for="email"> E-mail </label>
         <input type="text" class="form-input" formControlName="email" id="email" placeholder="Phone Number Here"
           required />
       </div>
@@ -35,3 +35,5 @@
 
   </div>
 </div>
+
+<p-toast position="top-right" [baseZIndex]="5000"></p-toast>

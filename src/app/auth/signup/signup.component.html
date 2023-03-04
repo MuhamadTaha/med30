@@ -8,10 +8,6 @@
       <p class="signup__text__subtitle"> Slogan here and it may contains more than one line. </p>
     </div>
 
-    <!-- <div style="text-align: center; color: red; padding: 20px; background-color: lightpink;" *ngIf="errorMessage">
-      <span> {{errorMessage}}</span>
-    </div> -->
-
     <div style="text-align: center;">
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
@@ -23,38 +19,45 @@
         <p-tabPanel header="step 1" [headerStyleClass]="'activeTab'">
           <h3> Step 1 : Registration Info </h3>
 
-          <div class="signup__form__company-name-en form-control d-flex flex-column">
-            <label for="company-name-en"> Company Name (En) </label>
-            <input type="text" class="form-input" formControlName="nameEn" id="company-name-en"
-              placeholder="Company Name Here (English)" required />
-          </div>
-          <div class="signup__form__company-name-ar form-control d-flex flex-column">
-            <label for="company-name-ar"> Company Name (Ar) </label>
-            <input type="text" class="form-input" formControlName="nameAr" id="company-name-ar"
-              placeholder="Company Name Here (Arabic)" required />
+          <div class="signup__form__company-name form-control d-flex flex-column">
+            <label for="company-name"> Company Name </label>
+            <input type="text" class="form-input" formControlName="companyName" id="company-name"
+              placeholder="Company Name Here " required />
           </div>
 
           <div class="signup__form__company-mail form-control d-flex flex-column">
             <label for="company-mail"> Company E-mail </label>
-            <input type="text" class="form-input" formControlName="email" id="company-mail"
+            <input type="text" class="form-input" formControlName="companyEmail" id="company-mail"
               placeholder="Company E-mail Here" required />
             <span class="error-message" *ngIf="
-              signupForm?.get('email')?.value && signupForm?.get('email')?.touched &&
-              signupForm?.get('email')?.errors?.['email']">
+              signupForm?.get('companyEmail')?.value && signupForm?.get('companyEmail')?.touched &&
+              signupForm?.get('companyEmail')?.errors?.['email']">
               Please enter a valid mail
             </span>
           </div>
 
           <div class="signup__form__file form-control">
             <label for="file">Choose File</label>
-            <p-fileUpload name="myfile[]" (onSelect)="onFileSelect($event)"
-              (onRemove)="onFileRemove($event)"></p-fileUpload>
+            <p-fileUpload name="myfile[]" [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
+              (onRemove)="onFileRemove($event)"> </p-fileUpload>
           </div>
 
           <div class="signup__form__password form-control d-flex flex-column">
             <label for="password"> Password </label>
             <input type="password" class="form-input" formControlName="password" id="password"
               placeholder="Password Here" required />
+            <span class="error-message" *ngIf="
+              signupForm?.get('password')?.value && signupForm?.get('password')?.touched &&
+              signupForm?.errors?.['passwordsNotValid']">
+              Please Enter a valid password, your password must:
+              <ul style="list-style-type: square;">
+                <li> be at least 6 characters </li>
+                <li> contains One or more letters are in lowercase </li>
+                <li> contains One or more letters are in uppercase </li>
+                <li> contains One or more number </li>
+                <li> contains One or more special character %, ^, &, @, # </li>
+              </ul>
+            </span>
           </div>
 
           <div class="signup__form__rePassword form-control d-flex flex-column">
@@ -71,6 +74,7 @@
 
 
           <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
+            <a routerLink="/auth/login"> Already have an account? Sign in </a>
             <button type="button" class="sign-button" [disabled]="!signupForm.valid" (click)="openSecondTab()">
               Next <i class="pi pi-arrow-right"></i>
             </button>
@@ -79,51 +83,40 @@
         </p-tabPanel>
 
         <p-tabPanel header="step 2" [headerStyleClass]="currentTabIndex == 1 ? 'activeTab' : ''"
-          formGroupName="responsiblePerson">
+          [disabled]="!signupForm.valid">
           <h3> Step 2 : Responsible person Info </h3>
 
-          <div class="signup__form__responsible-person-name-en form-control d-flex flex-column">
-            <label for="responsible-person-name-en"> Person name (En) </label>
-            <input type="text" class="form-input" formControlName="nameEn" id="responsible-person-name-en"
-              placeholder="Responsible Person Name Here (English)" [required]="currentTabIndex == 1" />
+          <div class="signup__form__responsible-person-name form-control d-flex flex-column">
+            <label for="responsible-person-name"> Person name </label>
+            <input type="text" class="form-input" formControlName="name" id="responsible-person-name"
+              placeholder="Responsible Person Name Here " [required]="currentTabIndex == 1" />
           </div>
 
-          <div class="signup__form__responsible-person-name-ar form-control d-flex flex-column">
-            <label for="responsible-person-name-ar"> Person name (Ar) </label>
-            <input type="text" class="form-input" formControlName="nameAr" id="responsible-person-name-ar"
-              placeholder="Responsible Person Name Here (Arabic)" [required]="currentTabIndex == 1" />
-          </div>
-
-          <div class="signup__form__responsible-mail form-control d-flex flex-column">
+          <!-- <div class="signup__form__responsible-mail form-control d-flex flex-column">
             <label for="responsible-mail"> E-mail </label>
             <input type="text" class="form-input" formControlName="email" id="responsible-mail"
               placeholder="Responsible E-mail Here" [required]="currentTabIndex == 1" />
             <span class="error-message" *ngIf="
-              signupForm?.get('responsiblePerson.email')?.value && signupForm?.get('responsiblePerson.email')?.touched &&
-              signupForm?.get('responsiblePerson.email')?.errors?.['email']">
+              signupForm?.get('email')?.value && signupForm?.get('email')?.touched &&
+              signupForm?.get('email')?.errors?.['email']">
               Please enter a valid mail
             </span>
+          </div> -->
+
+          <div class="signup__form__responsible-title form-control d-flex flex-column">
+            <label for="responsible-title"> Title </label>
+            <input type="text" class="form-input" formControlName="title" id="responsible-title"
+              placeholder="Responsible Title Here " [required]="currentTabIndex == 1" />
           </div>
 
-          <div class="signup__form__responsible-title-en form-control d-flex flex-column">
-            <label for="responsible-title-en"> Title (En) </label>
-            <input type="text" class="form-input" formControlName="titleEn" id="responsible-title-en"
-              placeholder="Responsible Title Here (English)" [required]="currentTabIndex == 1" />
-          </div>
-
-          <div class="signup__form__responsible-title-ar form-control d-flex flex-column">
-            <label for="responsible-title-ar"> Title (Ar) </label>
-            <input type="text" class="form-input" formControlName="titleAr" id="responsible-title-ar"
-              placeholder="Responsible Title Here (Arabic)" [required]="currentTabIndex == 1" />
-          </div>
-
-          <div class="signup__form__responsible-mobile-number form-control d-flex flex-column">
-            <label for="responsible-mobile-number"> Mobile number </label>
-            <input type="text" class="form-input" formControlName="phone" id="responsible-mobile-number"
+          <div class="signup__form__responsible-phone form-control d-flex flex-column">
+            <label for="responsible-phone"> Mobile number </label>
+            <input type="text" class="form-input" formControlName="phone" id="responsible-phone"
               placeholder="Responsible Mobile Number Here" [required]="currentTabIndex == 1" />
           </div>
 
           <div class="signup__form__signup d-flex align-items-center flex-row justify-content-between">
+            <a routerLink="/auth/login"> Already have an account? Sign in </a>
             <button type="submit" class="sign-button" [disabled]="!signupForm.valid">
               Sign up
               <i class="pi pi-arrow-right"></i>
@@ -138,3 +131,6 @@
 
   </div>
 </div>
+
+
+<p-toast position="top-right" [baseZIndex]="5000"></p-toast>

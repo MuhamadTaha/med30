@@ -1,9 +1,11 @@
 export interface AuthResponse {
-  kind: string,
-  idToken: string,
+  userId: string,
+  roles?: string,
+  userType?: number,
+  userTypeEntityId?: number,
+  userName?: string,
+  displayName?: string,
+  token: string,
   refreshToken: string,
-  email: string,
-  expiresIn: string,
-  localId: string,
-  registered?: string,
+  expDateTime?: Date
 }

@@ -53,7 +53,7 @@ export class ProfilePageComponent implements OnInit {
       'password': new FormControl(''),
       'rePassword': new FormControl(''),
     },
-      { validators: [this.validatorsService.checkPasswords] },)
+      { validators: [this.validatorsService.checkPasswordsMatching, this.validatorsService.checkPasswordValid] },)
   }
 
   edit() {

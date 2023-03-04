@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from '../shared-components/loading-spinner/loading-spinner.component';
 import { TabViewModule } from 'primeng/tabview';
 import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     TabViewModule,
+    ToastModule,
     FileUploadModule,
   ],
   exports: [RouterModule]

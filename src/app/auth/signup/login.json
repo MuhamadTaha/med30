@@ -1,0 +1,16 @@
+{
+  "isSucess": true,
+  "errorCode": null,
+  "error": null,
+  "data": {
+    "userId": "6",
+    "roles": "",
+    "userType": 2,
+    "userTypeEntityId": 0,
+    "userName": "taha@Email.com",
+    "displayName": "name",
+    "token": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9naXZlbm5hbWUiOiJuYW1lIiwianRpIjoiOWRjOGJlZDItZjMyYy00NDAzLWFlN2EtNmU3N2NiNTk5YjA4IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiJ0YWhhQEVtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3NpZCI6IjYiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibmFtZSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Ii0iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2V4cGlyYXRpb24iOiIzLzEwLzIwMjMgMTowNjozOCBQTSIsIlVzZXJUeXBlIjpbIjIiLCIyIl0sIlVzZXJUeXBlRW50aXR5SWQiOiI0IiwiZXhwIjoxNjc4NDgyMzk4LCJpc3MiOiIzT01FRCIsImF1ZCI6IjNPTUVEIn0.oNQkWMuJ_dkeKQrd-AQWY--ZYdSfZrLSaEWKG2oytes",
+    "refreshToken": null,
+    "expDateTime": "2023-03-10T21:06:38Z"
+  }
+}

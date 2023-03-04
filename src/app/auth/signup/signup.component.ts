@@ -3,60 +3,61 @@ import { FormGroup, FormControl, FormBuilder, ValidatorFn, AbstractControl, Vali
 import { AuthService } from '../services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ValidatorsService } from 'src/app/services/validators.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
+  providers: [MessageService]
 })
 export class SignupComponent implements OnInit {
 
   signupForm!: FormGroup
   isLoading = false
-  errorMessage: string = ''
   imagePath: any;
 
   currentTabIndex = 0;
 
-  constructor(public authService: AuthService, private validatorsService: ValidatorsService, private domSanitizer: DomSanitizer,) { }
+  constructor(public authService: AuthService, private messageService: MessageService, private validatorsService: ValidatorsService, private domSanitizer: DomSanitizer,) { }
 
   ngOnInit(): void {
 
     this.signupForm = new FormGroup({
-      'responsiblePerson': new FormGroup({
-        'nameEn': new FormControl(''),
-        'nameAr': new FormControl(''),
-        'titleEn': new FormControl(''),
-        'titleAr': new FormControl(''),
-        'email': new FormControl('', Validators.email),
-        'phone': new FormControl(''),
-      }),
-      'registrationNumber': new FormControl(''),
-      'nameEn': new FormControl(''),
-      'nameAr': new FormControl(''),
-      'userName': new FormControl(''),
-      'email': new FormControl('', Validators.email),
-      'password': new FormControl(''),
-      'rePassword': new FormControl(''),
-      'phone': new FormControl(''),
+      'phone': new FormControl('phone'),
+      'password': new FormControl('Test@123'),
+      'rePassword': new FormControl('Test@123'),
+      'name': new FormControl('name'),
+      'email': new FormControl('-'),
+      'companyName': new FormControl('companyName'),
+      'companyEmail': new FormControl('company@Email', Validators.email),
+      'comercialRegistrationNumber': new FormControl(''),
+      'title': new FormControl('title'),
     },
-      { validators: [this.validatorsService.checkPasswords, this.validatorsService.checkFile] },
+      { validators: [this.validatorsService.checkPasswordsMatching, this.validatorsService.checkFile, this.validatorsService.checkPasswordValid] },
     )
   }
 
   signup(form: FormGroup) {
     this.isLoading = true
-    this.signupForm.get('userName')?.setValue(this.signupForm.get('mail')?.value || '')
-    console.log(form.value)
+    const mapFormValueFrom = (obj: any, prop: any) => {
+      let { [prop]: omit, ...res } = obj
+      return res
+    }
 
-    this.authService.signUp(form.value).subscribe({
+    let formValue = mapFormValueFrom(form.value, 'rePassword');
+
+    console.log('form ===> ', form)
+    console.log('formValue ===> ', formValue)
+
+    this.authService.signUp(formValue).subscribe({
       next: (res) => {
         console.log('res ====> ', res)
         this.isLoading = false
       },
       error: (err) => {
         console.log('error ====> ', err)
-        this.errorMessage = err
+        this.showErrorToast(err);
         this.isLoading = false
       },
     })
@@ -68,7 +69,7 @@ export class SignupComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.imagePath = this.domSanitizer.bypassSecurityTrustResourceUrl('' + reader.result);
-      this.signupForm.get('registrationNumber')?.setValue(this.imagePath.changingThisBreaksApplicationSecurity)
+      this.signupForm.get('comercialRegistrationNumber')?.setValue(this.imagePath.changingThisBreaksApplicationSecurity.split('base64,')[1])
       // console.log('imagePath', this.imagePath)
       // console.log('imagePath nested', this.imagePath.changingThisBreaksApplicationSecurity)
       // console.log('imagePath nested 2', this.imagePath.changingThisBreaksApplicationSecurity.split('base64,')[1])
@@ -77,7 +78,7 @@ export class SignupComponent implements OnInit {
 
   onFileRemove(event: any) {
     console.log('onFileRemove', event)
-    this.signupForm.get('registrationNumber')?.setValue(null)
+    this.signupForm.get('comercialRegistrationNumber')?.setValue(null)
   }
 
   openSecondTab() {
@@ -85,8 +86,13 @@ export class SignupComponent implements OnInit {
   }
 
   click() {
-    console.log('signupForm', this.signupForm)
+    console.log('signupForm', this.signupForm);
   }
+
+  showErrorToast(errorMessage: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: errorMessage });
+  }
+
 
 
 }
