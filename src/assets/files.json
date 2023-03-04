@@ -1,86 +1,27 @@
 {
   "data": [
     {
-      "label": "Documents",
-      "data": "Documents Folder",
+      "label": "Specializations",
       "children": [
-        {
-          "label": "Work",
-          "data": "Work Folder",
-          "children": [
-            {
-              "label": "Expenses.doc",
-              "data": "Expenses Document"
-            },
-            {
-              "label": "Resume.doc",
-              "data": "Resume Document"
-            }
-          ]
-        },
-        {
-          "label": "Home",
-          "data": "Home Folder",
-          "children": [
-            {
-              "label": "Invoices.txt",
-              "data": "Invoices for this month"
-            }
-          ]
-        }
+        { "label": "Spec 1" },
+        { "label": "Spec 2" },
+        { "label": "Spec 3" }
       ]
     },
     {
-      "label": "Pictures",
-      "data": "Pictures Folder",
+      "label": "Area",
       "children": [
-        {
-          "label": "barcelona.jpg",
-          "data": "Barcelona Photo"
-        },
-        {
-          "label": "logo.jpg",
-          "data": "PrimeFaces Logo"
-        },
-        {
-          "label": "primeui.png",
-          "data": "PrimeUI Logo"
-        }
+        { "label": "Area 1" },
+        { "label": "Area 2" },
+        { "label": "Area 3" }
       ]
     },
     {
-      "label": "Movies",
-      "data": "Movies Folder",
+      "label": "Title",
       "children": [
-        {
-          "label": "Al Pacino",
-          "data": "Pacino Movies",
-
-          "children": [
-            {
-              "label": "Scarface",
-              "data": "Scarface Movie"
-            },
-            {
-              "label": "Serpico",
-              "data": "Serpico Movie"
-            }
-          ]
-        },
-        {
-          "label": "Robert De Niro",
-          "data": "De Niro Movies",
-          "children": [
-            {
-              "label": "Goodfellas",
-              "data": "Goodfellas Movie"
-            },
-            {
-              "label": "Untouchables",
-              "data": "Untouchables Movie"
-            }
-          ]
-        }
+        { "label": "Title 1" },
+        { "label": "Title 2" },
+        { "label": "Title 3" }
       ]
     }
   ]

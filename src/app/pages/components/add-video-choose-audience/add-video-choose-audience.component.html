@@ -1,17 +1,22 @@
 <div class="choose-audience">
   <h3>Choose audience</h3>
   <div class="choose-audience__content d-flex align-items-start">
+
+
     <div class="choose-audience__content__list ">
-      <p-tree [value]="files" selectionMode="checkbox" [(selection)]="selectedFiles" (onNodeSelect)="onSelect($event)"
-        (onNodeUnselect)="onUnSelect($event)"></p-tree>
+      <p-tree [value]="categoriesList" selectionMode="checkbox" [lazy]="true" [(selection)]="selectedDoctorsByCategory"
+        (onNodeSelect)="onSelect($event)" (onNodeUnselect)="onUnSelect($event)" (onLazyLoad)="onLazyLoad($event)"
+        (onNodeExpand)="onExpand($event)" (onNodeCollapse)="onCollapse($event)"></p-tree>
     </div>
+
+
     <div class="choose-audience__content__selected ">
       <div class="choose-audience__content__selected__text d-flex justify-content-between">
         <h4 class="title"> Doctors </h4>
-        <h4 class="count"> {{selectedDoctorsCount}} Doctor </h4>
+        <h4 class="count"> {{selectedDoctorsFiltered.length}} Doctor </h4>
       </div>
-      <p-tree [value]="targetedValue" selectionMode="checkbox" [(selection)]="selectedFiles2"
-        (onNodeSelect)="onSelect($event)" (onNodeUnselect)="onUnSelect($event)"></p-tree>
+      <p-tree [value]="selectedDoctorsFiltered" selectionMode="checkbox" [(selection)]="selectedDoctors"
+        (onNodeSelect)="onSelectDoctor($event)" (onNodeUnselect)="onUnselectDoctor($event)"></p-tree>
 
     </div>
   </div>
