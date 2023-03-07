@@ -1,0 +1,69 @@
+@import "../../../../assets/colors";
+@import "../../../../assets/common-style";
+
+.final-feedback-tree {
+  position: relative;
+  margin-top: 20px;
+  &::before {
+    content: "";
+    background-color: $light-grey-5;
+    height: 40px;
+    width: 1px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: -40px;
+    z-index: 2;
+  }
+}
+
+.card-container {
+  background-color: $primaryLowOpacity-1;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  &.question {
+    .header {
+      gap: 10px;
+      .add-question {
+        width: 35px;
+        height: 35px;
+        background: none;
+        border: none;
+        background: $white;
+        border: 2px solid $primary;
+        color: $primary;
+        font-size: 25px;
+        font-weight: bold;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+          background: $primary;
+          color: $white;
+          transition: all 0.5s;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .p-organizationchart-node-content {
+    padding: 0 !important;
+    border: none !important;
+    .p-node-toggler {
+      display: none !important;
+    }
+  }
+  .p-selectbutton .p-button {
+    box-shadow: none !important;
+    &.p-highlight,
+    &.p-highlight:hover {
+      background: $primary !important;
+      border-color: $primary !important;
+    }
+    .p-button-label {
+      font-weight: normal !important;
+    }
+  }
+}

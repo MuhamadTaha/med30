@@ -1,1 +1,88 @@
-<p>add-video-upload-videos works!</p>
+<div class="full-tree">
+  <p-organizationChart [value]="treeData">
+
+    <ng-template let-card pTemplate="upload-video">
+      <div class="card-container upload-video d-flex flex-column">
+        <div class="header">
+          <h4>{{card.label}}</h4>
+        </div>
+        <div class="content">
+          <button class="action-btn edit-btn">Upload Video</button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-card pTemplate="select-question-type">
+      <div class="card-container select-question-type d-flex flex-column">
+        <div class="header">
+          <h4>{{card.label}}</h4>
+        </div>
+        <div class="content">
+          <p-selectButton [options]="questionsTypes" [(ngModel)]="selectedQuestionType"
+            (onChange)="onQuestionTypeChange($event)" [disabled]="disableSelectQuestionType" optionValue="value"
+            optionLabel="name"></p-selectButton>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-card pTemplate="question">
+      <div class="card-container question d-flex flex-column">
+        <div class="header">
+          <h4>{{card.label}}</h4>
+        </div>
+        <div class="content">
+          <div class="content-question">
+            <p> Question </p>
+            <p> Answer 1 </p>
+            <p> Answer 2 </p>
+          </div>
+          <button class="action-btn save-btn" (click)="submitQuestion()">Submit Question</button>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-organizationChart>
+</div>
+
+<div class="final-feedback-tree">
+  <p-organizationChart [value]="feedbackTreeData">
+
+    <ng-template let-card pTemplate="upload-video">
+      <div class="card-container upload-video d-flex flex-column">
+        <div class="header">
+          <h4>{{card.label}}</h4>
+        </div>
+        <div class="content">
+          <button class="action-btn edit-btn">Upload Video</button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-card pTemplate="question">
+      <div class="card-container question d-flex flex-column">
+        <div class="header d-flex justify-content-center align-items-center">
+          <h4>{{card.label}}</h4>
+          <button class="add-question d-flex justify-content-center align-items-center"
+            *ngIf="card.questionType === 'feedback'" (click)="addFeedbackQuestion()">+</button>
+        </div>
+        <div class="content">
+          <div class="content-question" *ngIf="card.questionType == 'normal'">
+            <p> Question </p>
+            <p> Answer 1 </p>
+            <p> Answer 2 </p>
+          </div>
+          <div class="content-question" *ngIf="card.questionType == 'feedback'">
+            <div *ngFor="let question of feedbackQuestionsList">
+              <p> {{question.question}} </p>
+              <p> {{question.firstAnswer}} </p>
+              <p> {{question.secondeAnswer}} </p>
+            </div>
+          </div>
+
+          <button class="action-btn save-btn" (click)="submitQuestion()">Submit Question</button>
+        </div>
+      </div>
+    </ng-template>
+
+  </p-organizationChart>
+</div>

@@ -1,17 +1,25 @@
+// primary colors
 $primary: #1e71bb;
 $primaryLowOpacity: #1e71bb50;
+$primaryLowOpacity-1: #1e71bb16;
+
+// grey colors
 $light-grey-bg: #f8f8f8;
-$black: #000;
-$white: #fff;
-$status_published: #28c862;
-$text-red: #e11313;
-$button-red: #e32a2a;
-$input-bg: #e9eef3;
 $subtitle-color: #9d9d9d;
 $light-grey-1: #c2c2c2;
 $light-grey-2: #eee;
 $light-grey-3: #8c8c8c;
 $light-grey-4: #d6d6d6;
+$light-grey-5: #dee2e6;
+
+// form and buttons
+$checked-checkBox: #03b3e2;
+$input-bg: #e9eef3;
 $btn-red: #e32a2a;
 $btn-green: #16af30;
-$checked-checkBox: #03b3e2;
+$status_published: #28c862;
+$text-red: #e11313;
+
+// generic colors
+$black: #000;
+$white: #fff;
