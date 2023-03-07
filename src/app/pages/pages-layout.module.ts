@@ -14,10 +14,10 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { AddVideoPageComponent } from './add-video-page/add-video-page.component';
 
 import { NavbarComponent } from '../shared-components/navbar/navbar.component';
-import { AddVideoChooseAudienceComponent } from './components/add-video-choose-audience/add-video-choose-audience.component';
-import { AddVideoUploadVideosComponent } from './components/add-video-upload-videos/add-video-upload-videos.component';
-import { AddVideoSubmissionsComponent } from './components/add-video-submissions/add-video-submissions.component';
-import { AddVideoDialogComponent } from './components/add-video-dialog/add-video-dialog.component';
+import { AddVideoChooseAudienceComponent } from './add-video-page/components/add-video-choose-audience/add-video-choose-audience.component';
+import { AddVideoUploadVideosComponent } from './add-video-page/components/add-video-upload-videos/add-video-upload-videos.component';
+import { AddVideoSubmissionsComponent } from './add-video-page/components/add-video-submissions/add-video-submissions.component';
+import { AddVideoDialogComponent } from './add-video-page/components/add-video-dialog/add-video-dialog.component';
 
 import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/analysis-card.component';
 import { DoctorsCardComponent } from '../shared-components/cards/doctors-card/doctors-card.component';
@@ -80,8 +80,8 @@ const components = [
   declarations: [
     DisableControlDirective,
     PagesLayoutComponent,
+    AddVideoDialogComponent,
     ...components,
-    AddVideoDialogComponent
   ],
   imports: [
     CommonModule,

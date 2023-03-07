@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { AddVideoService } from '../../add-video-page/services/add-video.service';
-import { HandleAddVideoDataService } from '../../add-video-page/services/handle-add-video-data.service';
+import { AddVideoService } from '../../services/add-video.service';
+import { HandleAddVideoDataService } from '../../services/handle-add-video-data.service';
 
 @Component({
   selector: 'app-add-video-upload-videos',
