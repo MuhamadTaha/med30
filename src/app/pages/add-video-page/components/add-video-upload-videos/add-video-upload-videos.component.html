@@ -34,10 +34,13 @@
           <div class="content__question">
             <form [formGroup]="normalQuestionForm" (ngSubmit)="submitQuestion(normalQuestionForm)">
               <div class="content__question__form d-flex flex-column">
-                <input type="text" class="form-input" formControlName="question" placeholder="Question Body Here" />
-                <input type="text" class="form-input" formControlName="firstAnswer" placeholder="Answer 1" />
-                <input type="text" class="form-input" formControlName="secondeAnswer" placeholder="Answer 2" />
-                <button class="action-btn save-btn">Submit Question</button>
+                <input type="text" class="form-input" formControlName="question" placeholder="Question Body Here"
+                  [required]="selectedQuestionType =='normal'" />
+                <input type="text" class="form-input" formControlName="firstAnswer" placeholder="Answer 1"
+                  [required]="selectedQuestionType =='normal'" />
+                <input type="text" class="form-input" formControlName="secondeAnswer" placeholder="Answer 2"
+                  [required]="selectedQuestionType =='normal'" />
+                <button class="action-btn save-btn" [disabled]="!normalQuestionForm.valid">Submit Question</button>
               </div>
             </form>
           </div>
@@ -48,7 +51,7 @@
   </p-organizationChart>
 </div>
 
-<div class="final-feedback-tree">
+<div class="final-feedback-tree" *ngIf="selectedQuestionType">
   <p-organizationChart [value]="feedbackTreeData">
 
     <ng-template let-card pTemplate="upload-video">
@@ -99,4 +102,5 @@
 </div>
 
 
-<app-upload-video-dialog [showDialog]="showUploadVideoDialog" (onDialogClosed)="onDialogClosed($event)"></app-upload-video-dialog>
+<app-upload-video-dialog [showDialog]="showUploadVideoDialog"
+  (onDialogClosed)="onDialogClosed($event)"></app-upload-video-dialog>
