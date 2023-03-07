@@ -87,4 +87,8 @@ export class VideosListPageComponent implements OnInit {
     this.showAddVideoDialog = true
   }
 
+  onDialogClosed(event: any) {
+    this.showAddVideoDialog = false
+  }
+
 }

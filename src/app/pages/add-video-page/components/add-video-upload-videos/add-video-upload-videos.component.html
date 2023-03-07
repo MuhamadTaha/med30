@@ -7,7 +7,7 @@
           <h4>{{card.label}}</h4>
         </div>
         <div class="content">
-          <button class="action-btn edit-btn">Upload Video</button>
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
         </div>
       </div>
     </ng-template>
@@ -31,12 +31,16 @@
           <h4>{{card.label}}</h4>
         </div>
         <div class="content">
-          <div class="content-question">
-            <p> Question </p>
-            <p> Answer 1 </p>
-            <p> Answer 2 </p>
+          <div class="content__question">
+            <form [formGroup]="normalQuestionForm" (ngSubmit)="submitQuestion(normalQuestionForm)">
+              <div class="content__question__form d-flex flex-column">
+                <input type="text" class="form-input" formControlName="question" placeholder="Question Body Here" />
+                <input type="text" class="form-input" formControlName="firstAnswer" placeholder="Answer 1" />
+                <input type="text" class="form-input" formControlName="secondeAnswer" placeholder="Answer 2" />
+                <button class="action-btn save-btn">Submit Question</button>
+              </div>
+            </form>
           </div>
-          <button class="action-btn save-btn" (click)="submitQuestion()">Submit Question</button>
         </div>
       </div>
     </ng-template>
@@ -53,36 +57,46 @@
           <h4>{{card.label}}</h4>
         </div>
         <div class="content">
-          <button class="action-btn edit-btn">Upload Video</button>
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
         </div>
       </div>
     </ng-template>
 
     <ng-template let-card pTemplate="question">
-      <div class="card-container question d-flex flex-column">
+      <div class="card-container question d-flex flex-column" [ngClass]=" {'p-0': feedbackQuestionsList.length}">
         <div class="header d-flex justify-content-center align-items-center">
           <h4>{{card.label}}</h4>
           <button class="add-question d-flex justify-content-center align-items-center"
-            *ngIf="card.questionType === 'feedback'" (click)="addFeedbackQuestion()">+</button>
+            *ngIf="card.questionType === 'feedback'" [disabled]="feedbackQuestionsList.length >= 3"
+            (click)="addFeedbackQuestion()">
+            <fa-icon [icon]="addIcon"></fa-icon>
+          </button>
+          <button class="add-question d-flex justify-content-center align-items-center"
+            [disabled]="!feedbackQuestionsList.length" (click)="deleteFeedbackQuestion()">
+            <fa-icon [icon]="deleteIcon"></fa-icon>
+          </button>
+
         </div>
         <div class="content">
-          <div class="content-question" *ngIf="card.questionType == 'normal'">
-            <p> Question </p>
-            <p> Answer 1 </p>
-            <p> Answer 2 </p>
+          <div class="content__question" *ngFor="let question of feedbackQuestionsList, let i = index">
+            <form [formGroup]="feedbackQuestionForm">
+              <div class="content__question__form d-flex flex-column">
+                <input type="text" class="form-input" [formControlName]="'question_'+(i+1)"
+                  placeholder="Question Body Here" />
+                <input type="text" class="form-input" [formControlName]="'firstAnswer_'+(i+1)" placeholder="Answer 1" />
+                <input type="text" class="form-input" [formControlName]="'secondeAnswer_'+(i+1)"
+                  placeholder="Answer 2" />
+              </div>
+            </form>
           </div>
-          <div class="content-question" *ngIf="card.questionType == 'feedback'">
-            <div *ngFor="let question of feedbackQuestionsList">
-              <p> {{question.question}} </p>
-              <p> {{question.firstAnswer}} </p>
-              <p> {{question.secondeAnswer}} </p>
-            </div>
-          </div>
-
-          <button class="action-btn save-btn" (click)="submitQuestion()">Submit Question</button>
+          <button class="action-btn save-btn" [disabled]="!feedbackQuestionsList.length || !feedbackQuestionForm.valid"
+            (click)="submitQuestion(feedbackQuestionForm)">Submit Question</button>
         </div>
       </div>
     </ng-template>
 
   </p-organizationChart>
 </div>
+
+
+<app-upload-video-dialog [showDialog]="showUploadVideoDialog" (onDialogClosed)="onDialogClosed($event)"></app-upload-video-dialog>

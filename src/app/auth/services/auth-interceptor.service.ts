@@ -15,16 +15,16 @@ export class AuthInterceptorService implements HttpInterceptor {
 
 
     if (token && token != undefined) {
-      // request = request.clone({
-      //   setHeaders: {
-      //     Authorization: `Bearer ${token}`,
-      //     ApiKey: `5fd79378-5012-4576-9e6a-392a0655d7db`,
-      //   }
-      // });
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+          ApiKey: `5fd79378-5012-4576-9e6a-392a0655d7db`,
+        }
+      });
     } else {
-      // request = request.clone({
-      //   setHeaders: { ApiKey: `5fd79378-5012-4576-9e6a-392a0655d7db`, }
-      // });
+      request = request.clone({
+        setHeaders: { ApiKey: `5fd79378-5012-4576-9e6a-392a0655d7db`, }
+      });
     }
 
     return next.handle(request).pipe(

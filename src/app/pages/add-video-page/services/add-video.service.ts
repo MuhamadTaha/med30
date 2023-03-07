@@ -8,4 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class AddVideoService {
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  uploadFile(file: FormData) {
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Files/Upload', file)
+  }
 }

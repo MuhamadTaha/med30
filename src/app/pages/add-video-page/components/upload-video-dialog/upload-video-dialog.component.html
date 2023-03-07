@@ -1,0 +1,17 @@
+<p-dialog [(visible)]="showDialog" [modal]="true" [closeOnEscape]="false" [breakpoints]="{'960px': '70vw', '640px': '90vw'}"
+  [style]="{width: '40vw'}" >
+
+  <ng-template pTemplate="header"> Choose Video </ng-template>
+
+  <div class="dialog__file form-control">
+    <p-fileUpload name="myfile[]" [maxFileSize]="10000000" accept="video/*" (onSelect)="onFileSelect($event)"
+      (onRemove)="onFileRemove($event)"> </p-fileUpload>
+  </div>
+
+  <diV class="dialog__actions d-flex justify-content-between align-items-center">
+    <button class="cancel-btn-transparent action-btn d-flex align-items-center" (click)="closeDialog()">Cancel</button>
+    <button class="edit-btn action-btn d-flex align-items-center justify-content-center"
+      (click)="uploadVideo()">Start</button>
+  </diV>
+
+</p-dialog>

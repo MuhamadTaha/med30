@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,9 +11,11 @@ export class AddVideoDialogComponent {
   constructor(private router: Router) { }
 
   @Input() showDialog: any = false;
+  @Output() onDialogClosed = new EventEmitter<any>();
 
   closeDialog() {
     this.showDialog = false
+    this.onDialogClosed.emit(false);
   }
 
   routeToAddVideo() {

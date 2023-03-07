@@ -18,6 +18,7 @@ import { AddVideoChooseAudienceComponent } from './add-video-page/components/add
 import { AddVideoUploadVideosComponent } from './add-video-page/components/add-video-upload-videos/add-video-upload-videos.component';
 import { AddVideoSubmissionsComponent } from './add-video-page/components/add-video-submissions/add-video-submissions.component';
 import { AddVideoDialogComponent } from './add-video-page/components/add-video-dialog/add-video-dialog.component';
+import { UploadVideoDialogComponent } from './add-video-page/components/upload-video-dialog/upload-video-dialog.component';
 
 import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/analysis-card.component';
 import { DoctorsCardComponent } from '../shared-components/cards/doctors-card/doctors-card.component';
@@ -73,6 +74,8 @@ const components = [
   DoctorsCardComponent,
   VideosListCardComponent,
   VideoDetailsCardComponent,
+  AddVideoDialogComponent,
+  UploadVideoDialogComponent,
   FrequencyCardComponent,
 ]
 

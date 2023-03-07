@@ -34,5 +34,5 @@
     </div>
   </div>
 
-  <app-add-video-dialog [showDialog]="showAddVideoDialog"></app-add-video-dialog>
+  <app-add-video-dialog [showDialog]="showAddVideoDialog" (onDialogClosed)="onDialogClosed($event)"></app-add-video-dialog>
 </div>

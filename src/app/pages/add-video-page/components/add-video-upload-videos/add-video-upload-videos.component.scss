@@ -1,5 +1,5 @@
-@import "../../../../assets/colors";
-@import "../../../../assets/common-style";
+@import "../../../../../assets/colors";
+@import "../../../../../assets/common-style";
 
 .final-feedback-tree {
   position: relative;
@@ -22,9 +22,15 @@
   padding: 20px;
   margin: 20px;
   border-radius: 8px;
+  h4 {
+    margin-top: 0;
+  }
   &.question {
     .header {
       gap: 10px;
+      h4 {
+        margin: 8px 0;
+      }
       .add-question {
         width: 35px;
         height: 35px;
@@ -33,8 +39,7 @@
         background: $white;
         border: 2px solid $primary;
         color: $primary;
-        font-size: 25px;
-        font-weight: bold;
+        font-size: 16px;
         border-radius: 50%;
         cursor: pointer;
         &:hover {
@@ -42,7 +47,47 @@
           color: $white;
           transition: all 0.5s;
         }
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          &:hover {
+            background: $white;
+            color: $primary;
+          }
+        }
       }
+    }
+    .content {
+      &__question {
+        padding: 20px;
+        &__form {
+          min-width: 500px;
+          gap: 10px;
+          padding: 0 10px;
+          .form-input {
+            background: none !important;
+            border-bottom: 2px solid $primaryLowOpacity;
+            box-shadow: none !important;
+            outline: none !important;
+            padding: 10px 4px !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+          }
+        }
+        &:nth-of-type(even) {
+          background-color: #ffffff90;
+        }
+      }
+      button {
+        margin: 20px auto 0;
+        width: max-content;
+      }
+    }
+  }
+  &.p-0 {
+    padding: 20px 0 !important;
+    &__question {
+      padding: 20px;
     }
   }
 }
