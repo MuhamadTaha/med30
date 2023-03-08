@@ -4,8 +4,8 @@
 
 
     <div class="choose-audience__content__list ">
-      <p-tree [value]="categoriesList" selectionMode="checkbox" [lazy]="true" [(selection)]="selectedDoctorsByCategory"
-        (onNodeSelect)="onSelect($event)" (onNodeUnselect)="onUnSelect($event)" (onLazyLoad)="onLazyLoad($event)"
+      <p-tree [value]="categoriesList" selectionMode="checkbox" [loading]="showCategoriesLoading" [lazy]="true"
+        [(selection)]="selectedCategories" (onNodeSelect)="onSelect($event)" (onNodeUnselect)="onUnSelect($event)"
         (onNodeExpand)="onExpand($event)" (onNodeCollapse)="onCollapse($event)"></p-tree>
     </div>
 
@@ -15,8 +15,9 @@
         <h4 class="title"> Doctors </h4>
         <h4 class="count"> {{selectedDoctorsFiltered.length}} Doctor </h4>
       </div>
-      <p-tree [value]="selectedDoctorsFiltered" selectionMode="checkbox" [(selection)]="selectedDoctors"
-        (onNodeSelect)="onSelectDoctor($event)" (onNodeUnselect)="onUnselectDoctor($event)"></p-tree>
+      <p-tree [value]="selectedDoctorsFiltered" selectionMode="checkbox" [loading]="showDoctorsLoading"
+        [emptyMessage]="doctorsListEmptyMessage" [(selection)]="selectedDoctors" (onNodeSelect)="onSelectDoctor($event)"
+        (onNodeUnselect)="onUnselectDoctor($event)"></p-tree>
 
     </div>
   </div>

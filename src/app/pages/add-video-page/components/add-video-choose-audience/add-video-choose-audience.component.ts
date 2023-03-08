@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { AddVideoService } from '../../services/add-video.service';
 
 @Component({
   selector: 'app-add-video-choose-audience',
@@ -9,117 +10,113 @@ import { Component } from '@angular/core';
 })
 export class AddVideoChooseAudienceComponent {
 
-  selectedDoctorsByCategory!: any;
+  selectedCategories!: any;
   selectedDoctorsFiltered: any[] = []
   selectedDoctors!: any[];
+  showCategoriesLoading = false;
+  showDoctorsLoading = false;
+  doctorsListEmptyMessage = 'No doctors selected yet';
 
+  categoriesList: any[] = []
+  selectedCategoriesIds: any[] = []
 
-  categoriesList!: any[]
-
-  constructor() { }
+  constructor(private addVideoService: AddVideoService) { }
 
   ngOnInit() {
-    this.selectedDoctors = this.selectedDoctorsFiltered
+    this.selectedDoctors = this.selectedDoctorsFiltered;
+    this.getCharacteristicsSections()
+  }
 
-    this.categoriesList = [
-      {
-        "label": "Specializations",
-        "data": "S",
-        "emptyMessage": "no S",
-        "selectable": false,
-        "leaf": false,
-        "children": []
-      },
-      {
-        "label": "Area",
-        "data": "A",
-        "emptyMessage": "no A",
-        "selectable": false,
-        "leaf": false,
-        "children": []
-      },
-      {
-        "label": "Title",
-        "data": "T",
-        "emptyMessage": "no T",
-        "selectable": false,
-        "leaf": false,
-        "children": []
-      },
-    ]
-
-    // this.files = [
-    //   {
-    //     "name": "Specializations",
-    //     "children": [
-    //       { "name": "Spec 1", "title": "title1", "id": 1 },
-    //       { "name": "Spec 2", "title": "title2", "id": 2 },
-    //       { "name": "Spec 3", "title": "title2", "id": 3 },
-    //     ]
-    //   },
-    //   {
-    //     "name": "Area",
-    //     "children": [
-    //       { "name": "Area 1", "title": "title1", "id": 1 },
-    //       { "name": "Area 2", "title": "title2", "id": 2 },
-    //       { "name": "Area 3", "title": "title2", "id": 3 },
-    //     ]
-    //   },
-    //   {
-    //     "name": "Title",
-    //     "children": [
-    //       { "name": "Title 1", "title": "title1", "id": 1 },
-    //       { "name": "Title 2", "title": "title2", "id": 2 },
-    //       { "name": "Title 3", "title": "title2", "id": 3 },
-    //     ]
-    //   }
-    // ]
-
+  getCharacteristicsSections() {
+    this.showCategoriesLoading = true;
+    this.addVideoService.getCharacteristicsSections().subscribe((res: any) => {
+      if (res.data?.length) {
+        res.data.forEach((element: any) => {
+          let parent = {
+            id: element.id,
+            label: element.name,
+            emptyMessage: `no ${element.name}`,
+            selectable: false,
+            leaf: false,
+            children: []
+          }
+          this.categoriesList.push(parent)
+        })
+      }
+      this.showCategoriesLoading = false;
+    })
   }
 
   onSelect(event: any) {
+    this.showDoctorsLoading = true;
+
     this.selectedDoctorsFiltered = []
-    this.selectedDoctorsByCategory.forEach((element: any) => {
-      if (!element.children) {
-        this.selectedDoctorsFiltered.push(element)
+    this.selectedCategoriesIds = []
+    this.selectedCategories.forEach((element: any) => {
+      if (!element.children) this.selectedCategoriesIds.push(element.id)
+    })
+
+    this.addVideoService.getDoctorsListByCategory({ docChar: this.selectedCategoriesIds }).subscribe((res: any) => {
+      if (res.data?.length) {
+
+        res.data.forEach((element: any) => {
+          let parent = { id: element.id, label: element.name, category: event.node.label }
+          this.selectedDoctorsFiltered.push(parent)
+        })
       }
-    });
+      this.showDoctorsLoading = false;
+    })
     this.selectedDoctors = this.selectedDoctorsFiltered
-    // console.log('selectedDoctorsByCategory', this.selectedDoctorsByCategory)
-    // console.log('event', event)
-    // console.log('selectedDoctorsFiltered', this.selectedDoctorsFiltered)
 
   }
 
   onUnSelect(event: any) {
+    this.showDoctorsLoading = true;
+
     this.selectedDoctorsFiltered = []
-    this.selectedDoctorsByCategory.forEach((element: any) => {
-      if (!element.children) {
-        this.selectedDoctorsFiltered.push(element)
+    this.selectedCategoriesIds = []
+    this.selectedCategories.forEach((element: any) => {
+      if (!element.children) this.selectedCategoriesIds.push(element.id)
+    })
+
+    this.addVideoService.getDoctorsListByCategory({ docChar: this.selectedCategoriesIds }).subscribe((res: any) => {
+      if (res.data?.length) {
+        res.data.forEach((element: any) => {
+          let parent = { id: element.id, label: element.name, category: event.node.label }
+          this.selectedDoctorsFiltered.push(parent)
+        })
       }
-    });
-    // console.log('selectedDoctorsFiltered', this.selectedDoctorsFiltered)
+      this.showDoctorsLoading = false;
+    })
   }
 
   onExpand(event: any) {
-    // console.log('onExpand', event.node.label)
-    this.add(event.node.label);
+    this.showCategoriesLoading = true;
+    this.addVideoService.getCharacteristicsSectionsItems(event.node.id).subscribe((res: any) => {
+      this.categoriesList.forEach((category) => {
+        if (category.id == event.node.id) {
+          if (res.data?.length) {
+            res.data.forEach((element: any) => {
+              let newElement = { label: element.name, id: element.id, category: event.node.label }
+              category.children.push(newElement)
+            });
+          }
+        }
+      });
+      this.showCategoriesLoading = false;
+    })
   }
 
   onCollapse(event: any) {
-    // console.log('onCollapse', event)
-    // console.log('this.selectedDoctorsByCategory before', this.selectedDoctorsByCategory)
-
-    if (this.selectedDoctorsByCategory.length) {
-      for (var i = this.selectedDoctorsByCategory.length - 1; i >= 0; i--) {
-        if (this.selectedDoctorsByCategory[i].category) {
-          if (this.selectedDoctorsByCategory[i].category == event.node.label) {
-            this.selectedDoctorsByCategory.splice(i, 1);
-            // console.log('this.selectedDoctorsByCategory after', this.selectedDoctorsByCategory)
+    if (this.selectedCategories?.length) {
+      for (var i = this.selectedCategories.length - 1; i >= 0; i--) {
+        if (this.selectedCategories[i].category) {
+          if (this.selectedCategories[i].category == event.node.label) {
+            this.selectedCategories.splice(i, 1);
           }
         } else {
-          if (this.selectedDoctorsByCategory[i].label == event.node.label) {
-            this.selectedDoctorsByCategory.splice(i, 1);
+          if (this.selectedCategories[i].label == event.node.label) {
+            this.selectedCategories.splice(i, 1);
           }
         }
       }
@@ -130,7 +127,6 @@ export class AddVideoChooseAudienceComponent {
         if (this.selectedDoctorsFiltered[i].category) {
           if (this.selectedDoctorsFiltered[i].category == event.node.label) {
             this.selectedDoctorsFiltered.splice(i, 1);
-            // console.log('this.selectedDoctorsFiltered after', this.selectedDoctorsFiltered)
           }
         }
       }
@@ -140,38 +136,6 @@ export class AddVideoChooseAudienceComponent {
       if (element.label === event.node.label) {
         element.children = []
         element.selectable = false
-      }
-    })
-  }
-
-  onLazyLoad(event: any) {
-    console.log('onLazyLoad', event.node.label)
-  }
-
-  add(label: string) {
-
-    this.categoriesList.forEach((element: any) => {
-      if (label === element.label) {
-        element.selectable = true
-        if (element.label === "Specializations") {
-          element.children = [
-            { "label": "Spec 1", "title": "title1", "id": 1, "category": "Specializations" },
-            { "label": "Spec 2", "title": "title2", "id": 2, "category": "Specializations" },
-            { "label": "Spec 3", "title": "title2", "id": 3, "category": "Specializations" },
-          ]
-        } else if (element.label === "Area") {
-          element.children = [
-            { "label": "Area 1", "title": "title1", "id": 1, "category": "Area" },
-            { "label": "Area 2", "title": "title2", "id": 2, "category": "Area" },
-            { "label": "Area 3", "title": "title2", "id": 3, "category": "Area" },
-          ]
-        } else if (element.label === "Title") {
-          element.children = [
-            { "label": "Title 1", "title": "title1", "id": 1, "category": "Title" },
-            { "label": "Title 2", "title": "title2", "id": 2, "category": "Title" },
-            { "label": "Title 3", "title": "title2", "id": 3, "category": "Title" },
-          ]
-        }
       }
     })
   }

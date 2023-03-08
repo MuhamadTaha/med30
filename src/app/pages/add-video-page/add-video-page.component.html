@@ -5,18 +5,43 @@
   <p-tabView [(activeIndex)]="currentTabIndex" (onChange)="onTabChange($event)">
 
     <p-tabPanel header="Step 1: Choose audience" [headerStyleClass]="'activeTab'">
-      <app-add-video-choose-audience></app-add-video-choose-audience>
+      <ng-template pTemplate="choose-audience">
+        <app-add-video-choose-audience></app-add-video-choose-audience>
+      </ng-template>
     </p-tabPanel>
 
     <p-tabPanel header="Step 2: Upload videos"
       [headerStyleClass]="(currentTabIndex == 1 || currentTabIndex == 2) ? 'activeTab' : ''">
-      <app-add-video-upload-videos></app-add-video-upload-videos>
+      <ng-template pTemplate="upload-videos">
+        <app-add-video-upload-videos></app-add-video-upload-videos>
+      </ng-template>
     </p-tabPanel>
 
     <p-tabPanel header="Step 3: Submissions" [headerStyleClass]="currentTabIndex == 2 ? 'activeTab' : ''">
-      <app-add-video-submissions></app-add-video-submissions>
+      <ng-template pTemplate="video-submissions">
+        <app-add-video-submissions></app-add-video-submissions>
+      </ng-template>
     </p-tabPanel>
 
   </p-tabView>
+
+  <div class="add-video__content__actions d-flex justify-content-between">
+
+    <div class="add-video__content__actions__cancel">
+      <button class="cancel-btn-transparent action-btn d-flex align-items-center"
+        (click)="cancelRequest()">cancel</button>
+    </div>
+
+    <diV class="add-video__content__actions__submit d-flex align-items-center">
+      <button class="cancel-btn-transparent action-btn d-flex align-items-center" (click)="continueLater()">Save &
+        continue later</button>
+      <button class="edit-btn action-btn d-flex align-items-center justify-content-center" *ngIf="currentTabIndex != 2"
+        (click)="nextStep()">Next</button>
+      <button class="edit-btn action-btn d-flex align-items-center justify-content-center" *ngIf="currentTabIndex == 2"
+        (click)="submitRequest()">Submit</button>
+    </diV>
+
+  </div>
+
 
 </div>

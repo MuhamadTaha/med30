@@ -37,5 +37,31 @@ export class AddVideoPageComponent {
     });
   }
 
+  nextStep() {
+    switch (this.currentTabIndex) {
+      case 0:
+        console.log('step-1')
+        break
+      case 1:
+        console.log('step-2')
+        break
+      default:
+        break
+    }
+    this.currentTabIndex = this.currentTabIndex + 1
+    console.log('nextStep')
+  }
+
+  submitRequest() {
+    console.log('submitRequest')
+  }
+
+  continueLater() {
+    console.log('continueLater')
+  }
+
+  cancelRequest() {
+    console.log('cancelRequest')
+  }
 
 }

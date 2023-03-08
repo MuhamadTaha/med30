@@ -6,34 +6,37 @@
   h2 {
     margin-bottom: 20px;
   }
-}
-
-::ng-deep {
-  .p-tabview-panels {
-    padding: 30px 0 !important;
+  &__actions {
+    padding: 30px 0;
   }
-  .p-tabview-nav {
-    width: 100%;
-    border: none !important;
-    display: flex !important;
-    gap: 20px;
-    & > li {
-      width: 50%;
-      background-color: red;
-      a {
-        color: $input-bg !important;
-        padding: 15px 0 0 !important;
-        border-radius: 0 !important;
-        box-shadow: none !important;
-        border-top: 8px solid $input-bg !important;
-      }
-      &.activeTab a {
-        color: $primary !important;
-        border-top-color: $primary !important;
-      }
+
+  ::ng-deep {
+    .p-tabview-panels {
+      padding: 30px 0 !important;
     }
-    .p-tabview-ink-bar {
-      display: none !important;
+    .p-tabview-nav {
+      width: 100%;
+      border: none !important;
+      display: flex !important;
+      gap: 20px;
+      & > li {
+        width: 50%;
+        background-color: red;
+        a {
+          color: $input-bg !important;
+          padding: 15px 0 0 !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          border-top: 8px solid $input-bg !important;
+        }
+        &.activeTab a {
+          color: $primary !important;
+          border-top-color: $primary !important;
+        }
+      }
+      .p-tabview-ink-bar {
+        display: none !important;
+      }
     }
   }
 }
