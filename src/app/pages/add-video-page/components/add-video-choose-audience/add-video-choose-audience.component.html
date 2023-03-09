@@ -2,23 +2,39 @@
   <h3>Choose audience</h3>
   <div class="choose-audience__content d-flex align-items-start">
 
-
     <div class="choose-audience__content__list ">
       <p-tree [value]="categoriesList" selectionMode="checkbox" [loading]="showCategoriesLoading" [lazy]="true"
-        [(selection)]="selectedCategories" (onNodeSelect)="onSelect($event)" (onNodeUnselect)="onUnSelect($event)"
-        (onNodeExpand)="onExpand($event)" (onNodeCollapse)="onCollapse($event)"></p-tree>
+        [(selection)]="selectedCategories" (onNodeSelect)="onSelectOrUnselectCategory($event)"
+        (onNodeUnselect)="onSelectOrUnselectCategory($event)" (onNodeExpand)="onExpandCategory($event)"
+        (onNodeCollapse)="onCollapseCategory($event)"></p-tree>
     </div>
-
 
     <div class="choose-audience__content__selected ">
       <div class="choose-audience__content__selected__text d-flex justify-content-between">
         <h4 class="title"> Doctors </h4>
-        <h4 class="count"> {{selectedDoctorsFiltered.length}} Doctor </h4>
+        <h4 class="count"> {{doctorsListByCategory.length}} Doctor </h4>
       </div>
-      <p-tree [value]="selectedDoctorsFiltered" selectionMode="checkbox" [loading]="showDoctorsLoading"
-        [emptyMessage]="doctorsListEmptyMessage" [(selection)]="selectedDoctors" (onNodeSelect)="onSelectDoctor($event)"
-        (onNodeUnselect)="onUnselectDoctor($event)"></p-tree>
+      <p-tree [value]="doctorsListByCategory" selectionMode="checkbox" [loading]="showDoctorsLoading"
+        [emptyMessage]="doctorsListEmptyMessage" [(selection)]="selectedDoctors"
+        (onNodeSelect)="onSelectOrUnselectDoctor($event)" (onNodeUnselect)="onSelectOrUnselectDoctor($event)"></p-tree>
 
     </div>
   </div>
+
+  <div class="choose-audience__content__actions d-flex justify-content-between" style="padding: 30px 0;">
+
+    <div class="choose-audience__content__actions__cancel">
+      <button class="cancel-btn-transparent action-btn d-flex align-items-center"
+        (click)="cancelRequest()">cancel</button>
+    </div>
+
+    <diV class="choose-audience__content__actions__submit d-flex align-items-center">
+      <button class="cancel-btn-transparent action-btn d-flex align-items-center" (click)="continueLater()">Save &
+        continue later</button>
+      <button class="edit-btn action-btn d-flex align-items-center justify-content-center"
+        (click)="submitDoctorsList()"> Next</button>
+    </diV>
+
+  </div>
+
 </div>

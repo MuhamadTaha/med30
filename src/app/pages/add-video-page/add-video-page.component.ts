@@ -18,6 +18,10 @@ export class AddVideoPageComponent {
   ) { }
 
   ngOnInit() {
+    this.checkActiveRoute()
+  }
+
+  checkActiveRoute() {
     this.activatedRoute.queryParams.subscribe(params => {
       this.currentStep = params['step'];
       this.currentTabIndex = Number(this.currentStep.slice(5, 6)) - 1
@@ -37,13 +41,13 @@ export class AddVideoPageComponent {
     });
   }
 
-  nextStep() {
+  nextStepClicked() {
     switch (this.currentTabIndex) {
       case 0:
-        console.log('step-1')
+        this.handleStep1()
         break
       case 1:
-        console.log('step-2')
+        this.handleStep2()
         break
       default:
         break
@@ -52,16 +56,13 @@ export class AddVideoPageComponent {
     console.log('nextStep')
   }
 
-  submitRequest() {
-    console.log('submitRequest')
+  submitDoctorsList(doctorsList: any) {
+    console.log(doctorsList.map((item: any) => item.id))
+    this.currentTabIndex = this.currentTabIndex + 1
   }
 
-  continueLater() {
-    console.log('continueLater')
-  }
+  handleStep1() { console.log('handleStep1') }
 
-  cancelRequest() {
-    console.log('cancelRequest')
-  }
+  handleStep2() { console.log('handleStep2') }
 
 }

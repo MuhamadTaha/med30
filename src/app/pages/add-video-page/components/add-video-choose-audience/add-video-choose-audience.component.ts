@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AddVideoService } from '../../services/add-video.service';
 
 @Component({
@@ -10,143 +10,85 @@ import { AddVideoService } from '../../services/add-video.service';
 })
 export class AddVideoChooseAudienceComponent {
 
-  selectedCategories!: any;
-  selectedDoctorsFiltered: any[] = []
-  selectedDoctors!: any[];
+  categoriesList: any[] = []
+  selectedCategories: any[] = [];
+
+  selectedCategoriesIds: any[] = [];
+
+  doctorsListByCategory: any[] = [];
+  selectedDoctors: any[] = [];
+
   showCategoriesLoading = false;
   showDoctorsLoading = false;
+
   doctorsListEmptyMessage = 'No doctors selected yet';
 
-  categoriesList: any[] = []
-  selectedCategoriesIds: any[] = []
+  @Output() onSubmitDoctorsList = new EventEmitter<any>();
+
 
   constructor(private addVideoService: AddVideoService) { }
 
   ngOnInit() {
-    this.selectedDoctors = this.selectedDoctorsFiltered;
-    this.getCharacteristicsSections()
+    this.getSections()
   }
 
-  getCharacteristicsSections() {
+  getSections() {
     this.showCategoriesLoading = true;
-    this.addVideoService.getCharacteristicsSections().subscribe((res: any) => {
-      if (res.data?.length) {
-        res.data.forEach((element: any) => {
-          let parent = {
-            id: element.id,
-            label: element.name,
-            emptyMessage: `no ${element.name}`,
-            selectable: false,
-            leaf: false,
-            children: []
-          }
-          this.categoriesList.push(parent)
-        })
-      }
+    this.addVideoService.getSections().subscribe((res: any) => {
+      if (res) this.categoriesList = res;
       this.showCategoriesLoading = false;
     })
   }
 
-  onSelect(event: any) {
+  onSelectOrUnselectCategory(event: any) {
     this.showDoctorsLoading = true;
+    this.selectedCategoriesIds = this.getSelectedCategoriesIds()
 
-    this.selectedDoctorsFiltered = []
-    this.selectedCategoriesIds = []
-    this.selectedCategories.forEach((element: any) => {
-      if (!element.children) this.selectedCategoriesIds.push(element.id)
-    })
-
-    this.addVideoService.getDoctorsListByCategory({ docChar: this.selectedCategoriesIds }).subscribe((res: any) => {
-      if (res.data?.length) {
-
-        res.data.forEach((element: any) => {
-          let parent = { id: element.id, label: element.name, category: event.node.label }
-          this.selectedDoctorsFiltered.push(parent)
-        })
-      }
-      this.showDoctorsLoading = false;
-    })
-    this.selectedDoctors = this.selectedDoctorsFiltered
-
+    this.addVideoService.getDoctorsListByCategory(event.node.label, { docChar: this.selectedCategoriesIds })
+      .subscribe((res: any) => {
+        if (res) this.doctorsListByCategory = res; this.selectedDoctors = res
+        this.showDoctorsLoading = false;
+      })
   }
 
-  onUnSelect(event: any) {
-    this.showDoctorsLoading = true;
-
-    this.selectedDoctorsFiltered = []
-    this.selectedCategoriesIds = []
-    this.selectedCategories.forEach((element: any) => {
-      if (!element.children) this.selectedCategoriesIds.push(element.id)
-    })
-
-    this.addVideoService.getDoctorsListByCategory({ docChar: this.selectedCategoriesIds }).subscribe((res: any) => {
-      if (res.data?.length) {
-        res.data.forEach((element: any) => {
-          let parent = { id: element.id, label: element.name, category: event.node.label }
-          this.selectedDoctorsFiltered.push(parent)
-        })
-      }
-      this.showDoctorsLoading = false;
-    })
-  }
-
-  onExpand(event: any) {
+  onExpandCategory(event: any) {
     this.showCategoriesLoading = true;
-    this.addVideoService.getCharacteristicsSectionsItems(event.node.id).subscribe((res: any) => {
-      this.categoriesList.forEach((category) => {
-        if (category.id == event.node.id) {
-          if (res.data?.length) {
-            res.data.forEach((element: any) => {
-              let newElement = { label: element.name, id: element.id, category: event.node.label }
-              category.children.push(newElement)
-            });
-          }
-        }
-      });
-      this.showCategoriesLoading = false;
-    })
-  }
+    const expandedItem = event.node;
 
-  onCollapse(event: any) {
-    if (this.selectedCategories?.length) {
-      for (var i = this.selectedCategories.length - 1; i >= 0; i--) {
-        if (this.selectedCategories[i].category) {
-          if (this.selectedCategories[i].category == event.node.label) {
-            this.selectedCategories.splice(i, 1);
-          }
+    this.categoriesList.forEach((item) => {
+      if (item.id == expandedItem.id) {
+        if (!item.children.length) {
+          this.addVideoService.getSectionsItems(expandedItem.label, expandedItem.id).subscribe((res: any) => {
+            if (res) item.children = res
+            this.showCategoriesLoading = false;
+          })
         } else {
-          if (this.selectedCategories[i].label == event.node.label) {
-            this.selectedCategories.splice(i, 1);
-          }
+          this.showCategoriesLoading = false;
         }
       }
-    }
-
-    if (this.selectedDoctorsFiltered.length) {
-      for (var i = this.selectedDoctorsFiltered.length - 1; i >= 0; i--) {
-        if (this.selectedDoctorsFiltered[i].category) {
-          if (this.selectedDoctorsFiltered[i].category == event.node.label) {
-            this.selectedDoctorsFiltered.splice(i, 1);
-          }
-        }
-      }
-    }
-
-    this.categoriesList.forEach((element: any) => {
-      if (element.label === event.node.label) {
-        element.children = []
-        element.selectable = false
-      }
-    })
+    });
   }
 
-  onSelectDoctor(event: any) {
-    console.log('onSelectDoctor this.selectedDoctorsFiltered', this.selectedDoctorsFiltered)
-    console.log('onSelectDoctor this.selectedDoctors', this.selectedDoctors)
+  onCollapseCategory(event: any) { }
+
+  onSelectOrUnselectDoctor(event: any) { }
+
+  getSelectedCategoriesIds() {
+    return this.selectedCategories.filter((item: any) => {
+      if (!item.children) return item
+    }).map((row: any) => row.id)
   }
-  onUnselectDoctor(event: any) {
-    console.log('onUnselectDoctor this.selectedDoctorsFiltered', this.selectedDoctorsFiltered)
-    console.log('onUnselectDoctor this.selectedDoctors', this.selectedDoctors)
+
+  continueLater() {
+    console.log('continueLater')
+  }
+
+  cancelRequest() {
+    console.log('cancelRequest')
+  }
+
+  submitDoctorsList() {
+    this.onSubmitDoctorsList.emit(this.selectedDoctors);
   }
 
 }
