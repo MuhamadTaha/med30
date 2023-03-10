@@ -14,7 +14,6 @@ export class UploadVideoDialogComponent {
   @Output() uploadVideoEvent = new EventEmitter<any>();
 
   // isFileUploaded = false;
-  test = 'test';
   selectedFile!: any;
 
   constructor(private addVideoService: AddVideoService) { }
@@ -36,22 +35,16 @@ export class UploadVideoDialogComponent {
     const file = this.selectedFile;
     var formData: any = new FormData();
     formData.append('file', file);
-    for (var pair of formData.entries()) {
-      console.log(file);
-      console.log(pair[0]);
-      console.log(pair[1]);
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(file);
+    //   console.log(pair[0]);
+    //   console.log(pair[1]);
+    // }
 
-    this.addVideoService.uploadFile(formData).subscribe({
-      next: (response) => {
-        // this.isFileUploaded = true
-        this.uploadVideoEvent.emit({ res: response, videoType: this.videoType });
-        console.log('uploadFile response ===>', response)
-      },
-      error: (error) => {
-        // this.isFileUploaded = false
-        console.log('uploadFile error ===>', error)
-      },
+    this.addVideoService.uploadFile(formData).subscribe((res: any) => {
+      this.uploadVideoEvent.emit({ res: res, videoType: this.videoType, selectedFile: this.selectedFile });
+      console.log('uploadFile response ===>', res)
+      this.closeDialog();
     });
 
   }

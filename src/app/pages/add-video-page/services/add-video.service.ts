@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, take } from 'rxjs';
+import { } from 'rxjs';
+import { IMessageDetails } from '../interfaces/message-details.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +51,27 @@ export class AddVideoService {
     );
   }
 
-  createMessage(body: string) {
+  createMessage(body: any) {
     return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessage', body).pipe(take(1));
+  }
+
+  createMessageVideo(messageId: number, filepath: string) {
+    const body = {
+      id: 0,
+      messageId: messageId,
+      titleEn: "NA",
+      titleAr: "NA",
+      filePath: filepath,
+      orderNo: 0,
+      answerId: null,
+      survayId: null
+    }
+
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessageVideo', body).pipe(take(1));
+  }
+
+  createSurvey(body: any) {
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvay', body).pipe(take(1));
   }
 
 

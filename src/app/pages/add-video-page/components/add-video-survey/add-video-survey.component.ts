@@ -25,7 +25,7 @@ export class AddVideoSurveyComponent {
   constructor(private router: Router) { }
 
   submitSurvey() {
-    this.onAddSurvey.emit({ surveyType: this.surveyType, isSurveyAdded: true });
+    this.onAddSurvey.emit({ survey: this.survey, surveyType: this.surveyType, isSurveyAdded: true });
     this.isSurveyAdded = true;
     console.log('survey', this.survey)
   }

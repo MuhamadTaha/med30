@@ -17,6 +17,7 @@ export class HandleAddVideoDataService {
   treeData = [{
     label: 'Upload Introduction video',
     type: 'upload-video',
+    subType: 'intro',
     expanded: true,
     children: [
       {
@@ -31,7 +32,7 @@ export class HandleAddVideoDataService {
   }]
 
   normalQuestion = {
-    label: 'Normal Survey',
+    label: 'Normal',
     type: 'question',
     questionType: 'normal',
     expanded: true,
@@ -39,11 +40,13 @@ export class HandleAddVideoDataService {
       {
         label: 'Upload video for first answer',
         type: 'upload-video',
+        subType: 'answer1',
         expanded: true,
       },
       {
         label: 'Upload video for seconde answer',
         type: 'upload-video',
+        subType: 'answer2',
         expanded: true,
       },
     ],
@@ -51,13 +54,14 @@ export class HandleAddVideoDataService {
   }
 
   feedbackQuestion = {
-    label: 'Feedback Survey',
+    label: 'Feedback',
     type: 'question',
     questionType: 'feedback',
     expanded: true,
     children: [{
       label: 'Upload Feedback Video',
       type: 'upload-video',
+      subType: 'feedback',
       expanded: true,
     }],
   }

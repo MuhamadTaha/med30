@@ -63,11 +63,34 @@ export class AddVideoPageComponent {
 
   submitDoctorsList(request: any) {
     console.log('step 1 api request', request)
-    this.currentTabIndex = this.currentTabIndex + 1;
     this.addVideoService.createMessage(request).subscribe((res: any) => {
       this.messageDetails.id = res.data;
       console.log('response', res)
-      console.log('messageDetails', this.messageDetails)
+      console.log('messageDetails', this.messageDetails);
+      this.currentTabIndex = this.currentTabIndex + 1;
+    })
+  }
+
+  onUploadIntroVideo(introVideoPath: any) {
+    this.messageDetails.introVideoPath = introVideoPath;
+    this.addVideoService.createMessageVideo(this.messageDetails.id, this.messageDetails.introVideoPath).subscribe((res: any) => {
+      this.messageDetails.introVideoId = res.data
+    })
+  }
+
+  onAddSurvey(surveyData: any) {
+    const body = {
+      id: 0,
+      titleEn: surveyData.survey.titleEn,
+      titleAr: surveyData.survey.titleAr,
+      typeId: surveyData.surveyType,
+      messageId: this.messageDetails.id,
+      videoIds: [this.messageDetails.introVideoId]
+    }
+    this.addVideoService.createSurvey(body).subscribe((res: any) => {
+      console.log(res)
+      if (surveyData.surveyType == 1) this.messageDetails.normalSurveyId = res.data
+      else if (surveyData.surveyType == 2) this.messageDetails.feedbackSurveyId = res.data
     })
   }
 

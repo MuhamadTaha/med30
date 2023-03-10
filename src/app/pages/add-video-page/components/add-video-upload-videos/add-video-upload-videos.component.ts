@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { TreeNode } from 'primeng/api';
@@ -11,13 +11,18 @@ import { HandleAddVideoDataService } from '../../services/handle-add-video-data.
   styleUrls: ['./add-video-upload-videos.component.scss']
 })
 export class AddVideoUploadVideosComponent {
+
+  @Input() messageDetails!: any;
+  @Output() introVideoPathEvent = new EventEmitter<any>();
+  @Output() addSurveyEvent = new EventEmitter<any>();
+
   treeData!: TreeNode[];
   feedbackTreeData!: TreeNode[];
   questionsTypes!: any[];
   selectedQuestionType!: string;
   disableSelectQuestionType = false;
   showUploadVideoDialog = false;
-  videoType: string = "Introduction";
+  videoType: string = "intro";
 
   normalQuestionForm!: FormGroup;
   feedbackQuestionForm!: FormGroup;
@@ -25,6 +30,12 @@ export class AddVideoUploadVideosComponent {
   deleteIcon = faTrashAlt;
   addIcon = faPlus;
 
+  isVideoUploaded = {
+    intro: false,
+    answer1: false,
+    answer2: false,
+    feedback: false
+  }
 
   isNormalSurveyAdded = false;
   isFeedbackSurveyAdded = false;
@@ -40,10 +51,13 @@ export class AddVideoUploadVideosComponent {
     this.feedbackTreeData = [this.handleAddVideoDataService.getQuestionDataBasedOnType('feedback')]
     this.treeData = this.handleAddVideoDataService.getTreeData()
     this.questionsTypes = this.handleAddVideoDataService.getQuestionsTypes();
-    this.formInit()
+    this.formInit();
+    this.test();
   }
 
-  test() { }
+  test() {
+    console.log('this.messageDetails', this.messageDetails)
+  }
   formInit() {
     this.normalQuestionForm = new FormGroup({
       'question': new FormControl(''),
@@ -63,7 +77,7 @@ export class AddVideoUploadVideosComponent {
   }
 
   addFeedbackQuestion() {
-    if (this.feedbackQuestionsList.length < 3) {
+    if (this.feedbackQuestionsList.length < 5) {
       const feedbackQuestion = { question: 'question', firstAnswer: 'firstAnswer', secondeAnswer: 'secondeAnswer' }
       this.feedbackQuestionsList.push(feedbackQuestion)
       const length = this.feedbackQuestionsList.length
@@ -97,15 +111,36 @@ export class AddVideoUploadVideosComponent {
   }
 
   onUploadVideo(uploadFileResponse: any) {
-    console.log('uploadFileResponse', uploadFileResponse)
-  }
-
-  onAddSurvey(surveyStatus: any) {
-    if (surveyStatus.surveyType == 1) {
-      this.isNormalSurveyAdded = surveyStatus.isSurveyAdded
-    } else if (surveyStatus.surveyType == 2) {
-      this.isFeedbackSurveyAdded = surveyStatus.isSurveyAdded
+    console.log('uploadFileResponse', uploadFileResponse);
+    switch (uploadFileResponse.videoType) {
+      case 'intro': {
+        this.isVideoUploaded.intro = true;
+        this.introVideoPathEvent.emit(uploadFileResponse.res.data)
+        break;
+      }
+      case 'answer1': {
+        this.isVideoUploaded.answer1 = true;
+        break;
+      }
+      case 'answer2': {
+        this.isVideoUploaded.answer2 = true;
+        break;
+      }
+      case 'feedback': {
+        this.isVideoUploaded.feedback = true;
+        break;
+      }
+      default:
+        break;
     }
   }
-}
 
+  onAddSurvey(surveyData: any) {
+    if (surveyData.surveyType == 1) {
+      this.isNormalSurveyAdded = surveyData.isSurveyAdded
+    } else if (surveyData.surveyType == 2) {
+      this.isFeedbackSurveyAdded = surveyData.isSurveyAdded
+    }
+    this.addSurveyEvent.emit(surveyData)
+  }
+}
