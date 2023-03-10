@@ -5,6 +5,21 @@
   margin: auto;
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
+.gap-10 {
+  gap: 10px !important;
+}
+.gap-20 {
+  gap: 20px !important;
+}
+
+.gap-50 {
+  gap: 50px !important;
+}
+
 .form-input {
   margin-top: 8px;
   border: none;
@@ -12,6 +27,10 @@
   font-size: 15px;
   border-radius: 12px;
   background-color: $input-bg;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
 .sign-button {
@@ -63,6 +82,29 @@
   cursor: pointer;
   &:hover {
     opacity: 0.9;
+  }
+}
+
+.submit-input-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: none;
+  margin: unset !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: $primary;
+  color: $white;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 

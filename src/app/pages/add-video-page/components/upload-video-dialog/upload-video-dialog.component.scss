@@ -1,89 +1,89 @@
 @import "../../../../../assets/colors";
 @import "../../../../../assets/common-style";
 
-.dialog {
+.upload-video-dialog {
   &__actions {
     padding: 0 40px;
     gap: 50px;
   }
-}
-::ng-deep {
-  .p-dialog-header {
-    font-weight: bold;
-    justify-content: center !important;
-    .p-dialog-header-icons {
-      display: none !important;
+  ::ng-deep {
+    .p-dialog-header {
+      font-weight: bold;
+      justify-content: center !important;
+      .p-dialog-header-icons {
+        display: none !important;
+      }
     }
-  }
-  .p-fileupload {
-    padding: 10px 20px;
-    .p-fileupload-buttonbar {
-      padding: 0 !important;
-      background: none !important;
-      border: none !important;
-      margin-bottom: 5px;
-      .p-fileupload-choose {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: 55px;
-        background: $input-bg;
-        border: none;
-        outline: none;
-        outline: 2px dashed $primaryLowOpacity;
-        color: $primary;
-        margin-top: 8px;
-        border-radius: 12px;
-        cursor: pointer;
-        &:hover {
+    .p-fileupload {
+      padding: 10px 20px;
+      .p-fileupload-buttonbar {
+        padding: 0 !important;
+        background: none !important;
+        border: none !important;
+        margin-bottom: 5px;
+        .p-fileupload-choose {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          height: 55px;
           background: $input-bg;
+          border: none;
+          outline: none;
+          outline: 2px dashed $primaryLowOpacity;
           color: $primary;
-          opacity: 0.8;
+          margin-top: 8px;
+          border-radius: 12px;
+          cursor: pointer;
+          &:hover {
+            background: $input-bg;
+            color: $primary;
+            opacity: 0.8;
+          }
+          .p-button-icon::before {
+            color: $input-bg;
+            background-color: $primary;
+            padding: 4px;
+            font-weight: bold;
+            border-radius: 50%;
+            margin-inline: 5px;
+          }
+          .p-button-label {
+            flex: unset;
+          }
         }
-        .p-button-icon::before {
-          color: $input-bg;
-          background-color: $primary;
-          padding: 4px;
-          font-weight: bold;
-          border-radius: 50%;
-          margin-inline: 5px;
-        }
-        .p-button-label {
-          flex: unset;
+        p-button {
+          display: none;
         }
       }
-      p-button {
+    }
+    .p-fileupload-content {
+      padding: 0 !important;
+      border: none !important;
+      .p-fileupload-row {
+        padding: 20px 0 0;
+        .p-button-icon-only {
+          width: 45px !important;
+          height: 45px !important;
+          background: $input-bg;
+          border: none;
+          outline: none;
+          outline: 2px dashed $primaryLowOpacity;
+          color: $primary;
+          border-radius: 12px;
+          cursor: pointer;
+        }
+        & > div {
+          padding: 0;
+          &:last-child {
+            width: max-content;
+            display: flex;
+            justify-content: end;
+          }
+        }
+      }
+      p-progressbar {
         display: none;
       }
-    }
-  }
-  .p-fileupload-content {
-    padding: 0 !important;
-    border: none !important;
-    .p-fileupload-row {
-      padding: 20px 0 0;
-      .p-button-icon-only {
-        width: 45px !important;
-        height: 45px !important;
-        background: $input-bg;
-        border: none;
-        outline: none;
-        outline: 2px dashed $primaryLowOpacity;
-        color: $primary;
-        border-radius: 12px;
-        cursor: pointer;
-      }
-      & > div {
-        padding: 0;
-        &:last-child {
-          width: max-content;
-          display: flex;
-          justify-content: end;
-        }
-      }
-    }
-    p-progressbar {
-      display: none;
     }
   }
 }

@@ -9,7 +9,9 @@ import { AddVideoService } from '../../services/add-video.service';
 export class UploadVideoDialogComponent {
 
   @Input() showDialog: any = false;
-  @Output() onDialogClosed = new EventEmitter<any>();
+  @Input() videoType!: string;
+  @Output() closeDialogEvent = new EventEmitter<any>();
+  @Output() uploadVideoEvent = new EventEmitter<any>();
 
   // isFileUploaded = false;
   test = 'test';
@@ -19,7 +21,7 @@ export class UploadVideoDialogComponent {
 
   closeDialog() {
     this.showDialog = false
-    this.onDialogClosed.emit(false);
+    this.closeDialogEvent.emit(false);
   }
 
   onFileSelect(event: any) {
@@ -43,6 +45,7 @@ export class UploadVideoDialogComponent {
     this.addVideoService.uploadFile(formData).subscribe({
       next: (response) => {
         // this.isFileUploaded = true
+        this.uploadVideoEvent.emit({ res: response, videoType: this.videoType });
         console.log('uploadFile response ===>', response)
       },
       error: (error) => {

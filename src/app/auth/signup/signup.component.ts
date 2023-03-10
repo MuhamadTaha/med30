@@ -31,13 +31,13 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
 
     this.signupForm = new FormGroup({
-      'phone': new FormControl('phone'),
-      'password': new FormControl('Test@123'),
-      'rePassword': new FormControl('Test@123'),
-      'name': new FormControl('name'),
+      'phone': new FormControl(''),
+      'password': new FormControl(''),
+      'rePassword': new FormControl(''),
+      'name': new FormControl(''),
       'email': new FormControl('-'),
-      'companyName': new FormControl('companyName'),
-      'companyEmail': new FormControl('company@Email', Validators.email),
+      'companyName': new FormControl(''),
+      'companyEmail': new FormControl('', Validators.email),
       'comercialRegistrationNumber': new FormControl(''),
       'title': new FormControl('title'),
     },

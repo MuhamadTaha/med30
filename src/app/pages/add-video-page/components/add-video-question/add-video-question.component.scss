@@ -1,0 +1,24 @@
+@import "../../../../../assets/colors";
+@import "../../../../../assets/common-style";
+
+.question {
+  padding: 20px 0;
+  &__inputs {
+    min-width: 500px;
+    gap: 10px;
+    padding: 0 10px;
+    .form-input {
+      // background: none !important;
+      // border-bottom: 2px solid $primaryLowOpacity;
+      box-shadow: none !important;
+      outline: none !important;
+      // padding: 10px 4px !important;
+      margin: 0 !important;
+      border-radius: 8px !important;
+    }
+  }
+}
+button {
+  margin: 20px auto 0;
+  width: max-content;
+}

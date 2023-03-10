@@ -49,6 +49,10 @@ export class AddVideoService {
     );
   }
 
+  createMessage(body: string) {
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessage', body).pipe(take(1));
+  }
+
 
   uploadFile(file: FormData) {
     return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Files/Upload', file)

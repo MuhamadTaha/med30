@@ -1,0 +1,13 @@
+<div class="survey">
+
+  <div class="survey__inputs d-flex align-items-center w-100 gap-20">
+    <input type="text" class="form-input w-100" [(ngModel)]="survey.titleEn" placeholder="Title (EN)"
+      [disabled]="isSurveyAdded" />
+    <input type="text" class="form-input w-100" [(ngModel)]="survey.titleAr" placeholder="Title (AR)"
+      [disabled]="isSurveyAdded" />
+    <button class="submit-input-btn" (click)="submitSurvey()" [disabled]="isSurveyAdded">
+      <fa-icon [icon]="faCheck"> </fa-icon>
+    </button>
+  </div>
+
+</div>

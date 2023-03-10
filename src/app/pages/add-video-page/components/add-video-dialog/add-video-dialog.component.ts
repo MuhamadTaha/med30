@@ -11,11 +11,11 @@ export class AddVideoDialogComponent {
   constructor(private router: Router) { }
 
   @Input() showDialog: any = false;
-  @Output() onDialogClosed = new EventEmitter<any>();
+  @Output() closeDialogEvent = new EventEmitter<any>();
 
   closeDialog() {
     this.showDialog = false
-    this.onDialogClosed.emit(false);
+    this.closeDialogEvent.emit(false);
   }
 
   routeToAddVideo() {

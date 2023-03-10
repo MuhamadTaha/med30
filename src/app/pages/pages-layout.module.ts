@@ -18,6 +18,8 @@ import { AddVideoChooseAudienceComponent } from './add-video-page/components/add
 import { AddVideoUploadVideosComponent } from './add-video-page/components/add-video-upload-videos/add-video-upload-videos.component';
 import { AddVideoSubmissionsComponent } from './add-video-page/components/add-video-submissions/add-video-submissions.component';
 import { AddVideoDialogComponent } from './add-video-page/components/add-video-dialog/add-video-dialog.component';
+import { AddVideoQuestionComponent } from './add-video-page/components/add-video-question/add-video-question.component';
+import { AddVideoSurveyComponent } from './add-video-page/components/add-video-survey/add-video-survey.component';
 import { UploadVideoDialogComponent } from './add-video-page/components/upload-video-dialog/upload-video-dialog.component';
 
 import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/analysis-card.component';
@@ -35,6 +37,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { TreeModule } from 'primeng/tree';
 import { OrganizationChartModule } from 'primeng/organizationchart';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { DisableControlDirective } from '../directives/disable-control.directive';
@@ -64,6 +67,8 @@ const components = [
   ProfilePageComponent,
   AboutPageComponent,
   AddVideoPageComponent,
+  AddVideoQuestionComponent,
+  AddVideoSurveyComponent,
   // shared components
   NavbarComponent,
   AddVideoChooseAudienceComponent,
@@ -100,6 +105,7 @@ const components = [
     TreeModule,
     InputTextareaModule,
     TabViewModule,
+    FieldsetModule,
     FontAwesomeModule,
     RouterModule.forChild(routes)
   ]

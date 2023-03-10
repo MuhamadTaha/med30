@@ -17,12 +17,17 @@ export class AddVideoUploadVideosComponent {
   selectedQuestionType!: string;
   disableSelectQuestionType = false;
   showUploadVideoDialog = false;
+  videoType: string = "Introduction";
 
   normalQuestionForm!: FormGroup;
   feedbackQuestionForm!: FormGroup;
 
   deleteIcon = faTrashAlt;
   addIcon = faPlus;
+
+
+  isNormalSurveyAdded = false;
+  isFeedbackSurveyAdded = false;
 
   feedbackQuestionsList: { question: string; firstAnswer: string; secondeAnswer: string; }[] = [];
 
@@ -38,6 +43,7 @@ export class AddVideoUploadVideosComponent {
     this.formInit()
   }
 
+  test() { }
   formInit() {
     this.normalQuestionForm = new FormGroup({
       'question': new FormControl(''),
@@ -90,5 +96,16 @@ export class AddVideoUploadVideosComponent {
     this.showUploadVideoDialog = false;
   }
 
+  onUploadVideo(uploadFileResponse: any) {
+    console.log('uploadFileResponse', uploadFileResponse)
+  }
+
+  onAddSurvey(surveyStatus: any) {
+    if (surveyStatus.surveyType == 1) {
+      this.isNormalSurveyAdded = surveyStatus.isSurveyAdded
+    } else if (surveyStatus.surveyType == 2) {
+      this.isFeedbackSurveyAdded = surveyStatus.isSurveyAdded
+    }
+  }
 }
 

@@ -1,0 +1,31 @@
+<div class="question">
+
+  <div class="question__inputs d-flex align-items-center w-100 gap-20">
+    <input type="text" class="form-input w-100" [(ngModel)]="question.question.en" placeholder="Question (EN)"
+      [disabled]="isQuestionAdded || !isSurveyAdded" />
+    <input type="text" class="form-input w-100" [(ngModel)]="question.question.ar" placeholder="Question (AR)"
+      [disabled]="isQuestionAdded || !isSurveyAdded" />
+    <button class="submit-input-btn" (click)="submitQuestion()" [disabled]="isQuestionAdded || !isSurveyAdded ">
+      <fa-icon [icon]="faCheck"> </fa-icon>
+    </button>
+  </div>
+
+  <div class="question__inputs d-flex align-items-center w-100 gap-20">
+    <input type="text" class="form-input w-100" [(ngModel)]="question.answer1.en" placeholder="Answer 1 (EN)"
+      [disabled]="!isQuestionAdded || isAnswer1Added" />
+    <input type="text" class="form-input w-100" [(ngModel)]="question.answer1.ar" placeholder="Answer 1 (AR)"
+      [disabled]="!isQuestionAdded || isAnswer1Added" />
+    <button class="submit-input-btn" (click)="submitAnswer(1)" [disabled]="!isQuestionAdded || isAnswer1Added">
+      <fa-icon [icon]="faCheck"> </fa-icon> </button>
+  </div>
+
+  <div class="question__inputs d-flex align-items-center w-100 gap-20">
+    <input type="text" class="form-input w-100" [(ngModel)]="question.answer2.en" placeholder="Answer 2 (EN)"
+      [disabled]="!isAnswer1Added || isAnswer2Added" />
+    <input type="text" class="form-input w-100" [(ngModel)]="question.answer2.ar" placeholder="Answer 2 (AR)"
+      [disabled]="!isAnswer1Added || isAnswer2Added" />
+    <button class="submit-input-btn" (click)="submitAnswer(2)" [disabled]="!isAnswer1Added || isAnswer2Added">
+      <fa-icon [icon]="faCheck"> </fa-icon> </button>
+  </div>
+
+</div>

@@ -32,4 +32,8 @@ export class ValidatorsService {
     return group.get('comercialRegistrationNumber')?.value ? null : { fileIsRequired: true }
   }
 
+  checkCreateMessageFile: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    return group.get('coverPhotoPath')?.value ? null : { fileIsRequired: true }
+  }
+
 }

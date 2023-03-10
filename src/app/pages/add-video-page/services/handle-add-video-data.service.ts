@@ -21,7 +21,7 @@ export class HandleAddVideoDataService {
     children: [
       {
 
-        label: 'Select Question Type',
+        label: 'Select Survey Type',
         type: 'select-question-type',
         expanded: true,
         children: [
@@ -31,7 +31,7 @@ export class HandleAddVideoDataService {
   }]
 
   normalQuestion = {
-    label: 'Normal Question',
+    label: 'Normal Survey',
     type: 'question',
     questionType: 'normal',
     expanded: true,
@@ -51,7 +51,7 @@ export class HandleAddVideoDataService {
   }
 
   feedbackQuestion = {
-    label: 'Feedback Question',
+    label: 'Feedback Survey',
     type: 'question',
     questionType: 'feedback',
     expanded: true,

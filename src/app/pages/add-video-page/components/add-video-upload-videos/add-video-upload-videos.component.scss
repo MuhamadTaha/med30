@@ -58,30 +58,6 @@
       }
     }
     .content {
-      &__question {
-        padding: 20px;
-        &__form {
-          min-width: 500px;
-          gap: 10px;
-          padding: 0 10px;
-          .form-input {
-            background: none !important;
-            border-bottom: 2px solid $primaryLowOpacity;
-            box-shadow: none !important;
-            outline: none !important;
-            padding: 10px 4px !important;
-            margin: 0 !important;
-            border-radius: 0 !important;
-          }
-        }
-        &:nth-of-type(even) {
-          background-color: #ffffff90;
-        }
-      }
-      button {
-        margin: 20px auto 0;
-        width: max-content;
-      }
     }
   }
   &.p-0 {

@@ -31,19 +31,9 @@
           <h4>{{card.label}}</h4>
         </div>
         <div class="content">
-          <div class="content__question">
-            <form [formGroup]="normalQuestionForm" (ngSubmit)="submitQuestion(normalQuestionForm)">
-              <div class="content__question__form d-flex flex-column">
-                <input type="text" class="form-input" formControlName="question" placeholder="Question Body Here"
-                  [required]="selectedQuestionType =='normal'" />
-                <input type="text" class="form-input" formControlName="firstAnswer" placeholder="Answer 1"
-                  [required]="selectedQuestionType =='normal'" />
-                <input type="text" class="form-input" formControlName="secondeAnswer" placeholder="Answer 2"
-                  [required]="selectedQuestionType =='normal'" />
-                <button class="action-btn save-btn" [disabled]="!normalQuestionForm.valid">Submit Question</button>
-              </div>
-            </form>
-          </div>
+          <app-add-video-survey [surveyType]="1" (onAddSurvey)="onAddSurvey($event)"> </app-add-video-survey>
+          <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="1">
+          </app-add-video-question>
         </div>
       </div>
     </ng-template>
@@ -70,7 +60,7 @@
         <div class="header d-flex justify-content-center align-items-center">
           <h4>{{card.label}}</h4>
           <button class="add-question d-flex justify-content-center align-items-center"
-            *ngIf="card.questionType === 'feedback'" [disabled]="feedbackQuestionsList.length >= 3"
+            *ngIf="card.questionType === 'feedback'" [disabled]="feedbackQuestionsList.length >= 5"
             (click)="addFeedbackQuestion()">
             <fa-icon [icon]="addIcon"></fa-icon>
           </button>
@@ -81,16 +71,10 @@
 
         </div>
         <div class="content">
+          <app-add-video-survey [surveyType]="2" (onAddSurvey)="onAddSurvey($event)"> </app-add-video-survey>
           <div class="content__question" *ngFor="let question of feedbackQuestionsList, let i = index">
-            <form [formGroup]="feedbackQuestionForm">
-              <div class="content__question__form d-flex flex-column">
-                <input type="text" class="form-input" [formControlName]="'question_'+(i+1)"
-                  placeholder="Question Body Here" />
-                <input type="text" class="form-input" [formControlName]="'firstAnswer_'+(i+1)" placeholder="Answer 1" />
-                <input type="text" class="form-input" [formControlName]="'secondeAnswer_'+(i+1)"
-                  placeholder="Answer 2" />
-              </div>
-            </form>
+            <app-add-video-question [isSurveyAdded]="isFeedbackSurveyAdded" [questionType]="2">
+            </app-add-video-question>
           </div>
           <button class="action-btn save-btn" [disabled]="!feedbackQuestionsList.length || !feedbackQuestionForm.valid"
             (click)="submitQuestion(feedbackQuestionForm)">Submit Question</button>
@@ -102,5 +86,5 @@
 </div>
 
 
-<app-upload-video-dialog [showDialog]="showUploadVideoDialog"
-  (onDialogClosed)="onDialogClosed($event)"></app-upload-video-dialog>
+<app-upload-video-dialog [showDialog]="showUploadVideoDialog" [videoType]="videoType"
+  (closeDialogEvent)="onDialogClosed($event)" (uploadVideoEvent)="onUploadVideo($event)"></app-upload-video-dialog>

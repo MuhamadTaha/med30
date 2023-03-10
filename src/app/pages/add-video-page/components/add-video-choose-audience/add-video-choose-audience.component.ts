@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ValidatorsService } from 'src/app/services/validators.service';
 import { AddVideoService } from '../../services/add-video.service';
 
 @Component({
@@ -12,24 +15,46 @@ export class AddVideoChooseAudienceComponent {
 
   categoriesList: any[] = []
   selectedCategories: any[] = [];
-
   selectedCategoriesIds: any[] = [];
-
   doctorsListByCategory: any[] = [];
   selectedDoctors: any[] = [];
-
   showCategoriesLoading = false;
   showDoctorsLoading = false;
 
   doctorsListEmptyMessage = 'No doctors selected yet';
 
+  createMessageForm!: FormGroup;
+  imagePath!: any;
+  isLoading = false;
+
   @Output() onSubmitDoctorsList = new EventEmitter<any>();
 
 
-  constructor(private addVideoService: AddVideoService) { }
+  constructor(
+    private addVideoService: AddVideoService,
+    private domSanitizer: DomSanitizer,
+    private validatorsService: ValidatorsService,
+  ) { }
 
   ngOnInit() {
-    this.getSections()
+    this.formInitiation();
+    this.getSections();
+  }
+
+  formInitiation() {
+    this.createMessageForm = new FormGroup({
+      'id': new FormControl(0),
+      'titleEn': new FormControl(null),
+      'titleAr': new FormControl(null),
+      'descriptionEn': new FormControl(null),
+      'descriptionAr': new FormControl(null),
+      'coverPhotoPath': new FormControl(null),
+      'charactristics': new FormControl([]),
+      'doctors': new FormControl([]),
+    },
+      { validators: [this.validatorsService.checkCreateMessageFile] },
+    )
+
   }
 
   getSections() {
@@ -79,6 +104,20 @@ export class AddVideoChooseAudienceComponent {
     }).map((row: any) => row.id)
   }
 
+  onFileSelect(event: any) {
+    const file = event.currentFiles[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imagePath = this.domSanitizer.bypassSecurityTrustResourceUrl('' + reader.result);
+      this.createMessageForm.get('coverPhotoPath')?.setValue(this.imagePath.changingThisBreaksApplicationSecurity.split('base64,')[1])
+    };
+  }
+
+  onFileRemove(event: any) {
+    this.createMessageForm.get('coverPhotoPath')?.setValue(null)
+  }
+
   continueLater() {
     console.log('continueLater')
   }
@@ -87,8 +126,10 @@ export class AddVideoChooseAudienceComponent {
     console.log('cancelRequest')
   }
 
-  submitDoctorsList() {
-    this.onSubmitDoctorsList.emit(this.selectedDoctors);
+  submitDoctorsList(form: any) {
+    this.createMessageForm.get('charactristics')?.setValue(this.selectedCategoriesIds);
+    this.createMessageForm.get('doctors')?.setValue(this.selectedDoctors.map((item: any) => item.id));
+    this.onSubmitDoctorsList.emit(form.value);
   }
 
 }

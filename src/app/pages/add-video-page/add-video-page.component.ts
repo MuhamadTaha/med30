@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AddVideoService } from './services/add-video.service';
+import { IMessageDetails } from './interfaces/message-details.interface';
 
 @Component({
   selector: 'app-add-video-page',
@@ -8,12 +10,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddVideoPageComponent {
 
+  messageDetails: IMessageDetails = {} as IMessageDetails
+
   currentTabIndex: number = 0;
   currentStep!: string;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private addVideoService: AddVideoService,
 
   ) { }
 
@@ -56,9 +61,14 @@ export class AddVideoPageComponent {
     console.log('nextStep')
   }
 
-  submitDoctorsList(doctorsList: any) {
-    console.log(doctorsList.map((item: any) => item.id))
-    this.currentTabIndex = this.currentTabIndex + 1
+  submitDoctorsList(request: any) {
+    console.log('step 1 api request', request)
+    this.currentTabIndex = this.currentTabIndex + 1;
+    this.addVideoService.createMessage(request).subscribe((res: any) => {
+      this.messageDetails.id = res.data;
+      console.log('response', res)
+      console.log('messageDetails', this.messageDetails)
+    })
   }
 
   handleStep1() { console.log('handleStep1') }
