@@ -11,6 +11,11 @@ export class AddVideoQuestionComponent {
 
   @Input() questionType: number = 0
   @Input() isSurveyAdded = false;
+  @Input() questionId!: number;
+
+  @Output() onAddQuestionEvent = new EventEmitter<any>();
+  @Output() onAddAnswerEvent = new EventEmitter<any>();
+
   isQuestionAdded = false;
   isAnswer1Added = false;
   isAnswer2Added = false;
@@ -39,19 +44,19 @@ export class AddVideoQuestionComponent {
 
   submitQuestion() {
     this.question.question.id = 'question.id'
-    this.isQuestionAdded = true
-    console.log('question', this.question)
+    this.isQuestionAdded = true;
+    this.onAddQuestionEvent.emit({ ...this.question.question, type: this.questionType })
   }
 
   submitAnswer(answerId: number) {
     if (answerId === 1) {
-      this.question.answer1.id = 'answer1.id'
-      this.isAnswer1Added = true
+      this.isAnswer1Added = true;
+      this.onAddAnswerEvent.emit({ ...this.question.answer1, type: answerId, questionType: this.questionType, questionId: this.questionId })
+
     } else if (answerId === 2) {
-      this.question.answer2.id = 'answer2.id'
       this.isAnswer2Added = true
+      this.onAddAnswerEvent.emit({ ...this.question.answer2, type: answerId, questionType: this.questionType, questionId: this.questionId })
     }
-    console.log('question', this.question)
   }
 
 }

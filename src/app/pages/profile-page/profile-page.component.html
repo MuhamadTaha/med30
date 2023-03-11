@@ -64,7 +64,7 @@
         <h3> Photo </h3>
         <div class="profile__details__content__image__container">
           <img [src]="imagePath" />
-          <p-fileUpload name="myfile[]" (onSelect)="onFileSelect($event)"> </p-fileUpload>
+          <p-fileUpload (onSelect)="onFileSelect($event)"> </p-fileUpload>
         </div>
       </div>
 

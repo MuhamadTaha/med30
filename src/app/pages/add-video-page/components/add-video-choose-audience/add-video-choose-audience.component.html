@@ -38,7 +38,7 @@
         <div class="choose-audience__form__file form-control d-flex flex-column w-100 gap-10">
           <label for="description-ar"> Upload Message Cover Image </label>
           <div style="width: calc(50%)">
-            <p-fileUpload name="myfile[]" [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
+            <p-fileUpload [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
               (onRemove)="onFileRemove($event)"> </p-fileUpload>
           </div>
         </div>

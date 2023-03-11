@@ -13,8 +13,14 @@ import { HandleAddVideoDataService } from '../../services/handle-add-video-data.
 export class AddVideoUploadVideosComponent {
 
   @Input() messageDetails!: any;
+  @Input() questionId!: number;
   @Output() introVideoPathEvent = new EventEmitter<any>();
+  @Output() answer1VideoPathEvent = new EventEmitter<any>();
+  @Output() answer2VideoPathEvent = new EventEmitter<any>();
+  @Output() feedbackVideoPathEvent = new EventEmitter<any>();
   @Output() addSurveyEvent = new EventEmitter<any>();
+  @Output() addQuestionEvent = new EventEmitter<any>();
+  @Output() addAnswerEvent = new EventEmitter<any>();
 
   treeData!: TreeNode[];
   feedbackTreeData!: TreeNode[];
@@ -99,10 +105,10 @@ export class AddVideoUploadVideosComponent {
 
   submitQuestion(questionForm: FormGroup) {
     this.disableSelectQuestionType = !this.disableSelectQuestionType;
-    console.log('questionForm', questionForm.value)
   }
 
-  showUploadVideoDialogFn() {
+  showUploadVideoDialogFn(videoType: string) {
+    this.videoType = videoType;
     this.showUploadVideoDialog = true
   }
 
@@ -112,22 +118,25 @@ export class AddVideoUploadVideosComponent {
 
   onUploadVideo(uploadFileResponse: any) {
     console.log('uploadFileResponse', uploadFileResponse);
-    switch (uploadFileResponse.videoType) {
+    switch (uploadFileResponse.type) {
       case 'intro': {
         this.isVideoUploaded.intro = true;
-        this.introVideoPathEvent.emit(uploadFileResponse.res.data)
+        this.introVideoPathEvent.emit(uploadFileResponse)
         break;
       }
       case 'answer1': {
         this.isVideoUploaded.answer1 = true;
+        this.answer1VideoPathEvent.emit(uploadFileResponse)
         break;
       }
       case 'answer2': {
         this.isVideoUploaded.answer2 = true;
+        this.answer2VideoPathEvent.emit(uploadFileResponse)
         break;
       }
       case 'feedback': {
         this.isVideoUploaded.feedback = true;
+        this.feedbackVideoPathEvent.emit(uploadFileResponse)
         break;
       }
       default:
@@ -142,5 +151,11 @@ export class AddVideoUploadVideosComponent {
       this.isFeedbackSurveyAdded = surveyData.isSurveyAdded
     }
     this.addSurveyEvent.emit(surveyData)
+  }
+  onAddQuestion(questionData: any) {
+    this.addQuestionEvent.emit(questionData)
+  }
+  onAddAnswer(answerData: any) {
+    this.addAnswerEvent.emit(answerData)
   }
 }

@@ -1,4 +1,4 @@
-<button (click)="test()">0000000000000000</button>
+<!-- <button (click)="test()">Get Message Data</button> -->
 
 <div class="full-tree">
   <p-organizationChart [value]="treeData">
@@ -9,16 +9,13 @@
           <h4>{{card.label}}</h4>
         </div>
         <div class="content" *ngIf="card.subType == 'intro' && !isVideoUploaded.intro">
-          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn(card.subType)">Upload Video</button>
         </div>
         <div class="content" *ngIf="card.subType == 'answer1' && !isVideoUploaded.answer1">
-          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn(card.subType)">Upload Video</button>
         </div>
         <div class="content" *ngIf="card.subType == 'answer2' && !isVideoUploaded.answer2">
-          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
-        </div>
-        <div class="content" *ngIf="card.subType == 'feedback' && !isVideoUploaded.feedback">
-          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn(card.subType)">Upload Video</button>
         </div>
 
         <div class="content" *ngIf="card.subType == 'intro' && isVideoUploaded.intro">
@@ -30,9 +27,7 @@
         <div class="content" *ngIf="card.subType == 'answer2' && isVideoUploaded.answer2">
           <p> The seconde answer video has been Uploaded </p>
         </div>
-        <div class="content" *ngIf="card.subType == 'feedback' && isVideoUploaded.feedback">
-          <p> The feedback video has been Uploaded </p>
-        </div>
+
       </div>
     </ng-template>
 
@@ -59,7 +54,8 @@
           <div class="header">
             <h4>{{card.label}} Question</h4>
           </div>
-          <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="1">
+          <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="1" [questionId]="questionId"
+            (onAddQuestionEvent)="onAddQuestion($event)" (onAddAnswerEvent)="onAddAnswer($event)">
           </app-add-video-question>
         </div>
       </div>
@@ -76,8 +72,11 @@
         <div class="header">
           <h4>{{card.label}} Survey</h4>
         </div>
-        <div class="content">
-          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn()">Upload Video</button>
+        <div class="content" *ngIf="card.subType == 'feedback' && !isVideoUploaded.feedback">
+          <button class="action-btn edit-btn" (click)="showUploadVideoDialogFn(card.subType)">Upload Video</button>
+        </div>
+        <div class="content" *ngIf="card.subType == 'feedback' && isVideoUploaded.feedback">
+          <p> The feedback video has been Uploaded </p>
         </div>
       </div>
     </ng-template>
@@ -103,11 +102,12 @@
             <div class="header">
               <h4>{{card.label}} Question</h4>
             </div>
-            <app-add-video-question [isSurveyAdded]="isFeedbackSurveyAdded" [questionType]="2">
+            <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="2" [questionId]="questionId"
+              (onAddQuestionEvent)="onAddQuestion($event)" (onAddAnswerEvent)="onAddAnswer($event)">
             </app-add-video-question>
           </div>
-          <button class="action-btn save-btn" [disabled]="!feedbackQuestionsList.length || !feedbackQuestionForm.valid"
-            (click)="submitQuestion(feedbackQuestionForm)">Submit Question</button>
+          <!-- <button class="action-btn save-btn" [disabled]="!feedbackQuestionsList.length || !feedbackQuestionForm.valid"
+            (click)="submitQuestion(feedbackQuestionForm)">Submit Question</button> -->
         </div>
       </div>
     </ng-template>

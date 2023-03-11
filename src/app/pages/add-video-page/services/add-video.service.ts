@@ -55,23 +55,28 @@ export class AddVideoService {
     return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessage', body).pipe(take(1));
   }
 
-  createMessageVideo(messageId: number, filepath: string) {
-    const body = {
+  createMessageVideo(body: any) {
+    const restOfBody = {
       id: 0,
-      messageId: messageId,
       titleEn: "NA",
       titleAr: "NA",
-      filePath: filepath,
       orderNo: 0,
-      answerId: null,
-      survayId: null
     }
 
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessageVideo', body).pipe(take(1));
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessageVideo',
+      { ...body, ...restOfBody }).pipe(take(1));
   }
 
   createSurvey(body: any) {
     return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvay', body).pipe(take(1));
+  }
+
+  createSurveyQuestion(body: any) {
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvayQuestion', body).pipe(take(1));
+  }
+
+  createSurveyQuestionAnswer(body: any) {
+    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvayQuestionAnswer', body).pipe(take(1));
   }
 
 

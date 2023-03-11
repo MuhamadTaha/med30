@@ -14,9 +14,12 @@
     <p-tabPanel header="Step 2: Upload videos"
       [headerStyleClass]="(currentTabIndex == 1 || currentTabIndex == 2) ? 'activeTab' : ''">
       <ng-template pTemplate="upload-videos">
-        <app-add-video-upload-videos [messageDetails]="messageDetails"
-          (introVideoPathEvent)="onUploadIntroVideo($event)"
-          (addSurveyEvent)="onAddSurvey($event)"></app-add-video-upload-videos>
+        <app-add-video-upload-videos [messageDetails]="messageDetails" [questionId]="questionId"
+          (introVideoPathEvent)="onUploadIntroVideo($event)" (answer1VideoPathEvent)="onUploadAnswer1Video($event)"
+          (answer2VideoPathEvent)="onUploadAnswer2Video($event)"
+          (feedbackVideoPathEvent)="onUploadFeedbackVideo($event)" (addSurveyEvent)="onAddSurvey($event)"
+          (addQuestionEvent)="onAddQuestion($event)" (addAnswerEvent)="onAddAnswer($event)">
+        </app-add-video-upload-videos>
       </ng-template>
     </p-tabPanel>
 

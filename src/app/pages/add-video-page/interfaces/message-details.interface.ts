@@ -1,19 +1,26 @@
 export interface IMessageDetails {
-  id?: number | any | any;
+  messageId?: number | any | any;
   introVideoPath?: string | any | any;
   introVideoId?: number | any;
   normalSurveyId?: number | any;
-  normalQuestionId?: number | any;
-  normalAnswer1Id?: number | any;
-  normalAnswer2Id?: number | any;
-  normalAnswer1VideoId?: number | any;
-  normalAnswer2VideoId?: number | any;
+  normalQuestion?: INormalQuestion | any;
   feedbackSurveyId?: number | any;
-  feedbackSurvey?: IFeedbackSurvey[] | any;
+  feedbackVideoPath?: number | any;
+  feedbackVideoId?: number | any;
+  feedbackQuestion?: IFeedbackQuestion[] | any;
 }
 
-interface IFeedbackSurvey {
+interface IFeedbackQuestion {
   questionId?: number | any;
   answer1Id?: number | any;
   answer2Id?: number | any;
+}
+interface INormalQuestion {
+  questionId?: number | any;
+  answer1Id?: number | any;
+  answer1VideoPath?: string | any | any;
+  answer1VideoId?: number | any;
+  answer2Id?: number | any;
+  answer2VideoPath?: string | any | any;
+  answer2VideoId?: number | any;
 }
