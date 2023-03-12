@@ -21,8 +21,6 @@ export class HandleAddVideoDataService {
     expanded: true,
     children: [
       {
-
-        label: 'Select Survey Type',
         type: 'select-question-type',
         expanded: true,
         children: [

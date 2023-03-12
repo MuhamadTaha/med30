@@ -4,74 +4,55 @@
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   </div> -->
 
-  <p-fieldset legend="Message Details" [toggleable]="true" *ngIf="!isLoading">
-    <div class="choose-audience__form d-flex align-items-start">
+  <div class="choose-audience__form d-flex align-items-start">
 
-      <form [formGroup]="createMessageForm" class="d-flex flex-column w-100 gap-20">
+    <form [formGroup]="createMessageForm" class="d-flex w-100 gap-20">
 
-        <div class="choose-audience__form__title d-flex w-100 gap-20">
-          <div class="form-control d-flex flex-column w-100 gap-10">
-            <label for="title-en"> Title (EN) </label>
-            <input type="text" class="form-input" formControlName="titleEn" id="title-en" placeholder="Title (EN)"
-              required />
-          </div>
-          <div class="form-control d-flex flex-column w-100 gap-10">
-            <label for="title-ar"> Title (AR) </label>
-            <input type="text" class="form-input" formControlName="titleAr" id="title-ar" placeholder="Title (AR)"
-              required />
-          </div>
+      <div class="choose-audience__form__title d-flex flex-column w-100 gap-20">
+        <div class="form-control d-flex flex-column w-100 gap-10">
+          <label for="title-en"> Title </label>
+          <input type="text" class="form-input" formControlName="titleEn" id="title-en" placeholder="Title " required />
         </div>
-
-        <div class="choose-audience__form__description d-flex w-100 gap-20">
-          <div class="form-control d-flex flex-column w-100 gap-10">
-            <label for="description-en"> Description (EN) </label>
-            <textarea pInputTextarea formControlName="descriptionEn" [autoResize]="false" id="description-en"
-              placeholder="Description (EN)"></textarea>
-          </div>
-          <div class="form-control d-flex flex-column w-100 gap-10">
-            <label for="description-ar"> Description (AR) </label>
-            <textarea pInputTextarea formControlName="descriptionAr" [autoResize]="false" id="description-ar"
-              placeholder="Description (AR)"></textarea>
-          </div>
-        </div>
-
         <div class="choose-audience__form__file form-control d-flex flex-column w-100 gap-10">
           <label for="description-ar"> Upload Message Cover Image </label>
-          <div style="width: calc(50%)">
-            <p-fileUpload [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
-              (onRemove)="onFileRemove($event)"> </p-fileUpload>
-          </div>
+          <p-fileUpload [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
+            (onRemove)="onFileRemove($event)"> </p-fileUpload>
         </div>
-
-      </form>
-    </div>
-
-  </p-fieldset>
-
-  <p-fieldset legend="Choose Audience" [toggleable]="true" *ngIf="!isLoading">
-    <div class="choose-audience__content d-flex align-items-start">
-
-      <div class="choose-audience__content__list ">
-        <p-tree [value]="categoriesList" selectionMode="checkbox" [loading]="showCategoriesLoading" [lazy]="true"
-          [(selection)]="selectedCategories" (onNodeSelect)="onSelectOrUnselectCategory($event)"
-          (onNodeUnselect)="onSelectOrUnselectCategory($event)" (onNodeExpand)="onExpandCategory($event)"
-          (onNodeCollapse)="onCollapseCategory($event)"></p-tree>
       </div>
 
-      <div class="choose-audience__content__selected ">
-        <div class="choose-audience__content__selected__text d-flex justify-content-between">
-          <h4 class="title"> Doctors </h4>
-          <h4 class="count"> {{doctorsListByCategory.length}} Doctor </h4>
+      <div class="choose-audience__form__description d-flex w-100 gap-20">
+        <div class="form-control d-flex flex-column w-100 gap-10">
+          <label for="description-en"> Description </label>
+          <textarea pInputTextarea formControlName="descriptionEn" rows="6" [autoResize]="false" id="description-en"
+            placeholder="Description "></textarea>
         </div>
-        <p-tree [value]="doctorsListByCategory" selectionMode="checkbox" [loading]="showDoctorsLoading"
-          [emptyMessage]="doctorsListEmptyMessage" [(selection)]="selectedDoctors"
-          (onNodeSelect)="onSelectOrUnselectDoctor($event)"
-          (onNodeUnselect)="onSelectOrUnselectDoctor($event)"></p-tree>
-
       </div>
+
+    </form>
+  </div>
+
+
+  <div class="choose-audience__content d-flex align-items-start">
+
+    <div class="choose-audience__content__list ">
+      <p-tree [value]="categoriesList" selectionMode="checkbox" [loading]="showCategoriesLoading" [lazy]="true"
+        [(selection)]="selectedCategories" (onNodeSelect)="onSelectOrUnselectCategory($event)"
+        (onNodeUnselect)="onSelectOrUnselectCategory($event)" (onNodeExpand)="onExpandCategory($event)"
+        (onNodeCollapse)="onCollapseCategory($event)"></p-tree>
     </div>
 
-  </p-fieldset>
+    <div class="choose-audience__content__selected ">
+      <div class="choose-audience__content__selected__text d-flex justify-content-between">
+        <h4 class="title"> Doctors </h4>
+        <h4 class="count"> {{doctorsListByCategory.length}} Doctor </h4>
+      </div>
+      <p-tree [value]="doctorsListByCategory" selectionMode="checkbox" [loading]="showDoctorsLoading"
+        [emptyMessage]="doctorsListEmptyMessage" [(selection)]="selectedDoctors"
+        (onNodeSelect)="onSelectOrUnselectDoctor($event)" (onNodeUnselect)="onSelectOrUnselectDoctor($event)"></p-tree>
+
+    </div>
+  </div>
+
 
 
   <div class="choose-audience__actions d-flex justify-content-between" style="padding: 30px 0;">

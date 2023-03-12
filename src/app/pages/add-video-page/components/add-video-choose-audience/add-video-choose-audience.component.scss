@@ -17,6 +17,10 @@
     }
   }
   &__form {
+    margin-bottom: 50px;
+    .form-input {
+      margin: 0;
+    }
     textarea {
       background-color: $input-bg;
       border-radius: 8px;
