@@ -49,6 +49,9 @@ export class UploadVideoDialogComponent {
       this.uploadVideoEvent.emit({ ...res, type: this.videoType, file: this.selectedFile });
       this.closeDialog(currentFile);
     });
+
+    // this.uploadVideoEvent.emit({ type: this.videoType, file: this.selectedFile });
+
   }
 
 }

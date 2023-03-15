@@ -31,31 +31,20 @@
       </div>
     </ng-template>
 
-    <ng-template let-card pTemplate="select-question-type">
-      <div class="card-container select-question-type d-flex flex-column">
-        <div class="header">
-          <h4>{{card.label}}</h4>
-        </div>
+    <ng-template let-card pTemplate="select-survey-type">
+      <div class="card-container select-survey-type d-flex flex-column" *ngIf="isVideoUploaded.intro">
         <div class="content">
-          <p-selectButton [options]="questionsTypes" [(ngModel)]="selectedQuestionType"
-            (onChange)="onQuestionTypeChange($event)" [disabled]="disableSelectQuestionType" optionValue="value"
-            optionLabel="name"></p-selectButton>
+          <p-selectButton [options]="surveysTypes" [(ngModel)]="selectedSurveyType"
+            (onChange)="onSurveyTypeChange($event)" optionValue="value" optionLabel="name"
+            [disabled]="messageDetails.normalSurveyId ||messageDetails.feedbackSurveyId"></p-selectButton>
         </div>
       </div>
     </ng-template>
 
-    <ng-template let-card pTemplate="question">
+    <ng-template let-card pTemplate="survey">
       <div class="card-container question d-flex flex-column">
-        <!-- <div class="header">
-          <h4>{{card.label}} Survey</h4>
-        </div> -->
         <div class="content">
-          <!-- <app-add-video-survey [surveyType]="1" (onAddSurvey)="onAddSurvey($event)"> </app-add-video-survey> -->
-          <!-- <div class="header">
-            <h4>{{card.label}} Question</h4>
-          </div> -->
-          <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="1" [questionId]="questionId"
-            (onAddQuestionEvent)="onAddQuestion($event)" (onAddAnswerEvent)="onAddAnswer($event)">
+          <app-add-video-question [surveyType]="1" (onSubmitSurveyEvent)="onAddSurvey($event)">
           </app-add-video-question>
         </div>
       </div>
@@ -64,7 +53,7 @@
   </p-organizationChart>
 </div>
 
-<div class="final-feedback-tree" *ngIf="selectedQuestionType">
+<div class="final-feedback-tree" *ngIf="selectedSurveyType">
   <p-organizationChart [value]="feedbackTreeData">
 
     <ng-template let-card pTemplate="upload-video">
@@ -81,38 +70,33 @@
       </div>
     </ng-template>
 
-    <ng-template let-card pTemplate="question">
-      <div class="card-container question d-flex flex-column" [ngClass]=" {'p-0': feedbackQuestionsList.length}">
-        <div class="header d-flex justify-content-center align-items-center">
-          <h4>{{card.label}}</h4>
-          <button class="add-question d-flex justify-content-center align-items-center"
-            *ngIf="card.questionType === 'feedback'" [disabled]="feedbackQuestionsList.length >= 5"
-            (click)="addFeedbackQuestion()">
-            <fa-icon [icon]="addIcon"></fa-icon>
-          </button>
-          <button class="add-question d-flex justify-content-center align-items-center"
-            [disabled]="!feedbackQuestionsList.length" (click)="deleteFeedbackQuestion()">
-            <fa-icon [icon]="deleteIcon"></fa-icon>
-          </button>
-
-        </div>
+    <ng-template let-card pTemplate="survey">
+      <div class="card-container question d-flex flex-column">
         <div class="content">
-          <!-- <app-add-video-survey [surveyType]="2" (onAddSurvey)="onAddSurvey($event)"> </app-add-video-survey> -->
-          <div class="content__question" *ngFor="let question of feedbackQuestionsList, let i = index">
-            <!-- <div class="header">
-              <h4>{{card.label}} Question</h4>
-            </div> -->
-            <app-add-video-question [isSurveyAdded]="isNormalSurveyAdded" [questionType]="2" [questionId]="questionId"
-              (onAddQuestionEvent)="onAddQuestion($event)" (onAddAnswerEvent)="onAddAnswer($event)">
-            </app-add-video-question>
-          </div>
-          <!-- <button class="action-btn save-btn" [disabled]="!feedbackQuestionsList.length || !feedbackQuestionForm.valid"
-            (click)="submitQuestion(feedbackQuestionForm)">Submit Question</button> -->
+          <app-add-video-question [surveyType]="2" (onSubmitSurveyEvent)="onAddSurvey($event)">
+          </app-add-video-question>
         </div>
       </div>
     </ng-template>
 
   </p-organizationChart>
+</div>
+
+<div class="upload-videos__actions d-flex justify-content-between" style="padding: 30px 0;">
+
+  <div class="upload-videos__content__actions__cancel">
+    <button class="cancel-btn-transparent action-btn d-flex align-items-center"
+      (click)="cancelRequest()">cancel</button>
+  </div>
+
+  <diV class="upload-videos__content__actions__submit d-flex align-items-center">
+    <button class="cancel-btn-transparent action-btn d-flex align-items-center" (click)="continueLater()">Save &
+      continue later</button>
+    <button class="edit-btn action-btn d-flex align-items-center justify-content-center"
+      [disabled]="!messageDetails.introVideoId" (click)="submitVideos(messageDetails)">
+      Next</button>
+  </diV>
+
 </div>
 
 

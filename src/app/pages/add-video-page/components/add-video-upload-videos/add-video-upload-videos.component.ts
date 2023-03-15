@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { TreeNode } from 'primeng/api';
+import { IMessageDetails } from '../../interfaces/message-details.interface';
 import { AddVideoService } from '../../services/add-video.service';
 import { HandleAddVideoDataService } from '../../services/handle-add-video-data.service';
 
@@ -12,29 +12,25 @@ import { HandleAddVideoDataService } from '../../services/handle-add-video-data.
 })
 export class AddVideoUploadVideosComponent {
 
-  @Input() messageDetails!: any;
+  @Input() messageDetails!: IMessageDetails;
   @Input() questionId!: number;
   @Output() introVideoPathEvent = new EventEmitter<any>();
   @Output() answer1VideoPathEvent = new EventEmitter<any>();
   @Output() answer2VideoPathEvent = new EventEmitter<any>();
   @Output() feedbackVideoPathEvent = new EventEmitter<any>();
   @Output() addSurveyEvent = new EventEmitter<any>();
-  @Output() addQuestionEvent = new EventEmitter<any>();
-  @Output() addAnswerEvent = new EventEmitter<any>();
 
   treeData!: TreeNode[];
   feedbackTreeData!: TreeNode[];
-  questionsTypes!: any[];
-  selectedQuestionType!: string;
-  disableSelectQuestionType = false;
+
+  surveysTypes!: any[];
+  selectedSurveyType!: string;
+  disableSelectSurveyType = false;
   showUploadVideoDialog = false;
   videoType: string = "intro";
 
-  normalQuestionForm!: FormGroup;
-  feedbackQuestionForm!: FormGroup;
-
-  deleteIcon = faTrashAlt;
-  addIcon = faPlus;
+  normalSurveyForm!: FormGroup;
+  feedbackSurveyForm!: FormGroup;
 
   isVideoUploaded = {
     intro: false,
@@ -46,65 +42,38 @@ export class AddVideoUploadVideosComponent {
   isNormalSurveyAdded = false;
   isFeedbackSurveyAdded = false;
 
-  feedbackQuestionsList: { question: string; firstAnswer: string; secondeAnswer: string; }[] = [];
-
   constructor(
     private handleAddVideoDataService: HandleAddVideoDataService,
     private addVideoService: AddVideoService,
   ) { }
 
   ngOnInit() {
-    this.feedbackTreeData = [this.handleAddVideoDataService.getQuestionDataBasedOnType('feedback')]
+    this.feedbackTreeData = [this.handleAddVideoDataService.getSurveyDataBasedOnType('feedback')]
     this.treeData = this.handleAddVideoDataService.getTreeData()
-    this.questionsTypes = this.handleAddVideoDataService.getQuestionsTypes();
+    this.surveysTypes = this.handleAddVideoDataService.getSurveysTypes();
     this.formInit();
-    this.test();
   }
 
-  test() {
-    console.log('this.messageDetails', this.messageDetails)
-  }
   formInit() {
-    this.normalQuestionForm = new FormGroup({
+    this.normalSurveyForm = new FormGroup({
       'question': new FormControl(''),
       'firstAnswer': new FormControl(''),
       'secondeAnswer': new FormControl(''),
     })
-    this.feedbackQuestionForm = new FormGroup({})
+    this.feedbackSurveyForm = new FormGroup({})
   }
 
-  onQuestionTypeChange(event: any) {
-    this.feedbackQuestionsList = []
-    const question = this.handleAddVideoDataService.getQuestionDataBasedOnType(event.value)
+  onSurveyTypeChange(event: any) {
+    // this.feedbackQuestionsList = []
+    const question = this.handleAddVideoDataService.getSurveyDataBasedOnType(event.value)
     if (this.treeData[0].children) {
       this.treeData[0].children[0].children = []
       if (event.value === 'normal') this.treeData[0].children[0].children.push(question)
     }
   }
 
-  addFeedbackQuestion() {
-    if (this.feedbackQuestionsList.length < 5) {
-      const feedbackQuestion = { question: 'question', firstAnswer: 'firstAnswer', secondeAnswer: 'secondeAnswer' }
-      this.feedbackQuestionsList.push(feedbackQuestion)
-      const length = this.feedbackQuestionsList.length
-      this.feedbackQuestionForm.addControl(`question_${length}`, new FormControl(''))
-      this.feedbackQuestionForm.addControl(`firstAnswer_${length}`, new FormControl(''))
-      this.feedbackQuestionForm.addControl(`secondeAnswer_${length}`, new FormControl(''))
-    }
-  }
-
-  deleteFeedbackQuestion() {
-    if (this.feedbackQuestionsList.length) {
-      const length = this.feedbackQuestionsList.length
-      this.feedbackQuestionsList.splice(-1)
-      this.feedbackQuestionForm.removeControl(`question_${length}`)
-      this.feedbackQuestionForm.removeControl(`firstAnswer_${length}`)
-      this.feedbackQuestionForm.removeControl(`secondeAnswer_${length}`)
-    }
-  }
-
-  submitQuestion(questionForm: FormGroup) {
-    this.disableSelectQuestionType = !this.disableSelectQuestionType;
+  submitSurvey(surveyForm: FormGroup) {
+    this.disableSelectSurveyType = !this.disableSelectSurveyType;
   }
 
   showUploadVideoDialogFn(videoType: string) {
@@ -145,17 +114,20 @@ export class AddVideoUploadVideosComponent {
   }
 
   onAddSurvey(surveyData: any) {
-    if (surveyData.surveyType == 1) {
-      this.isNormalSurveyAdded = surveyData.isSurveyAdded
-    } else if (surveyData.surveyType == 2) {
-      this.isFeedbackSurveyAdded = surveyData.isSurveyAdded
-    }
     this.addSurveyEvent.emit(surveyData)
   }
-  onAddQuestion(questionData: any) {
-    this.addQuestionEvent.emit(questionData)
+
+
+  continueLater() {
+    console.log('continueLater')
   }
-  onAddAnswer(answerData: any) {
-    this.addAnswerEvent.emit(answerData)
+
+  cancelRequest() {
+    console.log('cancelRequest')
+  }
+
+  submitVideos(data: any) {
+    console.log('submitVideos', data)
+    // this.onSubmitDoctorsList.emit(form.value);
   }
 }

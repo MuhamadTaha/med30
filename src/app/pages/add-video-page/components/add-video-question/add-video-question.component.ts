@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ISurveyForm } from '../../interfaces/survey-question.interface';
 
 @Component({
   selector: 'app-add-video-question',
@@ -9,54 +9,48 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 })
 export class AddVideoQuestionComponent {
 
-  @Input() questionType: number = 0
-  @Input() isSurveyAdded = false;
-  @Input() questionId!: number;
+  @Input() surveyType: number = 0
 
-  @Output() onAddQuestionEvent = new EventEmitter<any>();
-  @Output() onAddAnswerEvent = new EventEmitter<any>();
+  @Output() onSubmitSurveyEvent = new EventEmitter<any>();
 
-  isQuestionAdded = false;
-  isAnswer1Added = false;
-  isAnswer2Added = false;
+  feedbackQuestionsList: ISurveyForm[] = [];
 
-  question = {
-    question: {
-      en: '',
-      ar: '',
-      id: '',
-    },
-    answer1: {
-      en: '',
-      ar: '',
-      id: '',
-    },
-    answer2: {
-      en: '',
-      ar: '',
-      id: '',
-    },
+  data = {
+    question: '',
+    answer1: '',
+    answer2: '',
   }
 
-  faCheck = faCheck;
+  deleteIcon = faTrashAlt;
+  addIcon = faPlus;
 
-  constructor(private router: Router) { }
+  constructor() { }
+  ngOnInit() { this.addFeedbackQuestion() }
 
-  submitQuestion() {
-    this.question.question.id = 'question.id'
-    this.isQuestionAdded = true;
-    this.onAddQuestionEvent.emit({ ...this.question.question, type: this.questionType })
-  }
 
-  submitAnswer(answerId: number) {
-    if (answerId === 1) {
-      this.isAnswer1Added = true;
-      this.onAddAnswerEvent.emit({ ...this.question.answer1, type: answerId, questionType: this.questionType, questionId: this.questionId })
-
-    } else if (answerId === 2) {
-      this.isAnswer2Added = true
-      this.onAddAnswerEvent.emit({ ...this.question.answer2, type: answerId, questionType: this.questionType, questionId: this.questionId })
+  addFeedbackQuestion() {
+    if (this.feedbackQuestionsList.length < 5) {
+      const feedbackQuestion: ISurveyForm = { question: '', answer1: '', answer2: '' }
+      this.feedbackQuestionsList.push(feedbackQuestion)
+      // const length = this.feedbackQuestionsList.length
+      // this.feedbackSurveyForm.addControl(`question_${length}`, new FormControl(''))
+      // this.feedbackSurveyForm.addControl(`firstAnswer_${length}`, new FormControl(''))
+      // this.feedbackSurveyForm.addControl(`secondeAnswer_${length}`, new FormControl(''))
     }
+  }
+
+  deleteFeedbackQuestion() {
+    if (this.feedbackQuestionsList.length) {
+      // const length = this.feedbackQuestionsList.length
+      // this.feedbackQuestionsList.splice(-1)
+      // this.feedbackSurveyForm.removeControl(`question_${length}`)
+      // this.feedbackSurveyForm.removeControl(`firstAnswer_${length}`)
+      // this.feedbackSurveyForm.removeControl(`secondeAnswer_${length}`)
+    }
+  }
+
+  submitSurvey(data: ISurveyForm[]) {
+    this.onSubmitSurveyEvent.emit({ questionsList: [...data], type: this.surveyType })
   }
 
 }

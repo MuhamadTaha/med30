@@ -19,7 +19,6 @@ import { AddVideoUploadVideosComponent } from './add-video-page/components/add-v
 import { AddVideoSubmissionsComponent } from './add-video-page/components/add-video-submissions/add-video-submissions.component';
 import { AddVideoDialogComponent } from './add-video-page/components/add-video-dialog/add-video-dialog.component';
 import { AddVideoQuestionComponent } from './add-video-page/components/add-video-question/add-video-question.component';
-import { AddVideoSurveyComponent } from './add-video-page/components/add-video-survey/add-video-survey.component';
 import { UploadVideoDialogComponent } from './add-video-page/components/upload-video-dialog/upload-video-dialog.component';
 
 import { AnalysisCardComponent } from '../shared-components/cards/analysis-card/analysis-card.component';
@@ -68,7 +67,6 @@ const components = [
   AboutPageComponent,
   AddVideoPageComponent,
   AddVideoQuestionComponent,
-  AddVideoSurveyComponent,
   // shared components
   NavbarComponent,
   AddVideoChooseAudienceComponent,

@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   dropdownItems = [
     { name: 'My Account', route: '/profile', icon: '../../../assets/icons/dropdown-profile.png' },
-    { name: 'About us', route: '/about', icon: '../../../assets/icons/dropdown-about.png' },
+    // { name: 'About us', route: '/about', icon: '../../../assets/icons/dropdown-about.png' },
     { name: 'Logout', route: '/logout' }
   ];
 
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void { }
 
   onChange(e: any) {
-    if (e.value.route == this.dropdownItems[2].route) {
+    if (e.value.route == this.dropdownItems[1].route) {
       this.authService.logout();
     } else {
       this.router.navigate([e.value.route])

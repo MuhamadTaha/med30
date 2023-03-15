@@ -1,24 +1,36 @@
-<div class="question d-flex flex-column gap-20">
+<div class="survey d-flex flex-column gap-20">
 
-  <div class="question__inputs d-flex align-items-center w-100 gap-20">
-    <input type="text" class="form-input w-100" [(ngModel)]="question.question.en" placeholder="Question " />
-    <!-- <button class="submit-input-btn" (click)="submitQuestion()" [disabled]="isQuestionAdded || !isSurveyAdded ">
-      <fa-icon [icon]="faCheck"> </fa-icon>
-    </button> -->
+  <div class="header d-flex justify-content-center align-items-center" *ngIf="surveyType === 2">
+    <h4>Feedback</h4>
+    <button class="add-question d-flex justify-content-center align-items-center" *ngIf="surveyType === 2"
+      [disabled]="feedbackQuestionsList.length >= 5" (click)="addFeedbackQuestion()">
+      <fa-icon [icon]="addIcon"></fa-icon>
+    </button>
+    <button class="add-question d-flex justify-content-center align-items-center"
+      [disabled]="!feedbackQuestionsList.length" (click)="deleteFeedbackQuestion()">
+      <fa-icon [icon]="deleteIcon"></fa-icon>
+    </button>
+
   </div>
 
-  <div class="question__inputs d-flex align-items-center w-100 gap-20">
-    <input type="text" class="form-input w-100" [(ngModel)]="question.answer1.en" placeholder="Answer 1 " />
-    <!-- <button class="submit-input-btn" (click)="submitAnswer(1)" [disabled]="!isQuestionAdded || isAnswer1Added">
-      <fa-icon [icon]="faCheck"> </fa-icon> </button> -->
+  <div class="d-flex flex-column gap-20" *ngFor="let question of feedbackQuestionsList; let i = index">
+    <div class="survey__inputs w-100">
+      <input type="text" class="form-input w-100" [(ngModel)]="feedbackQuestionsList[i].question"
+        placeholder="Question " />
+    </div>
+
+    <div class="survey__inputs w-100">
+      <input type="text" class="form-input w-100" [(ngModel)]="feedbackQuestionsList[i].answer1"
+        placeholder="Answer 1 " />
+    </div>
+
+    <div class="survey__inputs w-100">
+      <input type="text" class="form-input w-100" [(ngModel)]="feedbackQuestionsList[i].answer2"
+        placeholder="Answer 2 " />
+    </div>
+
   </div>
 
-  <div class="question__inputs d-flex align-items-center w-100 gap-20">
-    <input type="text" class="form-input w-100" [(ngModel)]="question.answer2.en" placeholder="Answer 2 " />
-    <!-- <button class="submit-input-btn" (click)="submitAnswer(2)" [disabled]="!isAnswer1Added || isAnswer2Added">
-      <fa-icon [icon]="faCheck"> </fa-icon> </button> -->
-  </div>
-
-  <button class="action-btn edit-btn" (click)="submitQuestion()"> Submit </button>
+  <button class="action-btn edit-btn" (click)="submitSurvey(feedbackQuestionsList)"> Submit </button>
 
 </div>

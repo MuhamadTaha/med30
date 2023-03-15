@@ -1,15 +1,41 @@
 @import "../../../../../assets/colors";
 @import "../../../../../assets/common-style";
 
-.question {
+.survey {
   padding: 20px 0;
+  .add-question {
+    width: 35px;
+    height: 35px;
+    background: none;
+    border: none;
+    background: $white;
+    border: 2px solid $primary;
+    color: $primary;
+    font-size: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:hover {
+      background: $primary;
+      color: $white;
+      transition: all 0.5s;
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        background: $white;
+        color: $primary;
+      }
+    }
+  }
   &__inputs {
     min-width: 500px;
     gap: 10px;
     padding: 0 10px;
     .form-input {
-      // background: none !important;
+      background: $white !important;
       // border-bottom: 2px solid $primaryLowOpacity;
+      border: 1px solid $light-grey-1;
       box-shadow: none !important;
       outline: none !important;
       // padding: 10px 4px !important;

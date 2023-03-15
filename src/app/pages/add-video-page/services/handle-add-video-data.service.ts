@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HandleAddVideoDataService {
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  questionsTypes = [
+  surveysTypes = [
     { name: 'Normal', value: 'normal' },
     { name: 'Feedback', value: 'feedback' },
   ]
@@ -21,7 +21,7 @@ export class HandleAddVideoDataService {
     expanded: true,
     children: [
       {
-        type: 'select-question-type',
+        type: 'select-survey-type',
         expanded: true,
         children: [
         ]
@@ -29,10 +29,10 @@ export class HandleAddVideoDataService {
     ]
   }]
 
-  normalQuestion = {
+  normalSurvey = {
     label: 'Normal',
-    type: 'question',
-    questionType: 'normal',
+    type: 'survey',
+    surveyType: 'normal',
     expanded: true,
     children: [
       {
@@ -51,10 +51,10 @@ export class HandleAddVideoDataService {
 
   }
 
-  feedbackQuestion = {
+  feedbackSurvey = {
     label: 'Feedback',
-    type: 'question',
-    questionType: 'feedback',
+    type: 'survey',
+    surveyType: 'feedback',
     expanded: true,
     children: [{
       label: 'Upload Feedback Video',
@@ -64,14 +64,14 @@ export class HandleAddVideoDataService {
     }],
   }
 
-  getQuestionDataBasedOnType(type: string) {
-    if (type === 'feedback') return this.feedbackQuestion
-    else if (type === 'normal') return this.normalQuestion
+  getSurveyDataBasedOnType(type: string) {
+    if (type === 'feedback') return this.feedbackSurvey
+    else if (type === 'normal') return this.normalSurvey
     else return {}
   }
 
   getTreeData() { return this.treeData }
 
-  getQuestionsTypes() { return this.questionsTypes }
+  getSurveysTypes() { return this.surveysTypes }
 
 }

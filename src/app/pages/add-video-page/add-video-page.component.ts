@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddVideoService } from './services/add-video.service';
 import { IMessageDetails } from './interfaces/message-details.interface';
+import { IAnswerRequest, IQuestionRequest, ISurveyForm, ISurveyRequest } from './interfaces/survey-question.interface';
 
 @Component({
   selector: 'app-add-video-page',
@@ -127,85 +128,70 @@ export class AddVideoPageComponent {
     })
   }
 
-  onAddSurvey(surveyData: any) {
-    const videoIds = [];
+  onAddSurvey(data: { questionsList: ISurveyForm[], type: number }) {
+    console.log('data', data)
 
-    if (surveyData.surveyType == 1) {
-      videoIds.push(this.messageDetails.introVideoId)
-    } else if (surveyData.surveyType == 2) {
-      if (this.messageDetails.normalQuestion.answer1Id && this.messageDetails.normalQuestion.answer2Id) {
-        videoIds.push(this.messageDetails.normalQuestion.answer1Id)
-        videoIds.push(this.messageDetails.normalQuestion.answer2Id)
+    const body: ISurveyRequest = {
+      titleEn: "NA",
+      titleAr: "NA",
+      typeId: data.type,
+      messageId: 0,
+      videoIds: [],
+      questions: []
+    }
+
+    if (data.type === 1) {
+      body.videoIds = []
+      body.videoIds.push(this.messageDetails.introVideoId || 11)
+    } else if (data.type === 2) {
+      if (this.messageDetails.normalQuestion?.answer1Id && this.messageDetails.normalQuestion?.answer2Id) {
+        body.videoIds = []
+        body.videoIds.push(this.messageDetails.normalQuestion.answer1Id, this.messageDetails.normalQuestion.answer2Id)
       } else {
-        videoIds.push(this.messageDetails.introVideoId)
+        body.videoIds = []
+        body.videoIds.push(this.messageDetails.introVideoId || 22)
       }
     }
 
-    const body = {
-      id: 0,
-      titleEn: surveyData.survey.titleEn,
-      titleAr: surveyData.survey.titleAr,
-      typeId: surveyData.surveyType,
-      messageId: this.messageDetails.messageId,
-      videoIds: videoIds
-    }
-    this.addVideoService.createSurvey(body).subscribe((res: any) => {
-      console.log(res)
-      if (surveyData.surveyType == 1) this.messageDetails.normalSurveyId = res.data
-      else if (surveyData.surveyType == 2) this.messageDetails.feedbackSurveyId = res.data
-    })
-  }
+    data.questionsList.forEach((element: ISurveyForm) => {
+      let answer1: IAnswerRequest = {
+        titleEn: element.answer1,
+        titleAr: element.answer1
+      }
+      let answer2: IAnswerRequest = {
+        titleEn: element.answer2,
+        titleAr: element.answer2,
+      }
+      let question: IQuestionRequest = {
+        titleEn: element.question,
+        titleAr: element.question,
+        answers: [answer1, answer2]
+      }
+      body.questions.push(question)
+    });
 
-  onAddQuestion(questionData: any) {
-    console.log('questionData', questionData)
-    const body = {
-      id: 0,
-      titleEn: questionData.en,
-      titleAr: questionData.ar,
-      servayId: questionData.type == 1 ? this.messageDetails.normalSurveyId : this.messageDetails.feedbackSurveyId,
-    }
-    this.addVideoService.createSurveyQuestion(body).subscribe((res: any) => {
-      console.log('createSurvayQuestion', res)
-      this.questionId = res.data
-      if (questionData.type == 1) {
-        this.messageDetails.normalQuestion = {}
-        this.messageDetails.normalQuestion.questionId = res.data
-      }
-      else if (questionData.type == 2) {
-        if (!this.messageDetails.feedbackQuestion) this.messageDetails.feedbackQuestion = []
-        this.messageDetails.feedbackQuestion.push({ questionId: res.data })
-      }
-    })
-  }
-
-  onAddAnswer(answerData: any) {
-    console.log('answerData', answerData)
-    const body = {
-      id: 0,
-      titleEn: answerData.en,
-      titleAr: answerData.ar,
-      questionId: answerData.questionId
-    }
-    this.addVideoService.createSurveyQuestionAnswer(body).subscribe((res: any) => {
-      console.log(res)
-      if (answerData.questionType == 1) {
-        if (answerData.type == 1) this.messageDetails.normalQuestion.answer1Id = res.data
-        else if (answerData.type == 2) this.messageDetails.normalQuestion.answer2Id = res.data
-      } else if (answerData.questionType == 2) {
-        this.messageDetails.feedbackQuestion.forEach((element: any) => {
-          console.log('element.questionId', element.questionId)
-          console.log('answerData.questionId', answerData.questionId)
-          if (element.questionId == answerData.questionId) {
-            if (answerData.type == 1) element.answer1Id = res.data
-            else if (answerData.type == 2) element.answer2Id = res.data
-          }
-        });
-      }
-    })
+    console.log('body ====> ', body)
+    // this.addVideoService.createSurvey(body).subscribe((res: any) => {
+    //   console.log('createSurvey', res)
+    //   // this.questionId = res.data
+    //   // if (data.type == 1) {
+    //   //   this.messageDetails.normalQuestion = {}
+    //   //   this.messageDetails.normalQuestion.questionId = res.data
+    //   // }
+    //   // else if (data.type == 2) {
+    //   //   if (!this.messageDetails.feedbackQuestion) this.messageDetails.feedbackQuestion = []
+    //   //   this.messageDetails.feedbackQuestion.push({ questionId: res.data })
+    //   // }
+    // })
   }
 
   handleStep1() { console.log('handleStep1') }
 
   handleStep2() { console.log('handleStep2') }
+
+  test() {
+    console.log('this.messageDetails', this.messageDetails)
+  }
+
 
 }

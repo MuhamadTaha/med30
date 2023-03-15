@@ -44,11 +44,11 @@ export class AddVideoChooseAudienceComponent {
   formInitiation() {
     this.createMessageForm = new FormGroup({
       'id': new FormControl(0),
-      'titleEn': new FormControl(null),
-      'titleAr': new FormControl(null),
-      'descriptionEn': new FormControl(null),
-      'descriptionAr': new FormControl(null),
-      'coverPhotoPath': new FormControl(null),
+      'titleEn': new FormControl(''),
+      'titleAr': new FormControl(''),
+      'descriptionEn': new FormControl(''),
+      'descriptionAr': new FormControl(''),
+      'coverPhotoPath': new FormControl(''),
       'charactristics': new FormControl([]),
       'doctors': new FormControl([]),
     },
@@ -127,6 +127,10 @@ export class AddVideoChooseAudienceComponent {
   }
 
   submitDoctorsList(form: any) {
+    const title = this.createMessageForm.get('titleEn')?.value
+    const description = this.createMessageForm.get('descriptionEn')?.value
+    this.createMessageForm.get('titleAr')?.setValue(title);
+    this.createMessageForm.get('descriptionAr')?.setValue(description);
     this.createMessageForm.get('charactristics')?.setValue(this.selectedCategoriesIds);
     this.createMessageForm.get('doctors')?.setValue(this.selectedDoctors.map((item: any) => item.id));
     this.onSubmitDoctorsList.emit(form.value);

@@ -10,11 +10,11 @@
 
       <div class="choose-audience__form__title d-flex flex-column w-100 gap-20">
         <div class="form-control d-flex flex-column w-100 gap-10">
-          <label for="title-en"> Title </label>
-          <input type="text" class="form-input" formControlName="titleEn" id="title-en" placeholder="Title " required />
+          <label for="title"> Title </label>
+          <input type="text" class="form-input" formControlName="titleEn" id="title" placeholder="Title " required />
         </div>
         <div class="choose-audience__form__file form-control d-flex flex-column w-100 gap-10">
-          <label for="description-ar"> Upload Message Cover Image </label>
+          <label> Upload Message Cover Image </label>
           <p-fileUpload [maxFileSize]="3000000" accept="image/*" (onSelect)="onFileSelect($event)"
             (onRemove)="onFileRemove($event)"> </p-fileUpload>
         </div>
@@ -22,8 +22,8 @@
 
       <div class="choose-audience__form__description d-flex w-100 gap-20">
         <div class="form-control d-flex flex-column w-100 gap-10">
-          <label for="description-en"> Description </label>
-          <textarea pInputTextarea formControlName="descriptionEn" rows="6" [autoResize]="false" id="description-en"
+          <label for="description"> Description </label>
+          <textarea pInputTextarea formControlName="descriptionEn" rows="6" [autoResize]="false" id="description"
             placeholder="Description "></textarea>
         </div>
       </div>

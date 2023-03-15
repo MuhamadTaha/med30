@@ -34,14 +34,14 @@ export class AuthService {
 
   logIn(formValue: any) {
     return this.http.post<AuthResponse>(
-      'http://abdelmageed-001-site15.etempurl.com/api/Accounts/Login', formValue).pipe(catchError(this.handleError), tap(resData => {
+      'https://comapi.30med.net/api/Accounts/Login', formValue).pipe(catchError(this.handleError), tap(resData => {
         localStorage.setItem('token', resData.data.token)
         localStorage.setItem('refreshToken', resData.data.refreshToken)
       }))
   }
 
   signUp(formValue: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Accounts/Register', formValue)
+    return this.http.post('https://comapi.30med.net/api/Accounts/Register', formValue)
       .pipe(catchError(this.handleError), tap(resData => {
         // this.router.navigate(['/auth/login'])
       }))

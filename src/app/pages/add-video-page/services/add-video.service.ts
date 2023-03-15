@@ -13,7 +13,7 @@ export class AddVideoService {
   constructor(private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   getSections() {
-    return this.http.get('http://abdelmageed-001-site15.etempurl.com/api/Characteristics/GetSections').pipe(
+    return this.http.get('https://comapi.30med.net/api/Characteristics/GetSections').pipe(
       map((res: any) =>
         res.data.map((item: any) => ({
           ...item,
@@ -28,7 +28,7 @@ export class AddVideoService {
   }
 
   getSectionsItems(category: string, sectionId: any) {
-    return this.http.get(`http://abdelmageed-001-site15.etempurl.com/api/Characteristics/GetSectionItems?sectionId=${sectionId}`).pipe(
+    return this.http.get(`https://comapi.30med.net/api/Characteristics/GetSectionItems?sectionId=${sectionId}`).pipe(
       map((res: any) =>
         res.data.map((item: any) => ({
           ...item,
@@ -40,7 +40,7 @@ export class AddVideoService {
   }
 
   getDoctorsListByCategory(category: string, categoryIDs: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Doctors/GetDoctorsList', categoryIDs).pipe(
+    return this.http.post('https://comapi.30med.net/api/Doctors/GetDoctorsList', categoryIDs).pipe(
       map((res: any) =>
         res.data.map((item: any) => ({
           ...item,
@@ -52,7 +52,7 @@ export class AddVideoService {
   }
 
   createMessage(body: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessage', body).pipe(take(1));
+    return this.http.post('https://comapi.30med.net/api/Messages/CreateMessage', body).pipe(take(1));
   }
 
   createMessageVideo(body: any) {
@@ -63,24 +63,24 @@ export class AddVideoService {
       orderNo: 0,
     }
 
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Messages/CreateMessageVideo',
+    return this.http.post('https://comapi.30med.net/api/Messages/CreateMessageVideo',
       { ...body, ...restOfBody }).pipe(take(1));
   }
 
   createSurvey(body: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvay', body).pipe(take(1));
+    return this.http.post('https://comapi.30med.net/api/MessageSurvays/CreateSurvay', body).pipe(take(1));
   }
 
   createSurveyQuestion(body: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvayQuestion', body).pipe(take(1));
+    return this.http.post('https://comapi.30med.net/api/MessageSurvays/CreateSurvayQuestion', body).pipe(take(1));
   }
 
   createSurveyQuestionAnswer(body: any) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/MessageSurvays/CreateSurvayQuestionAnswer', body).pipe(take(1));
+    return this.http.post('https://comapi.30med.net/api/MessageSurvays/CreateSurvayQuestionAnswer', body).pipe(take(1));
   }
 
 
   uploadFile(file: FormData) {
-    return this.http.post('http://abdelmageed-001-site15.etempurl.com/api/Files/Upload', file)
+    return this.http.post('https://comapi.30med.net/api/Files/Upload', file)
   }
 }
